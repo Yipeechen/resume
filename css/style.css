@@ -41,6 +41,15 @@ body {
   text-transform: uppercase;
 }
 
+.header-primary-sub:before {
+content: "";
+display: block;
+width: 100%;
+margin-bottom: 10px;
+border-bottom: 1px solid #fff;
+transform: translateX(-100px);
+}
+
 .header-primary-sub {
   display: block;
   font-weight: 300;
@@ -49,6 +58,15 @@ body {
   animation-name: moveInLeft;
   animation-duration: 2s;
 }
+
+.header-primary-main:after {
+  content: "";
+  display: block;
+  width: 110%;
+  border-bottom: 1px solid #fff;
+  transform: translateX(10px);
+}
+
 
 .header-primary-main {
   display: block;

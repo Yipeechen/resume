@@ -46,6 +46,8 @@ body {
   font-weight: 300;
   font-size: 40px;
   letter-spacing: 10px;
+  animation-name: moveInLeft;
+  animation-duration: 2s;
 }
 
 .header-primary-main {
@@ -54,4 +56,33 @@ body {
   font-size: 60px;
   letter-spacing: 20px;
   word-spacing: 30px;
+  animation-name: moveInRight;
+  animation-duration: 2s;
+}
+
+
+/*========================= animation ===================*/
+@keyframes moveInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+
+@keyframes moveInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
 }

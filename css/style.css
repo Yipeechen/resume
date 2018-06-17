@@ -1,54 +1,66 @@
-*{
+@keyframes moveInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px); }
+  100% {
+    opacity: 1;
+    transform: translate(0); } }
+
+@keyframes moveInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100px); }
+  80% {
+    transform: translateX(-20px); }
+  100% {
+    opacity: 1;
+    transform: translate(0); } }
+
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-}
+  box-sizing: border-box; }
+
+html {
+  font-size: 62.5%; }
+
+body {
+  box-sizing: border-box; }
 
 body {
   font-family: "Lato", sans-serif;
   font-weight: 400;
   font-size: 16px;
   line-height: 1.7;
-  color: #777;
-}
+  color: #777; }
 
-
-/*========================= header ===================*/
 .header {
   height: 95vh;
-  background-image: 
-  linear-gradient(
-    to right bottom,  
-    rgba(176, 192, 215, 0.8),
-    rgba(85, 121, 170, 0.8)
-    ), 
-  url(../images/header-bg-min.jpg);
+  background-image: linear-gradient(to right bottom, rgba(176, 192, 215, 0.8), rgba(85, 120, 170, 0.8)), url(../images/header-bg-min.jpg);
   background-size: cover;
   background-position: bottom;
   clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-  position: relative;
-}
+  position: relative; }
 
 .text-box {
   position: absolute;
-  top: 40%; 
+  top: 40%;
   left: 50%;
-  transform: translate(-50%, -50%); 
-}
+  transform: translate(-50%, -50%); }
 
 .header-primary {
   color: #fff;
-  text-transform: uppercase;
-}
+  text-transform: uppercase; }
 
 .header-primary-sub::before {
-content: "";
-display: block;
-width: 100%;
-margin-bottom: 10px;
-border-bottom: 1px solid #fff;
-transform: translateX(-100px);
-}
+  content: "";
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #fff;
+  transform: translateX(-100px); }
 
 .header-primary-sub {
   display: block;
@@ -56,17 +68,14 @@ transform: translateX(-100px);
   font-size: 40px;
   letter-spacing: 10px;
   animation-name: moveInLeft;
-  animation-duration: 1s;
-}
+  animation-duration: 1s; }
 
 .header-primary-main::after {
   content: "";
   display: block;
   width: 110%;
   border-bottom: 1px solid #fff;
-  transform: translateX(10px);
-}
-
+  transform: translateX(10px); }
 
 .header-primary-main {
   display: block;
@@ -75,36 +84,4 @@ transform: translateX(-100px);
   letter-spacing: 20px;
   word-spacing: 30px;
   animation-name: moveInRight;
-  animation-duration: 1s;
-}
-
-
-/*========================= animation ===================*/
-@keyframes moveInLeft {
-  0% {
-    opacity: 0;
-    transform: translateX(-100px);
-  }
-  
-  100% {
-    opacity: 1;
-    transform: translate(0);
-  }
-}
-
-
-@keyframes moveInRight {
-  0% {
-    opacity: 0;
-    transform: translateX(100px);
-  }
-  
-  80% {
-    transform: translateX(-20px);
-  }
-  
-  100% {
-    opacity: 1;
-    transform: translate(0);
-  }
-}
+  animation-duration: 1s; }

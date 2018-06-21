@@ -36,6 +36,38 @@ body {
   line-height: 1.7;
   color: #777; }
 
+.heading-primary {
+  color: #fff;
+  text-transform: uppercase; }
+  .heading-primary-sub {
+    display: block;
+    font-weight: 300;
+    font-size: 40px;
+    letter-spacing: 10px;
+    animation-name: moveInLeft;
+    animation-duration: 1s; }
+    .heading-primary-sub::before {
+      content: "";
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #fff;
+      transform: translateX(-100px); }
+  .heading-primary-main {
+    display: block;
+    font-weight: 700;
+    font-size: 60px;
+    letter-spacing: 20px;
+    word-spacing: 30px;
+    animation-name: moveInRight;
+    animation-duration: 1s; }
+    .heading-primary-main:after {
+      content: "";
+      display: block;
+      width: 110%;
+      border-bottom: 1px solid #fff;
+      transform: translateX(10px); }
+
 .header {
   height: 95vh;
   background-image: linear-gradient(to right bottom, rgba(176, 192, 215, 0.8), rgba(85, 120, 170, 0.8)), url(../images/header-bg-min.jpg);
@@ -43,45 +75,8 @@ body {
   background-position: bottom;
   clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
   position: relative; }
-
-.text-box {
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%); }
-
-.header-primary {
-  color: #fff;
-  text-transform: uppercase; }
-
-.header-primary-sub::before {
-  content: "";
-  display: block;
-  width: 100%;
-  margin-bottom: 10px;
-  border-bottom: 1px solid #fff;
-  transform: translateX(-100px); }
-
-.header-primary-sub {
-  display: block;
-  font-weight: 300;
-  font-size: 40px;
-  letter-spacing: 10px;
-  animation-name: moveInLeft;
-  animation-duration: 1s; }
-
-.header-primary-main::after {
-  content: "";
-  display: block;
-  width: 110%;
-  border-bottom: 1px solid #fff;
-  transform: translateX(10px); }
-
-.header-primary-main {
-  display: block;
-  font-weight: 700;
-  font-size: 60px;
-  letter-spacing: 20px;
-  word-spacing: 30px;
-  animation-name: moveInRight;
-  animation-duration: 1s; }
+  .header__text-box {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%); }

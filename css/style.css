@@ -134,7 +134,8 @@ body {
 
 .avatar__photo {
   width: 60%;
-  transform: translate(40%, 0%); }
+  transform: translate(40%, 0%);
+  transition: all .3s; }
 
 .avatar__bordered {
   position: relative; }
@@ -146,7 +147,17 @@ body {
     top: 0;
     width: 25rem;
     height: 25rem;
-    transform: translate(-10%, 60%); }
+    transform: translate(-10%, 60%);
+    transition: all .3s; }
+
+.avatar:hover .avatar__photo {
+  outline: 1.5rem solid #829cc1;
+  transform: scale(1.05) translate(50%, 10%);
+  box-shadow: 0 2.5rem 4rem rgba(0, 0, 0, 0.5);
+  z-index: 20; }
+
+.avatar:hover .avatar__bordered--decorated {
+  transform: translate(-30%, 30%); }
 
 .personal__info {
   width: 80%; }

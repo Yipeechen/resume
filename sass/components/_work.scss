@@ -16,7 +16,9 @@
     margin: 0;
     height: 35rem;
     overflow: hidden;
-    background-color: $color-primary-dark;
+    background: linear-gradient(
+    to bottom,rgba($color-primary-dark, 0.4), transparent , rgba($color-primary-dark, 0.9));
+      
 
     & img {
       opacity: 0.3;
@@ -45,7 +47,7 @@
     left: 0;
     opacity: 1;
     padding: 0 4rem;
-    color: white;
+    color:$color-primary-dark;
     word-spacing: .3rem;
     transform: skewY(-4deg) translateY(12rem);
     transition: all .5s;

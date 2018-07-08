@@ -23,7 +23,8 @@
 
   &:hover {
     .avatar__photo {
-    outline: 1.5rem solid $color-primary;
+    outline: 1.5rem solid rgba($color-secondary, .5);
+    z-index: 20;
     transform: scale(1.05) translate(50%, 10%);
     box-shadow: 0 2.5rem 4rem rgba($color-black, .5);
     z-index: 20;

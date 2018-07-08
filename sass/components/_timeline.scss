@@ -20,11 +20,11 @@
     &:hover {
       .timeline__event--icon {
         transform: rotate(-45deg);
-        background-color: $color-black;
+        background-color: $color-secondary;
       }
     
       .timeline__event--year {
-        box-shadow: inset 40rem 0 0 0 $color-black;
+        box-shadow: inset 40rem 0 0 0 rgba($color-secondary, .9);
       }
     }
 

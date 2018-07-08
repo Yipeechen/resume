@@ -1,0 +1,115 @@
+.contact-box {
+	padding: 0 6rem;
+	margin: 0 auto;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  @include clearfix;
+
+
+  &--item{
+    position: relative;
+    margin-top: -50px;
+    margin-right: 5px;
+    margin-left: 5px;
+    width: calc(20% - 10px);
+    float: left;
+    transition: all 0.5s;
+    overflow: hidden;
+    -webkit-clip-path: polygon(
+      50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%
+    );
+    clip-path: polygon(
+      50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%
+    );
+    
+    &:before {
+      content: '';
+      display: block;
+      padding-top: 112.5%;
+    }
+
+    &-icon {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      text-align: center;
+      background-image: linear-gradient(
+        to top right, $color-primary-light, $color-primary-dark);
+      
+      -webkit-clip-path: polygon(
+        50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%
+      );
+      clip-path: polygon(
+        50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%
+      );
+      
+      &:before,
+      &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        opacity: 0;
+        transition: opacity 0.5s;
+      }
+      
+      &:before {
+        background: pink;
+      }
+      
+      &:after {
+        background: linear-gradient(
+          to bottom, transparent, rgba($color-black, 0.3), rgba($color-black, 0.6));
+      }
+    }
+
+    &-info {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      opacity: 0;
+      text-align: center;
+      color: $color-white;
+      will-change: transform;
+      backface-visibility: hidden;
+      transform: translate(-50%, -50%) scale(0.5);
+      transition: all 0.5s;
+
+      &-detail {
+        margin: 1em 0 0;
+        letter-spacing: 1px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        line-height: 1.5;
+        color: turquoise;
+      }
+    }
+
+    &:hover{
+      .contact-box--item-icon:before,
+      .contact-box--item-icon:after,
+      .contact-box--item-info { 
+        opacity: 1;
+      }
+      
+      .contact-box--item-info {
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+  }
+}
+
+
+[class^= "fa"] {
+  color: $color-black;
+  font-size: 5rem;
+  line-height: 230%;
+  transform: translateY(50%);
+}

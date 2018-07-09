@@ -408,7 +408,7 @@ body {
 
 .section-skills {
   padding: 20rem 10rem;
-  background-image: linear-gradient(to right bottom, rgba(176, 192, 215, 0.8), rgba(85, 120, 170, 0.8)), url(/images/skill-bg-min.jpg);
+  background-image: linear-gradient(to right bottom, rgba(176, 192, 215, 0.8), rgba(85, 120, 170, 0.8)), url(https://github.com/Yipeechen/resume/blob/master/images/skill-bg-min.jpg?raw=true);
   background-size: cover;
   transform: skewY(-7deg);
   margin-top: -10rem; }

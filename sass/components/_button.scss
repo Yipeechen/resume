@@ -1,41 +1,46 @@
-.btn:link,
-.btn:visited{
-  display: inline-block;
-  padding: 10px 40px;
-  font-weight: 300;
-  text-decoration: none;
-  border-radius: 15px;
-  transition: all 0.2s;
+.btn {
+
+  &:link,
+  &:visited {
+    display: inline-block;
+    padding: 10px 40px;
+    font-weight: 300;
+    text-decoration: none;
+    border-radius: 15px;
+    transition: all 0.2s;
+  }
+
+  &-full:link,
+  &-full:visited {
+    background-color: $color-primary;
+    border: 1px solid $color-primary;
+    color: #fff;
+    margin-right: 15px;
+  }
+
+  &-ghost:link,
+  &-ghost:visited {
+    border: 1px solid $color-primary;
+    color: $color-primary;
+  }
+
+  &:hover,
+  &:active {
+    background-color: $color-primary-dark;
+    box-shadow: 0 1rem 2rem rgba($color-black,.15);
+    transform: translateY(-2px);
+  }
+
+  &-full:hover,
+  &-full:active {
+    border: 1px solid $color-primary-dark;
+  }
+
+  &-ghost:hover,
+  &-ghost:active {
+    border: 1px solid $color-primary;
+    color: #fff;
+  }
+
 }
 
-.btn-full:link,
-.btn-full:visited{
-  background-color: $color-primary;
-  border: 1px solid $color-primary;
-  color: #fff;
-  margin-right: 15px;
-}
-
-.btn-ghost:link,
-.btn-ghost:visited {
-  border: 1px solid $color-primary;
-  color: $color-primary;
-}
-
-.btn:hover,
-.bnt:active {
-  background-color: $color-primary-dark;
-  box-shadow: 0 1rem 2rem rgba($color-black,.15);
-  transform: translateY(-2px);
-}
-
-.btn-full:hover,
-.btn-full:active {
-  border: 1px solid $color-primary-dark;
-}
-
-.btn-ghost:hover,
-.btn-ghost:active {
-  border: 1px solid $color-primary;
-  color: #fff;
-}

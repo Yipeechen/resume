@@ -5,11 +5,14 @@
   "scripts": {
     "build-css": "node-sass sass/style.scss css/style.css -w",
     "dev": "webpack --mode development",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server --mode development --open"
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "webpack-dev-server": "^3.1.5"
+  },
   "devDependencies": {
     "node-sass": "^4.9.2",
     "webpack": "^4.17.1",

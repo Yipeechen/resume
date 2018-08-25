@@ -1,15 +1,27 @@
 {
   "name": "resume",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "build-css": "node-sass sass/style.scss css/style.css -w"
+    "build-css": "node-sass sass/style.scss css/style.css -w",
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
-    "node-sass": "^4.9.2"
-  }
+    "node-sass": "^4.9.2",
+    "webpack": "^4.17.1",
+    "webpack-cli": "^3.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yipeechen/resume.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Yipeechen/resume/issues"
+  },
+  "homepage": "https://github.com/Yipeechen/resume#readme",
+  "description": ""
 }

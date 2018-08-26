@@ -1,5 +1,10 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin'); // 使用 extract text webpack plugin
+
+const extractPlugin = new ExtractTextPlugin({
+                      filename: "css/bundle.css" // scss轉 css後另存的目標檔名
+                    });
 
 module.exports = {
   entry: ["babel-polyfill", "./js/index.js"],
@@ -14,7 +19,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: "index.html",
       template: "./index.html"
-    })
+    }),
+    extractPlugin
   ],
   module: {
     rules: [
@@ -34,6 +40,12 @@ module.exports = {
         use: {
           loader: "file-loader"
         }
+      },
+      {
+        test: /\.scss$/,
+        use: extractPlugin.extract({
+          use: ["css-loader", "sass-loader"]
+        })
       }
     ]
   }

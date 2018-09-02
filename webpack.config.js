@@ -7,6 +7,10 @@ const extractPlugin = new ExtractTextPlugin({
                     });
 
 module.exports = {
+  watch: true,
+  watchOptions: {
+    aggregateTimeout: 5000
+  },
   entry: ["babel-polyfill", "./js/index.js"],
   output: {
     path: path.resolve(__dirname, "dist"),

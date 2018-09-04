@@ -1,0 +1,23 @@
+#slide-message {
+  width: 23rem;
+  height: 8rem;
+
+  background-image: url('https://image.flaticon.com/icons/svg/375/375228.svg');
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  background-size: 30%;
+
+  background-color: $color-secondary;
+  border-top: 1px solid $color-white;
+  border-left: 1px solid $color-white;
+  border-bottom: 1px solid $color-white;
+  
+  padding: 1.8rem 2rem 1rem 9rem;
+  position: fixed;
+  bottom: 2rem; 
+  right: 0rem;
+  text-transform: uppercase;
+  word-spacing: 10px;
+  font-weight: 700;
+  color: $color-black;
+}

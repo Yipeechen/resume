@@ -558,6 +558,27 @@ body {
           transform: translateY(50%);
 }
 
+#slide-message {
+  width: 23rem;
+  height: 8rem;
+  background-image: url("https://image.flaticon.com/icons/svg/375/375228.svg");
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  background-size: 30%;
+  background-color: #ffa96a;
+  border-top: 1px solid #fff;
+  border-left: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  padding: 1.8rem 2rem 1rem 9rem;
+  position: fixed;
+  bottom: 2rem;
+  right: -23.5rem;
+  text-transform: uppercase;
+  word-spacing: 10px;
+  font-weight: 700;
+  color: #000;
+}
+
 .row {
   max-width: 114rem;
   margin: 0 auto;
@@ -607,8 +628,8 @@ body {
 
 .header {
   height: 95vh;
-  background-image: -webkit-gradient(linear, left top, right bottom, from(rgba(176, 192, 215, 0.8)), to(rgba(85, 120, 170, 0.8))), url(../images/header-bg-min.jpg);
-  background-image: linear-gradient(to right bottom, rgba(176, 192, 215, 0.8), rgba(85, 120, 170, 0.8)), url(../images/header-bg-min.jpg);
+  background-image: -webkit-gradient(linear, left top, right bottom, from(rgba(176, 192, 215, 0.8)), to(rgba(85, 120, 170, 0.8))), url(https://cdn.rawgit.com/Yipeechen/resume/master/images/header-bg-min.jpg);
+  background-image: linear-gradient(to right bottom, rgba(176, 192, 215, 0.8), rgba(85, 120, 170, 0.8)), url(https://cdn.rawgit.com/Yipeechen/resume/master/images/header-bg-min.jpg);
   background-size: cover;
   background-position: bottom;
   -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);

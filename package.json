@@ -1,32 +1,41 @@
 {
   "name": "resume",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "main": "index.js",
   "scripts": {
     "build-css": "node-sass sass/style.scss css/style.css -w",
-    "dev": "webpack --mode development",
-    "build": "webpack --mode production",
-    "start": "webpack-dev-server --mode development --open"
+    "dev": "webpack-dev-server --mode development --open --config webpack.dev.js",
+    "prod": "webpack --mode production --config webpack.prod.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "babel-polyfill": "6.26.0",
     "extract-text-webpack-plugin": "4.0.0-beta.0",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-router-dom": "5.2.0",
     "sass-loader": "7.1.0",
+    "styled-components": "5.2.0",
     "webpack-dev-server": "3.1.5"
   },
   "devDependencies": {
-    "babel-core": "6.26.3",
-    "babel-loader": "7.1.5",
+    "@babel/core": "7.11.6",
+    "@babel/plugin-proposal-export-default-from": "7.10.4",
+    "@babel/preset-env": "7.11.5",
+    "@babel/preset-react": "7.10.4",
+    "babel-loader": "8.1.0",
     "babel-preset-env": "1.7.0",
+    "clean-webpack-plugin": "3.0.0",
+    "copy-webpack-plugin": "6.2.0",
     "css-loader": "1.0.0",
     "file-loader": "2.0.0",
     "html-webpack-plugin": "3.2.0",
     "node-sass": "4.12.0",
     "style-loader": "0.22.1",
-    "webpack": "4.17.1",
-    "webpack-cli": "3.1.0"
+    "webpack": "4.37.0",
+    "webpack-cli": "3.1.0",
+    "webpack-merge": "5.2.0"
   },
   "repository": {
     "type": "git",

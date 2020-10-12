@@ -1,0 +1,56 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "standard",
+    "standard-jsx",
+    "standard-react",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "semistandard"
+  ],
+  "plugins": [
+    "react"
+  ],
+  "env": {
+    "jest": true
+  },
+  "rules": {
+    "arrow-parens": [2, "as-needed"],
+    "no-console": [
+      2, {
+        "allow": ["info", "warn", "error"]
+      }
+    ],
+    "max-len": [
+      2,
+      {
+        "ignoreStrings": true,
+        "ignoreUrls": true,
+        "ignoreTemplateLiterals": true,
+        "ignoreComments": true,
+        "ignoreTrailingComments": true,
+        "code": 100
+      }
+    ],
+    "comma-dangle": ["error", "always-multiline"],
+    "jsx-quotes": [2, "prefer-double"],
+    "react/no-unused-state": 2,
+    "react/require-default-props": 2,
+    "react/jsx-first-prop-new-line": 2,
+    "react/jsx-max-props-per-line": [
+      2, {
+        "when": "multiline"
+      }
+    ],
+    "react/no-did-mount-set-state": 2,
+    "react/no-did-update-set-state": 2,
+    "react/no-will-update-set-state": 2,
+    "react/sort-prop-types": [
+      2, {
+        "requiredFirst": true,
+        "callbacksLast": true
+      }
+    ],
+    "react/sort-comp": 2
+  }
+}

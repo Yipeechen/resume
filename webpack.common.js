@@ -1,11 +1,10 @@
-const path = require('path')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const { version: APP_VERSION } = require('./package.json')
+const { version: APP_VERSION } = require('./package.json');
 
-const OUTPUT = './public'
-const SRC_ROOT = './src'
+const OUTPUT = './public';
+const SRC_ROOT = './src';
 
 module.exports = {
   context: path.resolve(__dirname, SRC_ROOT),

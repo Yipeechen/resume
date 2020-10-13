@@ -1,7 +1,11 @@
 import React from 'react';
 
+import Header from './ResumeHeader';
+
 const resume = props => (
-  <h1>hello react</h1>
+  <React.Fragment>
+    <Header />
+  </React.Fragment>
 );
 
 export default resume;

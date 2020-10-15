@@ -1,26 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { HeadingSecondary } from '@src/components/TypoGraphy';
 import { ButtonFull, ButtonGhost } from '@src/components/Buttons';
 
 const Container = styled.section`
-  background-color:  #f7f7f7;
+  background-color: ${({ theme }) => theme.color.bgPrimary};
   padding: 25rem 0 30rem 0;
   margin-top: -20vh;
-`;
-const StyledHeadingSecondaryWrapper = styled.div`
-  text-align: center;
-  margin-bottom: 8rem;
-`;
-const StyledHeadingSecondary = styled.h2`
-  font-size: 3.5rem;
-  text-transform: uppercase;
-  font-weight: 700;
-  display: inline-block;
-  background-image: linear-gradient(to right, ${({ theme }) => theme.color.primaryLight}, ${({ theme }) => theme.color.primaryDark});
-  -webkit-background-clip: text;
-  color: transparent;
-  letter-spacing: 2px;
 `;
 const StyledWrapper = styled.div`
   display: flex;
@@ -99,11 +86,9 @@ const StyledInfoButtons = styled.div`
 
 const resumeAbout = () => (
   <Container>
-    <StyledHeadingSecondaryWrapper>
-      <StyledHeadingSecondary>
-        About Me
-      </StyledHeadingSecondary>
-    </StyledHeadingSecondaryWrapper>
+    <HeadingSecondary>
+      About Me
+    </HeadingSecondary>
     <StyledWrapper>
       <StyledAvatar>
         <StyledAvatarBordered />

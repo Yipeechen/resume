@@ -13,8 +13,10 @@ const color = {
   whiteOpLevel8: '#ffffffcc',
   greyDark: '#777777',
   black: '#000000',
-  blackOpLevel5: '#00000080',
   blackOpLevel2: '#00000033',
+  blackOpLevel3: '#0000004d',
+  blackOpLevel5: '#00000080',
+  blackOpLevel6: '#00000099',
 
   bgPrimary: '#f7f7f7',
 };

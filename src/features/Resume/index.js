@@ -5,6 +5,7 @@ import About from './ResumeAbout';
 import Skills from './ResumeSkills';
 import Experience from './ResumeExperience';
 import Works from './ResumeWorks';
+import Contact from './ResumeContact';
 
 const resume = props => (
   <React.Fragment>
@@ -13,6 +14,7 @@ const resume = props => (
     <Skills />
     <Experience />
     <Works />
+    <Contact />
   </React.Fragment>
 );
 

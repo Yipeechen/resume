@@ -14,7 +14,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, OUTPUT),
     filename: 'scripts/[hash:8].js',
-    publicPath: '/',
+    publicPath: './',
   },
   resolve: {
     alias: {

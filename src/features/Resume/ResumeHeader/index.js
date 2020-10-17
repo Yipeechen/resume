@@ -36,7 +36,7 @@ const StyledHeader = styled.header`
     ${({ theme }) => theme.color.primaryLightOpLevel8},
     ${({ theme }) => theme.color.primaryDarkOpLevel8}
     ), 
-  url(https://cdn.rawgit.com/Yipeechen/resume/master/images/header-bg-min.jpg);
+  url(https://yipeechen.github.io/resume/images/header-bg-min.jpg);
   background-size: cover;
   background-position: bottom;
   clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);

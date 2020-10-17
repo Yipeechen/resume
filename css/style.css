@@ -628,8 +628,8 @@ body {
 
 .header {
   height: 95vh;
-  background-image: -webkit-gradient(linear, left top, right bottom, from(rgba(176, 192, 215, 0.8)), to(rgba(85, 120, 170, 0.8))), url(https://cdn.rawgit.com/Yipeechen/resume/master/images/header-bg-min.jpg);
-  background-image: linear-gradient(to right bottom, rgba(176, 192, 215, 0.8), rgba(85, 120, 170, 0.8)), url(https://cdn.rawgit.com/Yipeechen/resume/master/images/header-bg-min.jpg);
+  background-image: -webkit-gradient(linear, left top, right bottom, from(rgba(176, 192, 215, 0.8)), to(rgba(85, 120, 170, 0.8))), url(https://yipeechen.github.io/resume/images/header-bg-min.jpg);
+  background-image: linear-gradient(to right bottom, rgba(176, 192, 215, 0.8), rgba(85, 120, 170, 0.8)), url(https://yipeechen.github.io/resume/images/header-bg-min.jpg);
   background-size: cover;
   background-position: bottom;
   -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);

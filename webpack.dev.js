@@ -7,7 +7,7 @@ module.exports = merge(common, {
   devtool: 'inline-source-map',
   devServer: {
     historyApiFallback: true,
-    contentBase: ['./src/public'],
+    contentBase: ['./src/docs'],
     port: 8080,
     host: '0.0.0.0',
     disableHostCheck: true,

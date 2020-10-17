@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const { version: APP_VERSION } = require('./package.json');
 
-const OUTPUT = './public';
+const OUTPUT = './docs';
 const SRC_ROOT = './src';
 
 module.exports = {

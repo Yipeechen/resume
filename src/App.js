@@ -8,7 +8,7 @@ import Resume from '@src/features/Resume';
 
 const routes = [
   {
-    path: '/',
+    path: '/resume',
     exact: true,
     component: Resume,
   },
@@ -23,7 +23,7 @@ const App = () => (
         {routes.map((route, i) => (
           <Route key={i} path={route.path} exact={route.exact} component={route.component} />
         ))}
-        <Route exact path="*" render={() => <Redirect to="/" />} />
+        <Route exact path="*" render={() => <Redirect to="/resume" />} />
       </Switch>
     </BrowserRouter>
   </ThemeProvider>

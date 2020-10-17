@@ -18,8 +18,8 @@ const StyledAvatarImg = styled.img.attrs({
   src: 'https://yipeechen.github.io/resume/images/avatar.jpg',
   alt: 'avatar',
 })`
-  width: 60%;
-  transform: translate(40%, 0%);
+  width: 65%;
+  transform: translate(20%, 0%);
   transition: all .3s;
 `;
 const StyledAvatarBordered = styled.div`
@@ -31,9 +31,9 @@ const StyledAvatarBordered = styled.div`
     position: absolute;
     right: 0;
     top: 0;
-    width: 25rem;
-    height: 25rem;
-    transform: translate(-10%, 60%);
+    width: 30rem;
+    height: 30rem;
+    transform: translate(-20%, 50%);
     transition: all .3s;
   }
 `;
@@ -44,24 +44,24 @@ const StyledAvatar = styled.div`
     ${StyledAvatarImg} {
       outline: 1.5rem solid ${({ theme }) => theme.color.secondaryOpLevel5};
       z-index: 20;
-      transform: scale(1.05) translate(50%, 10%);
+      transform: scale(1.05) translate(30%, 0%);
       box-shadow: 0 2.5rem 4rem ${({ theme }) => theme.color.blackOpLevel5};
       z-index: 20;
     }
 
     ${StyledAvatarBordered} {
       &::after {
-        transform: translate(-30%, 30%);
+        transform: translate(-40%, 10%);
       }
     }
   }
 `;
 const StyledInfo = styled.div`
   flex: 1;
-  width: 80%;
 `;
 const StyledInfoContent = styled.div`
-  margin: 0 40px 2rem 40px;
+  width: 80%;
+  margin: 0 auto;
 `;
 const StyledHeadingTertiary = styled.h3`
   font-size: 1.8rem;
@@ -112,9 +112,33 @@ const resumeAbout = () => (
           Html5 | Css3 | JavaScript | Bootstrap | Ruby on Rails
         </StyledInfoSkill>
         <StyledInfoButtons>
-          <ButtonFull>What I learn</ButtonFull>
-          <ButtonGhost>My works</ButtonGhost>
-          <ButtonGhost>Contact me</ButtonGhost>
+          <ButtonFull
+            activeClass="active"
+            to="section_skills"
+            smooth
+            offset={200}
+            duration={500}
+          >
+            What I learn
+          </ButtonFull>
+          <ButtonGhost
+            activeClass="active"
+            to="section_works"
+            smooth
+            offset={-70}
+            duration={500}
+          >
+            My works
+          </ButtonGhost>
+          <ButtonGhost
+            activeClass="active"
+            to="section_contact"
+            smooth
+            offset={-70}
+            duration={500}
+          >
+            Contact me
+          </ButtonGhost>
         </StyledInfoButtons>
       </StyledInfo>
     </StyledWrapper>

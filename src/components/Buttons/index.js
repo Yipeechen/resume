@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { Link } from 'react-scroll';
 
-export const Button = styled.a`
+export const Button = styled(Link)`
   display: inline-block;
   padding: 10px 40px;
   font-weight: 300;

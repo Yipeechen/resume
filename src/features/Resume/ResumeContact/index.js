@@ -185,7 +185,7 @@ const cards = [
 ];
 
 const resumeContact = () => (
-  <StyledContainer>
+  <StyledContainer id="section_contact">
     <HeadingSecondary>Contact</HeadingSecondary>
     <StyledWrapper>
       {cards.map((card, i) => (

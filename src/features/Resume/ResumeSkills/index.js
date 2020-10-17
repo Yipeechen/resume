@@ -25,6 +25,7 @@ const StyledWrapper = styled.div`
 `;
 const StyledCard = styled.div`
   flex: 1;
+  display: inline-table;
   background-color: ${({ theme }) => theme.color.whiteOpLevel8};
   font-size: 1.5rem;
   padding: 2.5rem;
@@ -101,7 +102,7 @@ Card.defaultProps = {
 };
 
 const resumeSkills = () => (
-  <Container>
+  <Container id="section_skills">
     <StyledWrapper>
       {cards.map((card, i) => (
         <Card

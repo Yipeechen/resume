@@ -111,30 +111,30 @@ const works = [
     title: '人性化線下CRM平台',
     tool: 'Ruby on Rails | JS | Chart.js | Bootstrap3 | Git Version Control | Ajax | jQuery',
     link: 'https://github.com/Yipeechen/whale',
-    img: 'https://raw.githubusercontent.com/Yipeechen/resume/master/images/work-1.jpg',
+    img: 'https://yipeechen.github.io/resume/images/work-1.jpg',
   },
   {
     title: 'Stackoverflow',
     tool: 'Ruby on Rails | JS | Bootstrap4 | Git Version Control | Ajax | jQuery',
     link: 'https://github.com/Yipeechen/stackoverflow',
-    img: 'https://raw.githubusercontent.com/Yipeechen/resume/master/images/work-2.jpg',
+    img: 'https://yipeechen.github.io/resume/images/work-2.jpg',
   },
   {
     title: 'Restaurant forum',
     tool: 'Ruby on Rails | Bootstrap3 | Git Version Control | Heroku',
     link: 'https://github.com/Yipeechen/restaurant_forum',
-    img: 'https://raw.githubusercontent.com/Yipeechen/resume/master/images/work-3.jpg',
+    img: 'https://yipeechen.github.io/resume/images/work-3.jpg',
   },
   {
     title: 'Dojo forum',
     tool: 'Ruby on Rails | JS | Bootstrap3 | Git Version Control | Ajax | Heroku',
     link: 'https://github.com/Yipeechen/dojo-forum',
-    img: 'https://raw.githubusercontent.com/Yipeechen/resume/master/images/work-4.jpg',
+    img: 'https://yipeechen.github.io/resume/images/work-4.jpg',
   },
 ];
 
 const resumeWorks = () => (
-  <Container>
+  <Container id="section_works">
     <HeadingSecondary>Works</HeadingSecondary>
     <StyledWrapper>
       {works.map((work, i) => (

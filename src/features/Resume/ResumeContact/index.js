@@ -25,10 +25,7 @@ const StyledWrapper = styled.div`
     clear: both;
   }
 `;
-const StyledCardLink = styled.a.attrs(({ link }) => ({
-  src: link,
-  target: '_blank',
-}))`
+const StyledCardLink = styled.div`
   position: absolute;
   top: 0;
   right: 0;
@@ -95,7 +92,10 @@ const StyledCardInfoContent = styled.div`
   line-height: 1.5;
   color: turquoise;
 `;
-const StyledCardWrapper = styled.div`
+const StyledCardWrapper = styled.a.attrs(({ link }) => ({
+  href: link,
+  target: '_blank',
+}))`
   position: relative;
   margin-top: -50px;
   margin-right: 5px;
@@ -139,8 +139,8 @@ const StyledCardIcon = styled.div`
 `;
 
 const Card = ({ link, icon, title, content }) => (
-  <StyledCardWrapper>
-    <StyledCardLink link={link}>
+  <StyledCardWrapper link={link}>
+    <StyledCardLink>
       <StyledCardIcon>
         {icon}
       </StyledCardIcon>

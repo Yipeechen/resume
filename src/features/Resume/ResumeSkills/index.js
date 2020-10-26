@@ -2,6 +2,8 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import styled from 'styled-components';
 
+import { HeadingTertiary } from '@src/components/TypoGraphy';
+
 const Container = styled.section`
   padding: 20rem 10rem;
   background-image: linear-gradient(
@@ -20,12 +22,14 @@ const Container = styled.section`
 `;
 const StyledWrapper = styled.div`
   display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: flex-start;
   max-width: 114rem;
   margin: 0 auto;
 `;
 const StyledCard = styled.div`
   flex: 1;
-  display: inline-table;
   background-color: ${({ theme }) => theme.color.whiteOpLevel8};
   font-size: 1.5rem;
   padding: 2.5rem;
@@ -54,11 +58,19 @@ const StyledCardIcon = styled.i.attrs(({ className }) => ({
   -webkit-background-clip: text;
   color: transparent;
 `;
-const StyledHeadingTertiary = styled.h3`
-  font-size: 1.8rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  margin-bottom: 1.5rem;
+const StyledCardListLi = styled.li`
+  width: 100%;
+`;
+const StyledCardList = styled.ul`
+  ${({ isTwoColumn }) => isTwoColumn
+    ? `display: flex;
+      flex-wrap: wrap;
+      ${StyledCardListLi} {
+        width: 50%;
+      }
+      `
+    : null
+}
 `;
 
 const cards = [
@@ -70,7 +82,22 @@ const cards = [
   {
     icon: 'icon-basic-webpage-img-txt',
     title: 'Web Development',
-    list: ['Html5', 'Css3 & Sass', 'JavaScript', 'jQuery', 'Ruby on Rails', 'Bootstrap', 'Git Version Control'],
+    list: [
+      'Html5',
+      'CSS3 & Sass',
+      'CSS in JS',
+      'JavaScript',
+      'jQuery',
+      'Webpack',
+      'Npm & Yarn',
+      'Ruby on Rails',
+      'Antd & Bootstrap',
+      'Eslint',
+      'React & hooks',
+      'Redux',
+      'Webview',
+      'Git Version Control',
+    ],
   },
   {
     icon: 'icon-basic-world',
@@ -82,12 +109,12 @@ const cards = [
 const Card = ({ title, className, content }) => (
   <StyledCard>
     <StyledCardIcon className={className} />
-    <StyledHeadingTertiary>{title}</StyledHeadingTertiary>
-    <ul>
+    <HeadingTertiary>{title}</HeadingTertiary>
+    <StyledCardList isTwoColumn={content.length > 8}>
       {content.map((item, i) => (
-        <li key={i}>{item}</li>
+        <StyledCardListLi key={i}>{item}</StyledCardListLi>
       ))}
-    </ul>
+    </StyledCardList>
   </StyledCard>
 );
 Card.propTypes = {

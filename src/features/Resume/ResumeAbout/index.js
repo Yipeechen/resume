@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { HeadingSecondary } from '@src/components/TypoGraphy';
+import { HeadingSecondary, HeadingTertiary } from '@src/components/TypoGraphy';
 import { ButtonFull, ButtonGhost } from '@src/components/Buttons';
 
 const Container = styled.section`
@@ -19,6 +19,7 @@ const StyledAvatarImg = styled.img.attrs({
   alt: 'avatar',
 })`
   width: 65%;
+  filter: grayscale(1);
   transform: translate(20%, 0%);
   transition: all .3s;
 `;
@@ -43,8 +44,8 @@ const StyledAvatar = styled.div`
   &:hover {
     ${StyledAvatarImg} {
       outline: 1.5rem solid ${({ theme }) => theme.color.secondaryOpLevel5};
-      z-index: 20;
       transform: scale(1.05) translate(30%, 0%);
+      filter: grayscale(0);
       box-shadow: 0 2.5rem 4rem ${({ theme }) => theme.color.blackOpLevel5};
       z-index: 20;
     }
@@ -63,11 +64,11 @@ const StyledInfoContent = styled.div`
   width: 80%;
   margin: 0 auto;
 `;
-const StyledHeadingTertiary = styled.h3`
-  font-size: 1.8rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  margin-bottom: 1.5rem;
+const StyledHeadingTertiarySub = styled.span`
+  font-size: 16px;
+  text-transform: none;
+  color: #5478aa;
+  float: right;
 `;
 const StyledInfoSkill = styled.div`
   line-height: 35px;
@@ -96,9 +97,12 @@ const resumeAbout = () => (
       </StyledAvatar>
       <StyledInfo>
         <StyledInfoContent>
-          <StyledHeadingTertiary>
-            挑戰自我 學習新技能
-          </StyledHeadingTertiary>
+          <HeadingTertiary>
+            挑戰自我，學習新技能
+            <StyledHeadingTertiarySub>
+              2 years + Frontend Developer
+            </StyledHeadingTertiarySub>
+          </HeadingTertiary>
           <StyledText>
             製作報告 PPT 及旅遊手冊，培養出對排版美編的興趣，加上選修 App Inventor 課程製作簡易 App，對於程式撰寫產生興趣，
             畢業後投入「大航道計畫」以培育 Web Full-stack development 能力為目標，從零開始建立學習經驗，動手實踐功能、畫面獲取學習動力與成就。
@@ -109,7 +113,7 @@ const resumeAbout = () => (
           </StyledText>
         </StyledInfoContent>
         <StyledInfoSkill>
-          Html5 | Css3 | JavaScript | Bootstrap | Ruby on Rails
+          Html5 | CSS3 | JavaScript | React | Redux | Ruby on Rails
         </StyledInfoSkill>
         <StyledInfoButtons>
           <ButtonFull

@@ -26,8 +26,7 @@ const StyledWrapper = styled.ul`
   }
 `;
 const StyledEventIcon = styled.label`
-  transition: transform 0.2s ease-in;
-  background-color: ${({ theme }) => theme.color.primaryDark};
+  transition: all 0.2s ease-in;
   outline: 10px solid ${({ theme }) => theme.color.white};
   display: block;
   margin: 0.5rem 0.5rem 0.5rem -0.5rem;
@@ -47,7 +46,6 @@ const StyledEventPeriod = styled.p`
   transition: box-shadow 0.5s ease-in 0.1s;
   color: ${({ theme }) => theme.color.white};
   font-size: 1.4rem;
-  background-color: ${({ theme }) => theme.color.primaryDark};
   box-shadow: inset 0 0 0 0rem ${({ theme }) => theme.color.primaryLight};
   display: inline-block;
   margin-bottom: 1.2rem;
@@ -66,6 +64,18 @@ const StyledEventWrapper = styled.div`
       box-shadow: inset 40rem 0 0 0 ${({ theme }) => theme.color.secondaryOpLevel9};
     }
   }
+
+  ${StyledEventIcon} {
+    background-color: ${({ theme, isHightLight }) => isHightLight ? 'transparent' : theme.color.primaryDark};
+    ${({ isHightLight }) => isHightLight ? 'background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%)' : null};
+  }
+
+  ${StyledEventPeriod} {
+    box-shadow: inset 40rem 0 0 0 ${({ theme, isHightLight }) => isHightLight ? 'transparent' : theme.color.primaryDark};
+    ${({ isHightLight }) => isHightLight ? 'background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%)' : null};
+  }
+
+  ${props => props.isHightLight}
 `;
 const StyledEventSubTitle = styled.h4`
   font-size: 1.4rem;
@@ -75,8 +85,8 @@ const StyledEventContent = styled.div`
   padding-bottom: 1.2rem;
 `;
 
-const Event = ({ period, title, subTitle, content }) => (
-  <StyledEventWrapper>
+const Event = ({ period, title, subTitle, content, isHightLight }) => (
+  <StyledEventWrapper isHightLight={isHightLight}>
     <StyledEventIcon />
     <StyledEventBox>
       <StyledEventPeriod>{period}</StyledEventPeriod>
@@ -88,12 +98,14 @@ const Event = ({ period, title, subTitle, content }) => (
 );
 Event.propTypes = {
   content: PropTypes.string,
+  isHightLight: PropTypes.bool,
   period: PropTypes.string,
   subTitle: PropTypes.string,
   title: PropTypes.string,
 };
 Event.defaultProps = {
   content: '',
+  isHightLight: false,
   period: '',
   subTitle: '',
   title: '',
@@ -103,20 +115,33 @@ const events = [
   {
     title: 'Biology Science',
     subTitle: 'National Sun Yat-Sen University',
-    period: 'September  2013 - June 2017',
+    period: 'Sep. 2013 - Jun. 2017',
     content: '生物科學是有關生命的、充滿多元化且具綜合性的科學，教育目標在培養生物科學研究人才、基礎科學教育人才、生物應用及技術開發人才，培育學生具有基本專業知識、獨立思考、執行課程實驗步驟和表達呈現生物科學相關知識。',
   },
   {
     title: '大航道計畫 - 讓年輕人出航',
     subTitle: 'Alpha Camp',
-    period: 'September 2017 - June 2018',
-    content: '從無程式背景的小白，依序接觸基本Html & Css實作出靜態網頁，接續Git版本控制管理，提高專案開發效率，RWD & Bootstrap點綴靜態網頁內容排版，ROR學習MVC模式開發及運用套件，Heroku網站部署，JS & Ajax & API增加網頁動態效果提升互動，及相關資訊觀念課程，到參與專案開發實踐，藉由創建的線上社群社團，增進交流學習。',
+    period: 'Sep. 2017 - Jun. 2018',
+    content: '從無程式背景的小白，依序接觸基本 Html & Css 實作出靜態網頁，接續 Git 版本控制管理，提高專案開發效率，RWD & Bootstrap 點綴靜態網頁內容排版，ROR 學習 MVC 模式開發及運用套件，Heroku 網站部署，JS & Ajax & API 增加網頁動態效果提升互動，及相關資訊觀念課程，到參與專案開發實踐，藉由創建的線上社群社團，增進交流學習。',
   },
   {
-    title: '茶籽堂 - 人性化線下CRM平台',
-    subTitle: 'Alpha Camp - Demo Day',
-    period: 'April 2018',
-    content: '真正著手非課程範例專案的開始，與團隊從最初的與企業主溝通需求、設計使用者故事、建立階段性目標至專案版本控制等，找出問題了解問題，學習如何發問並解決，實作出集合傳統的POS機、會員資料、庫存以及報表分析等功能，減少資料在不同系統間的繁複操作。',
+    title: '茶籽堂 - 人性化線下 CRM 平台',
+    subTitle: 'Alpha Camp - Demo Day 1',
+    period: 'Apr. 2018',
+    content: '真正著手非課程範例專案的開始，與團隊從最初的與企業主溝通需求、設計使用者故事、建立階段性目標至專案版本控制等，找出問題了解問題，學習如何發問並解決，實作出集合傳統的 POS 機、會員資料、庫存以及報表分析等功能，減少資料在不同系統間的繁複操作。',
+  },
+  {
+    isHightLight: true,
+    title: '大航道計畫 - 啟航基金得主',
+    subTitle: 'Alpha Camp',
+    period: 'Oct. 2018',
+    content: '為 Alpha Camp - Demo Day 1 與茶籽堂合作的開發者之一，從前端的客情資料到頁面的 UI 與 UX，表現皆相當的亮眼，在「入選 Demo Day 工程團隊」，針對技術力的審核和對團隊的貢獻程度等，與「求職表現」衡量綜合表現優異的學生，獲予 10 萬元啟航基金。',
+  },
+  {
+    title: '希平方 - 數位教育平台',
+    subTitle: 'Frontend Developer',
+    period: 'Sep. 2018 - Oct. 2020',
+    content: '後台為採用 React 與 Redux 的 SPA，從無到有的課程/系統問答介面、各產品之學員進度查詢功能開發及 UI / UX 設計。前台為後端語言 PHP 的 MVC 框架，，維護既有產品，整合前端開發環境，執行產品購買商業邏輯相關流程規劃。日文產品接觸 Webview 與 App 間的溝通，串接 Sign in with Apple，及音檔播放應用。',
   },
 ];
 
@@ -124,13 +149,14 @@ const resumeExperience = () => (
   <Container>
     <HeadingSecondary>Experience</HeadingSecondary>
     <StyledWrapper>
-      {events.map((event, i) => (
+      {events.reverse().map((event, i) => (
         <Event
           key={i}
           title={event.title}
           subTitle={event.subTitle}
           period={event.period}
           content={event.content}
+          isHightLight={event.isHightLight}
         />
       ))}
     </StyledWrapper>

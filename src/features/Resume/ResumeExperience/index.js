@@ -58,6 +58,7 @@ const StyledEventWrapper = styled.div`
     ${StyledEventIcon} {
       transform: rotate(-45deg);
       background-color: ${({ theme }) => theme.color.secondary};
+      background-image: none;
     }
   
     ${StyledEventPeriod} {
@@ -66,7 +67,7 @@ const StyledEventWrapper = styled.div`
   }
 
   ${StyledEventIcon} {
-    background-color: ${({ theme, isHightLight }) => isHightLight ? 'transparent' : theme.color.primaryDark};
+    background-color: ${({ theme, isHightLight }) => isHightLight ? theme.color.secondary : theme.color.primaryDark};
     ${({ isHightLight }) => isHightLight ? 'background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%)' : null};
   }
 
@@ -74,8 +75,6 @@ const StyledEventWrapper = styled.div`
     box-shadow: inset 40rem 0 0 0 ${({ theme, isHightLight }) => isHightLight ? 'transparent' : theme.color.primaryDark};
     ${({ isHightLight }) => isHightLight ? 'background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%)' : null};
   }
-
-  ${props => props.isHightLight}
 `;
 const StyledEventSubTitle = styled.h4`
   font-size: 1.4rem;

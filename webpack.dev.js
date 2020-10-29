@@ -7,11 +7,12 @@ module.exports = merge(common, {
   devtool: 'inline-source-map',
   devServer: {
     historyApiFallback: true,
-    contentBase: ['./src/docs'],
+    contentBase: ['./src'],
     port: 8080,
     host: '0.0.0.0',
     disableHostCheck: true,
     hot: true,
+    open: true,
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),

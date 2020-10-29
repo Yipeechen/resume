@@ -5,7 +5,7 @@
   "scripts": {
     "lint": "eslint . --ext .js,.jsx",
     "build-css": "node-sass sass/style.scss css/style.css -w",
-    "dev": "webpack-dev-server --mode development --open --config webpack.dev.js",
+    "dev": "webpack-dev-server --mode development --config webpack.dev.js",
     "prod": "webpack --mode production --config webpack.prod.js"
   },
   "author": "",

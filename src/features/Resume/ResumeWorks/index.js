@@ -22,7 +22,7 @@ const StyledWrapper = styled.ul`
 const StyledWorkWrapper = styled.li`
   display: block;
   float: left;
-  width: 25%;
+  width: 20%;
 `;
 const StyledWorkLink = styled.a.attrs(({ link }) => ({
   href: link,
@@ -42,7 +42,7 @@ const StyledWorkInfo = styled.div`
   top: 0;
   left: 0;
   opacity: 1;
-  padding: 0 4rem;
+  padding: 0 2.5rem;
   color: ${({ theme }) => theme.color.primaryDark};
   word-spacing: .3rem;
   transform: skewY(-4deg) translateY(12rem);
@@ -114,6 +114,12 @@ const works = [
     img: 'https://yipeechen.github.io/resume/images/work-1.jpg',
   },
   {
+    title: 'About Yiping',
+    tool: ' JS | React | Git Version Control | CSS in JS | Webpack | Eslint',
+    link: 'https://github.com/Yipeechen/stackoverflow',
+    img: 'https://yipeechen.github.io/resume/images/work-5.jpg',
+  },
+  {
     title: 'Stackoverflow',
     tool: 'Ruby on Rails | JS | Bootstrap4 | Git Version Control | Ajax | jQuery',
     link: 'https://github.com/Yipeechen/stackoverflow',
@@ -122,13 +128,13 @@ const works = [
   {
     title: 'Restaurant forum',
     tool: 'Ruby on Rails | Bootstrap3 | Git Version Control | Heroku',
-    link: 'https://github.com/Yipeechen/restaurant_forum',
+    link: 'https://restaurant-forum-by-yipee.herokuapp.com',
     img: 'https://yipeechen.github.io/resume/images/work-3.jpg',
   },
   {
     title: 'Dojo forum',
     tool: 'Ruby on Rails | JS | Bootstrap3 | Git Version Control | Ajax | Heroku',
-    link: 'https://github.com/Yipeechen/dojo-forum',
+    link: 'https://dojooforum.herokuapp.com',
     img: 'https://yipeechen.github.io/resume/images/work-4.jpg',
   },
 ];

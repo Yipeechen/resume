@@ -104,12 +104,15 @@ const resumeAbout = () => (
             </StyledHeadingTertiarySub>
           </HeadingTertiary>
           <StyledText>
-            製作報告 PPT 及旅遊手冊，培養出對排版美編的興趣，加上選修 App Inventor 課程製作簡易 App，對於程式撰寫產生興趣，
-            畢業後投入「大航道計畫」以培育 Web Full-stack development 能力為目標，從零開始建立學習經驗，動手實踐功能、畫面獲取學習動力與成就。
+            與一名資深工程師開創後台系統，使用前端主流生態 React 與 Redux，搭配 rxjs 進行非同步請求處理，近期加入 React hooks 應用，
+            學習到模組化管理、前端框架應用，及從零到有的環境開發設置。
           </StyledText>
           <StyledText>
-            透過與同儕切磋詢問、重整邏輯思維、增加熟練度以及自我解 bug 的能力，藉由理解模仿汲取奠定基礎。同時也透過其他學習網站 Udemy、Hahow 的課程和書籍精進技能，
-            閱覽 Medium 文章及加入社團接收新知，努力成為擁有設計觀感，高度還原設計稿，提升使用者體驗的 Web Developer。
+            與後端工程師討論 API 規格，構想多種錯誤情況處理，產品開發上獨自完成 UI / UX，聽取使用者回饋進行改善，而細心個性交付完成度高、錯誤率低的成品。
+          </StyledText>
+          <StyledText>
+            透過其他學習網站 Udemy 課程和書籍精進與驗證技能，
+            閱覽 Medium 文章及加入社團接收新知，成為擁有設計觀感，高度還原設計稿，提高多瀏覽器支援度，提升使用者體驗的 Web Developer。
           </StyledText>
         </StyledInfoContent>
         <StyledInfoSkill>

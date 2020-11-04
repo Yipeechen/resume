@@ -104,15 +104,15 @@ const resumeAbout = () => (
             </StyledHeadingTertiarySub>
           </HeadingTertiary>
           <StyledText>
-            與一名資深工程師開創後台系統，使用前端主流生態 React 與 Redux，搭配 rxjs 進行非同步請求處理，近期加入 React hooks 應用，
-            學習到模組化管理、前端框架應用，及從零到有的環境開發設置。
+          參與從零到有的環境開發設置，與一名資深工程師開創後台系統，使用前端主流生態 React 與 Redux，搭配 rxjs 進行非同步請求處理，近期加入 React hooks 應用，
+            學習到模組化管理、前端框架應用、Webview 實作經驗。
           </StyledText>
           <StyledText>
-            與後端工程師討論 API 規格，構想多種錯誤情況處理，產品開發上獨自完成 UI / UX，聽取使用者回饋進行改善，而細心個性交付完成度高、錯誤率低的成品。
+            與後端工程師討論 API 規格，構想多種錯誤情況處理，產品開發上獨自完成 UI / UX，聽取使用者回饋進行改善，細心特質可交付高完成度、低錯誤率的作品。
           </StyledText>
           <StyledText>
             透過其他學習網站 Udemy 課程和書籍精進與驗證技能，
-            閱覽 Medium 文章及加入社團接收新知，成為擁有設計觀感，高度還原設計稿，提高多瀏覽器支援度，提升使用者體驗的 Web Developer。
+            閱覽 Medium 文章及加入社團接收新知，成為擁有設計觀感、提升使用者體驗的開發者。
           </StyledText>
         </StyledInfoContent>
         <StyledInfoSkill>

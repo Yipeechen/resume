@@ -159,7 +159,7 @@ const events = [
     subTitle: 'Frontend Developer',
     period: 'Sep. 2018 - Oct. 2020',
     content: [
-      '後台為採用前端主流 React 與 Redux 的 SPA 環境，從無到有的課程/系統問答介面、各產品之學員進度查詢功能開發及 UI / UX 設計，以 CSS in JS 攥寫樣式，近期加入 React hooks 運用，資料管理結合 rxjs 發送請求，處理商業邏輯與 response 初步整理。',
+      '後台為採用前端主流 React 與 Redux 的 SPA 環境，從無到有的課程 & 系統問答平面、多產品之學員進度查詢介面及 UI / UX 設計，以 CSS in JS 攥寫樣式，近期加入 React hooks 運用，資料管理結合 rxjs 發送請求，處理商業邏輯與 response 初步整理。',
       '前台維護既有產品，整合 PHP 的 MVC 框架下與 React 併用的前端開發環境，執行產品購買商業邏輯相關流程規劃，活動制式內容的參數化並訂定 API 規格，以達快速開發 ; 亞太第三方登入的串接。',
       'App 產品以 React-Native 開發，Webview 接觸與 App 間的溝通格式訂定與實行，處理 Sign in with Apple，教學牌卡分類顯示及多情境下音檔應用，至最佳使用者體驗。',
     ],

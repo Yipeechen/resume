@@ -72,7 +72,6 @@ const StyledHeadingTertiarySub = styled.span`
 `;
 const StyledInfoSkill = styled.div`
   line-height: 35px;
-  text-transform: capitalize;
   color:  ${({ theme }) => theme.color.primaryDark};
   word-spacing: 5px;
   margin: 0 40px 4rem;
@@ -104,7 +103,7 @@ const resumeAbout = () => (
             </StyledHeadingTertiarySub>
           </HeadingTertiary>
           <StyledText>
-          參與從零到有的環境開發設置，與一名資深工程師開創後台系統，使用前端主流生態 React 與 Redux，搭配 rxjs 進行非同步請求處理，近期加入 React hooks 應用，
+          參與從零到有的環境開發設置，與一名資深工程師開創後台系統，使用前端主流生態 React 與 Redux，搭配 RxJS 進行非同步請求處理，近期加入 React hooks 應用，
             學習到模組化管理、前端框架應用、Webview 實作經驗。
           </StyledText>
           <StyledText>

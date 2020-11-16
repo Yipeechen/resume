@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
 import theme from '@src/styles/theme';
+import mediaQueries from './styles/mediaQueries';
 import { ResetStyle, GlobalStyle } from '@src/styles/reset';
 import Resume from '@src/features/Resume';
 
@@ -15,7 +16,7 @@ const routes = [
 ];
 
 const App = () => (
-  <ThemeProvider theme={theme}>
+  <ThemeProvider theme={{ ...theme, ...mediaQueries }}>
     <BrowserRouter>
       <ResetStyle />
       <GlobalStyle />

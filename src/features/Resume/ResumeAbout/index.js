@@ -13,6 +13,9 @@ const StyledWrapper = styled.div`
   display: flex;
   max-width: 114rem;
   margin: 0 auto;
+  ${({ theme }) => theme.tablet`
+    max-width: 76.8rem;
+  `}
 `;
 const StyledAvatarImg = styled.img.attrs({
   src: 'https://yipeechen.github.io/resume/images/avatar.jpg',
@@ -63,12 +66,19 @@ const StyledInfo = styled.div`
 const StyledInfoContent = styled.div`
   width: 80%;
   margin: 0 auto;
+  ${({ theme }) => theme.tablet`
+    width: 100%;
+  `}
+`;
+const StyledHeadingTertiary = styled(HeadingTertiary)`
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 `;
 const StyledHeadingTertiarySub = styled.span`
   font-size: 16px;
   text-transform: none;
-  color: #5478aa;
-  float: right;
+  color: ${({ theme }) => theme.color.primaryDark};
 `;
 const StyledInfoSkill = styled.div`
   line-height: 35px;
@@ -96,12 +106,12 @@ const resumeAbout = () => (
       </StyledAvatar>
       <StyledInfo>
         <StyledInfoContent>
-          <HeadingTertiary>
+          <StyledHeadingTertiary>
             挑戰自我，學習新技能
             <StyledHeadingTertiarySub>
               2 years + Frontend Developer
             </StyledHeadingTertiarySub>
-          </HeadingTertiary>
+          </StyledHeadingTertiary>
           <StyledText>
           參與從零到有的環境開發設置，與一名資深工程師開創後台系統，使用前端主流生態 React 與 Redux，搭配 RxJS 進行非同步請求處理，近期加入 React hooks 應用，
             學習到模組化管理、前端框架應用、Webview 實作經驗。

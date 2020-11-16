@@ -31,21 +31,25 @@ HeadingSecondary.defaultProps = {
   children: null,
 };
 
-const StyledHeadingTertiary = styled.h3`
+const StyledHeadingTertiary = styled.h3.attrs(({ className }) => ({
+  className: className,
+}))`
   font-size: 1.8rem;
   font-weight: 700;
   text-transform: uppercase;
   margin-bottom: 1.5rem;
 `;
 
-export const HeadingTertiary = ({ children }) => (
-  <StyledHeadingTertiary>
+export const HeadingTertiary = ({ className, children }) => (
+  <StyledHeadingTertiary className={className}>
     {children}
   </StyledHeadingTertiary>
 );
 HeadingTertiary.propTypes = {
   children: PropTypes.any,
+  className: PropTypes.string,
 };
 HeadingTertiary.defaultProps = {
   children: null,
+  className: '',
 };

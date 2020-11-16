@@ -44,21 +44,23 @@ const StyledAvatarBordered = styled.div`
 const StyledAvatar = styled.div`
   flex: 1;
 
-  &:hover {
-    ${StyledAvatarImg} {
-      outline: 1.5rem solid ${({ theme }) => theme.color.secondaryOpLevel5};
-      transform: scale(1.05) translate(30%, 0%);
-      filter: grayscale(0);
-      box-shadow: 0 2.5rem 4rem ${({ theme }) => theme.color.blackOpLevel5};
-      z-index: 20;
-    }
+  ${({ theme }) => theme.hoverable`
+    &:hover {
+      ${StyledAvatarImg} {
+        outline: 1.5rem solid ${({ theme }) => theme.color.secondaryOpLevel5};
+        transform: scale(1.05) translate(30%, 0%);
+        filter: grayscale(0);
+        box-shadow: 0 2.5rem 4rem ${({ theme }) => theme.color.blackOpLevel5};
+        z-index: 20;
+      }
 
-    ${StyledAvatarBordered} {
-      &::after {
-        transform: translate(-40%, 10%);
+      ${StyledAvatarBordered} {
+        &::after {
+          transform: translate(-40%, 10%);
+        }
       }
     }
-  }
+  `}
 `;
 const StyledInfo = styled.div`
   flex: 1;

@@ -10,6 +10,7 @@ const breakPoints = {
   tablet_landscape_below: '@media (max-width: 767px)',
   tablet_portrait: '@media (min-width: 701px) and (max-width: 767px)',
   mobile: '@media (max-width: 700px)',
+  hoverable: '@media (hover: hover) and (pointer: fine) ',
 };
 
 export default Object.keys(breakPoints).reduce((acc, label) => {

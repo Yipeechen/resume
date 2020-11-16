@@ -40,9 +40,11 @@ const StyledCard = styled.div`
   &:not(:last-child) {
     margin-right: 6rem;
   }
-  &:hover {
-    transform: translateY(-1.5rem) scale(1.03);
-  }
+  ${({ theme }) => theme.hoverable`
+    &:hover {
+      transform: translateY(-1.5rem) scale(1.03);
+    }
+  `}
 `;
 const StyledCardIcon = styled.i.attrs(({ className }) => ({
   className: className,

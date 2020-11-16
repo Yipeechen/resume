@@ -68,17 +68,19 @@ const StyledWorkImgWrapper = styled.figure`
   transparent ,
   ${({ theme }) => theme.color.primaryDarkOpLevel9});
 
-  &:hover {
-    ${StyledWorkImg} {
-      opacity: 1;
-      transform: translateY(1.8rem) scale(1.17) skewY(-4deg);
+  ${({ theme }) => theme.hoverable`
+    &:hover {
+      ${StyledWorkImg} {
+        opacity: 1;
+        transform: translateY(1.8rem) scale(1.17) skewY(-4deg);
+      }
+      
+      ${StyledWorkInfo} {
+        opacity: 0;
+        transform: translateY(20rem);
+      }
     }
-    
-    ${StyledWorkInfo} {
-      opacity: 0;
-      transform: translateY(20rem);
-    }
-  }
+  `}
 `;
 
 const Work = ({ link, title, tool, img }) => (

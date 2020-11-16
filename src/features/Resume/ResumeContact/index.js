@@ -117,19 +117,21 @@ const StyledCardWrapper = styled.a.attrs(({ link }) => ({
     padding-top: 112.5%;
   }
 
-  &:hover{
-    ${StyledCardLink} {
-      &::before,
-      &::after {
+  ${({ theme }) => theme.hoverable`
+    &:hover{
+      ${StyledCardLink} {
+        &::before,
+        &::after {
+          opacity: 1;
+        }
+      }
+      
+      ${StyledCardInfo} {
         opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
       }
     }
-    
-    ${StyledCardInfo} {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
-    }
-  }
+  `}
 `;
 const StyledCardIcon = styled.div`
   color: ${({ theme }) => theme.color.black};

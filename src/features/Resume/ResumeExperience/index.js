@@ -54,17 +54,19 @@ const StyledEventPeriod = styled.p`
 const StyledEventWrapper = styled.div`
   position: relative;
 
-  &:hover {
-    ${StyledEventIcon} {
-      transform: rotate(-45deg);
-      background-color: ${({ theme }) => theme.color.secondary};
-      background-image: none;
+  ${({ theme }) => theme.hoverable`
+    &:hover {
+      ${StyledEventIcon} {
+        transform: rotate(-45deg);
+        background-color: ${({ theme }) => theme.color.secondary};
+        background-image: none;
+      }
+    
+      ${StyledEventPeriod} {
+        box-shadow: inset 40rem 0 0 0 ${({ theme }) => theme.color.secondaryOpLevel9};
+      }
     }
-  
-    ${StyledEventPeriod} {
-      box-shadow: inset 40rem 0 0 0 ${({ theme }) => theme.color.secondaryOpLevel9};
-    }
-  }
+  `}
 
   ${StyledEventIcon} {
     background-color: ${({ theme, isHightLight }) => isHightLight ? theme.color.secondary : theme.color.primaryDark};

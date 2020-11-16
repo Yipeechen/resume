@@ -9,12 +9,14 @@ export const Button = styled(Link)`
   border-radius: 15px;
   transition: all 0.2s;
 
-  &:hover,
-  &:active {
-    background-color: ${({ theme }) => theme.color.primaryDark};
-    box-shadow: 0 1rem 2rem ${({ theme }) => theme.color.blackOpLevel2};
-    transform: translateY(-2px);
-  }
+  ${({ theme }) => theme.hoverable`
+    &:hover,
+    &:active {
+      background-color: ${({ theme }) => theme.color.primaryDark};
+      box-shadow: 0 1rem 2rem ${({ theme }) => theme.color.blackOpLevel2};
+      transform: translateY(-2px);
+    }
+  `}
 `;
 
 export const ButtonFull = styled(Button)`
@@ -22,19 +24,23 @@ export const ButtonFull = styled(Button)`
   border: 1px solid ${({ theme }) => theme.color.primary};
   color: ${({ theme }) => theme.color.white};
 
-  &:hover,
-  &:active {
-    border: 1px solid ${({ theme }) => theme.color.primaryDark};
-  }
+  ${({ theme }) => theme.hoverable`
+    &:hover,
+    &:active {
+      border: 1px solid ${({ theme }) => theme.color.primaryDark};
+    }
+  `}
 `;
 
 export const ButtonGhost = styled(Button)`
   border: 1px solid ${({ theme }) => theme.color.primary};
   color: ${({ theme }) => theme.color.primary};
 
-  &:hover,
-  &:active {
-    border: 1px solid ${({ theme }) => theme.color.primary};
-    color: ${({ theme }) => theme.color.white};
-  }
+  ${({ theme }) => theme.hoverable`
+    &:hover,
+    &:active {
+      border: 1px solid ${({ theme }) => theme.color.primary};
+      color: ${({ theme }) => theme.color.white};
+    }
+  `}
 `;

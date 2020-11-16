@@ -108,7 +108,7 @@ Work.defaultProps = {
 };
 const works = [
   {
-    title: '人性化線下CRM平台',
+    title: '人性化線下 CRM 平台',
     tool: 'Ruby on Rails | JS | Chart.js | Bootstrap3 | Git Version Control | Ajax | jQuery',
     link: 'https://github.com/Yipeechen/whale',
     img: 'https://yipeechen.github.io/resume/images/work-1.jpg',

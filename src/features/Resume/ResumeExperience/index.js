@@ -75,29 +75,46 @@ const StyledEventWrapper = styled.div`
     box-shadow: inset 40rem 0 0 0 ${({ theme, isHightLight }) => isHightLight ? 'transparent' : theme.color.primaryDark};
     ${({ isHightLight }) => isHightLight
     ? `background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
-      border-radius: 20px;
     `
     : null};
   }
 `;
-const StyledEventSubTitle = styled.h4`
+const StyledEventSubTitle = styled.span`
   font-size: 1.4rem;
   margin: 0 16px;
   font-weight: 500;
   display: inline-block;
 `;
 const StyledEventContent = styled.div`
-  padding-bottom: 1.2rem;
 `;
 const StyledEventContentHeading = styled.h5`
+  margin-bottom: .8rem;
+
   &::before {
-    content: '\-';
+    content: '\- ';
     display: inline-block;
-    margin: 0 8px;
+    margin: 0 8px 0 0;
   }
 `;
+const StyledEventContentSkills = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  margin-top: .8rem;
+`;
+const StyledEventContentSkill = styled.span`
+  border: 1px solid ${({ theme }) => theme.color.primaryDark};
+  margin: 4px;
+  padding: 1px 16px;
+  border-radius: 50px;
+  font-size: 13px;
+  color: ${({ theme }) => theme.color.primaryDark};
+  font-weight: 600;
+`;
 const StyledEventContentPart = styled.div`
-  ${({ isLastOne }) => isLastOne ? null : 'padding-bottom: 2.4rem'};
+  &:not(:last-child) {
+    margin-bottom: 2.4rem;
+  }
 `;
 
 const Event = ({ period, title, subTitle, content, isHightLight }) => (
@@ -118,10 +135,19 @@ const Event = ({ period, title, subTitle, content, isHightLight }) => (
             isLastOne={content.length === i + 1}
           >
             {part.heading
-              ? (<StyledEventContentHeading>{part.heading}</StyledEventContentHeading>)
+              ? (<StyledEventContentHeading>
+                {part.heading}
+              </StyledEventContentHeading>)
               : null
             }
             {part.body ?? part}
+            <StyledEventContentSkills>
+              {part?.skills?.map((skill, i) => (
+                <StyledEventContentSkill key={i}>
+                  {skill}
+                </StyledEventContentSkill>
+              ))}
+            </StyledEventContentSkills>
           </StyledEventContentPart>
         ))}</StyledEventContent>
     </StyledEventBox>
@@ -156,7 +182,10 @@ const events = [
     subTitle: 'Alpha Camp',
     period: 'Sep. 2017 - Jun. 2018',
     content: [
-      '從無程式背景的小白，依序接觸基本 Html & Css 實作出靜態網頁，接續 Git 版本控制管理，提高專案開發效率，RWD & Bootstrap 點綴靜態網頁內容排版，ROR 學習 MVC 模式開發及運用套件，Heroku 網站部署，JS & Ajax & API 增加網頁動態效果提升互動，及相關資訊觀念課程，到參與專案開發實踐，藉由創建的線上社群社團，增進交流學習。',
+      {
+        body: '從無程式背景的小白，依序接觸基本 Html & Css 實作出靜態網頁，接續 Git 版本控制管理，提高專案開發效率，RWD & Bootstrap 點綴靜態網頁內容排版，RoR 學習 MVC 模式開發及運用套件，Heroku 網站部署，JS & Ajax & API 增加網頁動態效果提升互動，及相關資訊觀念課程，到參與專案開發實踐，藉由創建的線上社群社團，增進交流學習。',
+        skills: ['Github', 'Html5', 'CSS', 'JavaScript', 'jQuery', 'Ruby on Rails', 'Bootstrap', '金流串接'],
+      },
     ],
   },
   {
@@ -164,7 +193,10 @@ const events = [
     subTitle: 'Alpha Camp - Demo Day 1',
     period: 'Apr. 2018',
     content: [
-      '真正著手非課程範例專案的開始，與團隊從最初的與企業主溝通需求、設計使用者故事、建立階段性目標至專案版本控制等，找出問題了解問題，學習如何發問並解決，實作出集合傳統的 POS 機、會員資料、庫存以及報表分析等功能，減少資料在不同系統間的繁複操作。',
+      {
+        body: '真正著手非課程範例專案的開始，與團隊從最初的與企業主溝通需求、設計使用者故事、建立階段性目標至專案版本控制等，找出問題了解問題，學習如何發問並解決，實作出集合傳統的 POS 機、會員資料、庫存以及報表分析等功能，減少資料在不同系統間的繁複操作。',
+        skills: ['Ruby on Rails', 'Sass', 'jQuery', 'chart.js'],
+      },
     ],
   },
   {
@@ -182,16 +214,19 @@ const events = [
     period: 'Sep. 2018 - Oct. 2020',
     content: [
       {
-        heading: '課程後台',
-        body: '後台為採用前端主流 React 與 Redux 的 SPA 環境，從無到有的課程 & 系統問答平面、多產品之學員進度查詢介面及 UI / UX 設計，以 CSS in JS 攥寫樣式，近期加入 React hooks 運用，資料管理結合 RxJS 發送請求，處理商業邏輯與 response 初步整理。',
+        heading: '課程後台：使用者進度查詢｜問答平台｜多產品後台',
+        body: '為採用前端主流 React 與 Redux 的 SPA 環境，從無到有的課程 & 系統問答平面、多產品之學員進度查詢介面及 UI / UX 設計，以 CSS in JS 攥寫樣式，近期加入 React hooks 運用，資料管理結合 RxJS 發送請求，處理商業邏輯與 response 初步整理。',
+        skills: ['React', 'Redux', 'RxJS', 'Styled-components', 'Webpack', 'Antd', 'Npm & Yarn', 'Eslint'],
       },
       {
-        heading: '前台網頁',
-        body: '前台維護既有產品，整合 PHP 的 MVC 框架下與 React 併用的前端開發環境，執行產品購買商業邏輯相關流程規劃，活動制式內容的參數化並訂定 API 規格，以達快速開發 ; 亞太第三方登入的串接。',
+        heading: '前台網頁：行銷活動｜產品購買｜亞太登入串接｜課程問卷',
+        body: '維護既有產品，整合 PHP 的 MVC 框架下與 React 併用的前端開發環境，執行產品購買商業邏輯相關流程規劃，活動制式內容的參數化並訂定 API 規格，以達快速開發 ; 亞太第三方登入的串接。',
+        skills: ['PHP', 'React', 'Sass', 'Styled-components', 'Webpack', 'Npm & Yarn', 'Eslint'],
       },
       {
-        heading: 'App webview',
-        body: 'App 產品以 React-Native 開發，Webview 接觸與 App 間的溝通格式訂定與實行，處理 Sign in with Apple，教學牌卡分類顯示及多情境下音檔應用，至最佳使用者體驗。',
+        heading: 'App webview：多入口音檔教學牌卡列表｜Sign in with Apple｜靜態頁面',
+        body: '產品以 React-Native 開發，接觸 Webview 與 App 間的溝通格式訂定與實行，探討 mobile browser 與 Webview 的原生行為之差異，並處理 Sign in with Apple，教學牌卡分類顯示及多情境下音檔應用，至最佳使用者體驗。',
+        skills: ['Webview', 'Babel'],
       },
     ],
   },

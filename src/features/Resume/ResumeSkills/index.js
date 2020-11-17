@@ -48,6 +48,7 @@ const StyledCard = styled.div`
   border-radius: 3px;
   box-shadow: 0 1.5rem 4rem ${({ theme }) => theme.color.blackOpLevel2};
   transition: transform .3s;
+  width: 33%;
 
   ${({ theme }) => theme.tablet`
     padding: 2.5rem .5rem;

@@ -8,8 +8,11 @@ const Container = styled.section`
   background-color: ${({ theme }) => theme.color.bgPrimary};
   padding: 30rem 0 5rem 0;
   margin-top: -20vh;
-  ${({ theme }) => theme.tablet`
+  ${({ theme }) => theme.tablet_mobile`
     margin-top: -15vh;
+  `}
+  ${({ theme }) => theme.mobile`
+    padding: 15rem 0 1rem 0;
   `}
 `;
 const StyledWrapper = styled.ul`
@@ -18,6 +21,9 @@ const StyledWrapper = styled.ul`
   width: 70%;
   ${({ theme }) => theme.tablet`
     width: 80%;
+  `}
+  ${({ theme }) => theme.mobile`
+    width: 85%;
   `}
 
   &:before {

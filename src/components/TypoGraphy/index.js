@@ -5,6 +5,10 @@ import styled from 'styled-components';
 const StyledHeadingSecondaryWrapper = styled.div`
   text-align: center;
   margin-bottom: 8rem;
+  ${({ theme }) => theme.mobile`
+    margin-bottom: 2.4rem;
+    width: 100%;
+  `}
 `;
 const StyledHeadingSecondary = styled.h2`
   font-size: 3.5rem;

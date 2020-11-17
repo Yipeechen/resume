@@ -11,7 +11,7 @@ const Container = styled.section`
     ${({ theme }) => theme.color.primaryLightOpLevel8},
     ${({ theme }) => theme.color.primaryDarkOpLevel8}
   ),
-  url(https://github.com/Yipeechen/resume/blob/master/images/skill-bg-min.jpg?raw=true);
+  url('https://github.com/Yipeechen/resume/blob/master/images/skill-bg-min.jpg?raw=true');
   background-size: cover;
 
   transform: skewY(-7deg);
@@ -21,6 +21,9 @@ const Container = styled.section`
   }
   ${({ theme }) => theme.tablet`
     padding: 15rem 3rem;
+  `}
+  ${({ theme }) => theme.mobile`
+    padding: 5rem 3rem;
   `}
 `;
 const StyledWrapper = styled.div`
@@ -33,9 +36,11 @@ const StyledWrapper = styled.div`
   ${({ theme }) => theme.tablet`
     width: 100%;
   `}
+  ${({ theme }) => theme.mobile`
+    flex-wrap: wrap;
+  `}
 `;
 const StyledCard = styled.div`
-  flex: 1;
   background-color: ${({ theme }) => theme.color.whiteOpLevel8};
   font-size: 1.5rem;
   padding: 2.5rem;
@@ -47,11 +52,18 @@ const StyledCard = styled.div`
   ${({ theme }) => theme.tablet`
     padding: 2.5rem .5rem;
   `}
+  ${({ theme }) => theme.mobile`
+    width: 100%;
+  `}
 
   &:not(:last-child) {
     margin-right: 6rem;
     ${({ theme }) => theme.tablet`
       margin-right: 2rem;
+    `}
+    ${({ theme }) => theme.mobile`
+      margin-right: 0rem;
+      margin-bottom: 2.4rem;
     `}
   }
   ${({ theme }) => theme.hoverable`

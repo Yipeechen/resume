@@ -10,7 +10,7 @@ import { HeadingSecondary } from '@src/components/TypoGraphy';
 const StyledContainer = styled.section`
   background-color: ${({ theme }) => theme.color.bgPrimary};
   padding: 5rem 0 10rem 0;
-  ${({ theme }) => theme.tablet`
+  ${({ theme }) => theme.tablet_mobile`
     padding: 0rem 0 10rem 0;
   `}
 `;
@@ -27,6 +27,10 @@ const StyledWrapper = styled.div`
     display: table;
     clear: both;
   }
+  ${({ theme }) => theme.mobile`
+    padding: 5rem 0 0;
+    width: 90%;
+  `}
 `;
 const StyledCardLink = styled.div`
   position: absolute;
@@ -85,15 +89,20 @@ const StyledCardInfo = styled.div`
   backface-visibility: hidden;
   transform: translate(-50%, -50%) scale(0.5);
   transition: all 0.5s;
+  ${({ theme }) => theme.mobile`
+    font-size: 2rem;
+  `}
 `;
 const StyledCardInfoContent = styled.div`
   margin: 1em 0 0;
   letter-spacing: 1px;
-  font-size: 1.6rem;
   font-weight: 700;
   font-size: 1.1rem;
   line-height: 1.5;
   color: turquoise;
+  ${({ theme }) => theme.mobile`
+    margin: 0;
+  `}
 `;
 const StyledCardWrapper = styled.a.attrs(({ link }) => ({
   href: link,
@@ -113,6 +122,9 @@ const StyledCardWrapper = styled.a.attrs(({ link }) => ({
   clip-path: polygon(
     50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%
   );
+  ${({ theme }) => theme.mobile`
+    width: 33%;
+  `}
   
   &::before {
     content: '';
@@ -138,7 +150,7 @@ const StyledCardWrapper = styled.a.attrs(({ link }) => ({
 `;
 const StyledCardIcon = styled.div`
   color: ${({ theme }) => theme.color.black};
-  font-size: 5rem;
+  font-size: 3.5rem;
   line-height: 230%;
   top: 50%;
   left: 50%;

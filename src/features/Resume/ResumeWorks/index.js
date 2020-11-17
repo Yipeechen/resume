@@ -7,7 +7,7 @@ import { HeadingSecondary } from '@src/components/TypoGraphy';
 const Container = styled.section`
   background-color: ${({ theme }) => theme.color.bgPrimary};
   padding: 5rem 0 10rem 0;
-  ${({ theme }) => theme.tablet`
+  ${({ theme }) => theme.tablet_mobile`
     padding: 0rem 0 10rem 0;
   `}
 `;
@@ -21,11 +21,18 @@ const StyledWrapper = styled.ul`
     clear: both;
   }
   transform: skewY(4deg);
+  ${({ theme }) => theme.mobile`
+    transform: skewY(0deg);
+  `}
 `;
 const StyledWorkWrapper = styled.li`
   display: block;
   float: left;
   width: 20%;
+  ${({ theme }) => theme.mobile`
+    width: 100%;
+    margin-bottom: .8rem;
+  `}
 `;
 const StyledWorkLink = styled.a.attrs(({ link }) => ({
   href: link,
@@ -42,6 +49,9 @@ const StyledWorkImg = styled.img.attrs(({ img }) => ({
   ${({ theme }) => theme.tablet`
     height: 100%;
   `}
+  ${({ theme }) => theme.mobile`
+    transform: translateY(1.8rem) scale(1.3) skewY(0deg);
+  `}
 `;
 const StyledWorkInfo = styled.div`
   position: absolute;
@@ -53,17 +63,20 @@ const StyledWorkInfo = styled.div`
   color: ${({ theme }) => theme.color.primaryDark};
   word-spacing: .3rem;
   transition: all .5s;
+  ${({ theme }) => theme.mobile`
+    transform: skewY(0deg) translate(-50%, -50%);
+  `}
 `;
 const StyledInfoTitle = styled.h4`
   margin-bottom: 1.5rem;
   font-size: 2.4rem;
   font-weight: bold;
-  ${({ theme }) => theme.tablet`
+  ${({ theme }) => theme.tablet_mobile`
     font-size: 2rem;
   `}
 `;
 const StyledInfoContent = styled.p`
-  ${({ theme }) => theme.tablet`
+  ${({ theme }) => theme.tablet_mobile`
     font-size: 1.4rem;
   `}
 `;
@@ -79,11 +92,18 @@ const StyledWorkImgWrapper = styled.figure`
   transparent ,
   ${({ theme }) => theme.color.primaryDarkOpLevel9});
 
+  ${({ theme }) => theme.mobile`
+    height: 15rem;
+  `}
+
   ${({ theme }) => theme.hoverable`
     &:hover {
       ${StyledWorkImg} {
         opacity: 1;
         transform: translateY(1.8rem) scale(1.17) skewY(-4deg);
+        ${({ theme }) => theme.mobile`
+          transform: translateY(1.8rem) scale(1.17) skewY(0deg);
+        `}
       }
       
       ${StyledWorkInfo} {

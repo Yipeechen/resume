@@ -8,12 +8,20 @@ const Container = styled.section`
   background-color: ${({ theme }) => theme.color.bgPrimary};
   padding: 25rem 0 30rem 0;
   margin-top: -20vh;
+  ${({ theme }) => theme.mobile`
+    padding: 15rem 0 15rem 0;
+  `}
 `;
 const StyledWrapper = styled.div`
   display: flex;
   max-width: 102.4rem;
   margin: 0 auto;
   width: 85%;
+  ${({ theme }) => theme.mobile`
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  `}
 `;
 const StyledAvatarImg = styled.img.attrs({
   src: 'https://yipeechen.github.io/resume/images/avatar.jpg',
@@ -23,10 +31,18 @@ const StyledAvatarImg = styled.img.attrs({
   filter: grayscale(1);
   transform: translate(0%, 0%);
   transition: all .3s;
-  ${({ theme }) => theme.tablet`
+
+  ${({ theme }) => theme.tablet_mobile`
     filter: grayscale(0);
+  `}
+  ${({ theme }) => theme.tablet`
     width: 35vw;
     transform: translate(-4vw, 5vw);
+  `}
+  ${({ theme }) => theme.mobile`
+    width: 100%;
+    transform: translate(0, 0);
+    margin-bottom: 2.4rem;
   `}
 `;
 const StyledAvatarBordered = styled.div`
@@ -47,11 +63,16 @@ const StyledAvatarBordered = styled.div`
       width: 33vw;
       height: 33vw;
     `}
+    ${({ theme }) => theme.mobile`
+      border-width: 0px;
+    `}
   }
 `;
 const StyledAvatar = styled.div`
-  flex: 1;
   width: 50%;
+  ${({ theme }) => theme.mobile`
+    width: 100%;
+  `}
 
   ${({ theme }) => theme.hoverable`
     &:hover {
@@ -63,6 +84,9 @@ const StyledAvatar = styled.div`
         z-index: 20;
         ${({ theme }) => theme.tablet`
           transform: translate(0%, 10vw);
+        `}
+        ${({ theme }) => theme.mobile`
+          transform: translate(0%, 0%);
         `}
       }
 
@@ -78,8 +102,10 @@ const StyledAvatar = styled.div`
   `}
 `;
 const StyledInfo = styled.div`
-  flex: 1;
   width: 50%;
+  ${({ theme }) => theme.mobile`
+    width: 100%;
+  `}
 `;
 const StyledInfoContent = styled.div`
   margin: 0 auto;
@@ -110,14 +136,25 @@ const StyledText = styled.p`
 const StyledInfoButtons = styled.div`
   display: flex;
   justify-content: space-between;
+  ${({ theme }) => theme.mobile`
+    flex-wrap: wrap;
+  `}
 `;
 const StyledButtonFull = styled(ButtonFull)`
   width: 30%;
   text-align: center;
+  ${({ theme }) => theme.mobile`
+    width: 100%;
+    margin: 8px auto;
+  `}
 `;
 const StyledButtonGhost = styled(ButtonGhost)`
   width: 30%;
   text-align: center;
+  ${({ theme }) => theme.mobile`
+    width: 100%;
+    margin: 8px auto;
+  `}
 `;
 
 const resumeAbout = () => (

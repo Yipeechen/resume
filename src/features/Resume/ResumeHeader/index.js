@@ -36,7 +36,7 @@ const StyledHeader = styled.header`
     ${({ theme }) => theme.color.primaryLightOpLevel8},
     ${({ theme }) => theme.color.primaryDarkOpLevel8}
     ), 
-  url(https://yipeechen.github.io/resume/images/header-bg-min.jpg);
+  url('https://yipeechen.github.io/resume/images/header-bg-min.jpg');
   background-size: cover;
   background-position: bottom;
   clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
@@ -55,10 +55,13 @@ const StyledHeadingPrimary = styled.h1`
 const StyledHeadingSub = styled.span`
   display: block;
   font-weight: 300;
-  font-size: 40px;
+  font-size: 4rem;
   letter-spacing: 10px;
   animation-name: ${moveInLeft};
   animation-duration: 1s;
+  ${({ theme }) => theme.mobile`
+    font-size: 3rem;
+  `}
 
   &::before {
     content: '';
@@ -67,18 +70,24 @@ const StyledHeadingSub = styled.span`
     margin-bottom: 10px;
     border-bottom: 1px solid ${({ theme }) => theme.white};
     transform: translateX(-100px);
+    ${({ theme }) => theme.mobile`
+      transform: translateX(-50px);
+  `}
   }
 `;
 const StyledHeadingMain = styled.span`
   display: block;
   font-weight: 700;
-  font-size: 60px;
+  font-size: 6rem;
   letter-spacing: 20px;
   word-spacing: 30px;
   animation-name: ${moveInRight};
   animation-duration: 1s;
+  ${({ theme }) => theme.mobile`
+    font-size: 4rem;
+  `}
 
-  &:after {
+  &::after {
     content: '';
     display: block;
     width: 110%;

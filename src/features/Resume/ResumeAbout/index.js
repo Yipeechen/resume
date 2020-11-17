@@ -11,20 +11,23 @@ const Container = styled.section`
 `;
 const StyledWrapper = styled.div`
   display: flex;
-  max-width: 114rem;
+  max-width: 102.4rem;
   margin: 0 auto;
-  ${({ theme }) => theme.tablet`
-    max-width: 76.8rem;
-  `}
+  width: 85%;
 `;
 const StyledAvatarImg = styled.img.attrs({
   src: 'https://yipeechen.github.io/resume/images/avatar.jpg',
   alt: 'avatar',
 })`
-  width: 65%;
+  width: 75%;
   filter: grayscale(1);
-  transform: translate(20%, 0%);
+  transform: translate(0%, 0%);
   transition: all .3s;
+  ${({ theme }) => theme.tablet`
+    filter: grayscale(0);
+    width: 35vw;
+    transform: translate(-4vw, 5vw);
+  `}
 `;
 const StyledAvatarBordered = styled.div`
   position: relative;
@@ -37,26 +40,38 @@ const StyledAvatarBordered = styled.div`
     top: 0;
     width: 30rem;
     height: 30rem;
-    transform: translate(-20%, 50%);
+    transform: translate(-20%, 60%);
     transition: all .3s;
+    ${({ theme }) => theme.tablet`
+      transform: translate(-4vw, 17vw);
+      width: 33vw;
+      height: 33vw;
+    `}
   }
 `;
 const StyledAvatar = styled.div`
   flex: 1;
+  width: 50%;
 
   ${({ theme }) => theme.hoverable`
     &:hover {
       ${StyledAvatarImg} {
         outline: 1.5rem solid ${({ theme }) => theme.color.secondaryOpLevel5};
-        transform: scale(1.05) translate(30%, 0%);
+        transform: scale(1.05) translate(15%, 15%);
         filter: grayscale(0);
         box-shadow: 0 2.5rem 4rem ${({ theme }) => theme.color.blackOpLevel5};
         z-index: 20;
+        ${({ theme }) => theme.tablet`
+          transform: translate(0%, 10vw);
+        `}
       }
 
       ${StyledAvatarBordered} {
         &::after {
-          transform: translate(-40%, 10%);
+          transform: translate(-23%, 24%);
+          ${({ theme }) => theme.tablet`
+            border-color: transparent;
+          `}
         }
       }
     }
@@ -64,9 +79,9 @@ const StyledAvatar = styled.div`
 `;
 const StyledInfo = styled.div`
   flex: 1;
+  width: 50%;
 `;
 const StyledInfoContent = styled.div`
-  width: 80%;
   margin: 0 auto;
   ${({ theme }) => theme.tablet`
     width: 100%;
@@ -86,14 +101,23 @@ const StyledInfoSkill = styled.div`
   line-height: 35px;
   color:  ${({ theme }) => theme.color.primaryDark};
   word-spacing: 5px;
-  margin: 0 40px 4rem;
+  margin: 0 auto 2rem;
+  text-align: center;
 `;
 const StyledText = styled.p`
   margin-bottom: 2rem;
 `;
 const StyledInfoButtons = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+`;
+const StyledButtonFull = styled(ButtonFull)`
+  width: 30%;
+  text-align: center;
+`;
+const StyledButtonGhost = styled(ButtonGhost)`
+  width: 30%;
+  text-align: center;
 `;
 
 const resumeAbout = () => (
@@ -130,7 +154,7 @@ const resumeAbout = () => (
           Html5 | CSS3 | JavaScript | React | Redux | Ruby on Rails
         </StyledInfoSkill>
         <StyledInfoButtons>
-          <ButtonFull
+          <StyledButtonFull
             activeClass="active"
             to="section_skills"
             smooth
@@ -138,8 +162,8 @@ const resumeAbout = () => (
             duration={500}
           >
             What I learn
-          </ButtonFull>
-          <ButtonGhost
+          </StyledButtonFull>
+          <StyledButtonGhost
             activeClass="active"
             to="section_works"
             smooth
@@ -147,8 +171,8 @@ const resumeAbout = () => (
             duration={500}
           >
             My works
-          </ButtonGhost>
-          <ButtonGhost
+          </StyledButtonGhost>
+          <StyledButtonGhost
             activeClass="active"
             to="section_contact"
             smooth
@@ -156,7 +180,7 @@ const resumeAbout = () => (
             duration={500}
           >
             Contact me
-          </ButtonGhost>
+          </StyledButtonGhost>
         </StyledInfoButtons>
       </StyledInfo>
     </StyledWrapper>

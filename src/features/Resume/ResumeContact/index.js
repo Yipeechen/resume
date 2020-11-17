@@ -10,6 +10,9 @@ import { HeadingSecondary } from '@src/components/TypoGraphy';
 const StyledContainer = styled.section`
   background-color: ${({ theme }) => theme.color.bgPrimary};
   padding: 5rem 0 10rem 0;
+  ${({ theme }) => theme.tablet`
+    padding: 0rem 0 10rem 0;
+  `}
 `;
 const StyledWrapper = styled.div`
   padding: 5rem 6rem 0;
@@ -137,7 +140,10 @@ const StyledCardIcon = styled.div`
   color: ${({ theme }) => theme.color.black};
   font-size: 5rem;
   line-height: 230%;
-  transform: translateY(50%);
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
 `;
 
 const Card = ({ link, icon, title, content }) => (

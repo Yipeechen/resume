@@ -7,6 +7,9 @@ import { HeadingSecondary } from '@src/components/TypoGraphy';
 const Container = styled.section`
   background-color: ${({ theme }) => theme.color.bgPrimary};
   padding: 5rem 0 10rem 0;
+  ${({ theme }) => theme.tablet`
+    padding: 0rem 0 10rem 0;
+  `}
 `;
 const StyledWrapper = styled.ul`
   list-style: none;
@@ -36,25 +39,33 @@ const StyledWorkImg = styled.img.attrs(({ img }) => ({
   height: auto;
   transform: translateY(1.8rem) scale(1.3) skewY(-4deg);
   transition: transform 0.5s, opacity 0.5s;
+  ${({ theme }) => theme.tablet`
+    height: 100%;
+  `}
 `;
 const StyledWorkInfo = styled.div`
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 50%;
+  transform: skewY(-4deg) translate(-50%, -50%);
+  width: 85%;
   opacity: 1;
-  padding: 0 2.5rem;
   color: ${({ theme }) => theme.color.primaryDark};
   word-spacing: .3rem;
-  transform: skewY(-4deg) translateY(12rem);
   transition: all .5s;
 `;
 const StyledInfoTitle = styled.h4`
   margin-bottom: 1.5rem;
   font-size: 2.4rem;
   font-weight: bold;
+  ${({ theme }) => theme.tablet`
+    font-size: 2rem;
+  `}
 `;
 const StyledInfoContent = styled.p`
-
+  ${({ theme }) => theme.tablet`
+    font-size: 1.4rem;
+  `}
 `;
 const StyledWorkImgWrapper = styled.figure`
   position: relative;
@@ -77,7 +88,7 @@ const StyledWorkImgWrapper = styled.figure`
       
       ${StyledWorkInfo} {
         opacity: 0;
-        transform: translateY(20rem);
+        transform: translate(-50%, 200%) skewY(-4deg);
       }
     }
   `}

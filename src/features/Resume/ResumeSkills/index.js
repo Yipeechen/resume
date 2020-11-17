@@ -19,6 +19,9 @@ const Container = styled.section`
   & > * {
     transform: skewY(7deg);
   }
+  ${({ theme }) => theme.tablet`
+    padding: 15rem 3rem;
+  `}
 `;
 const StyledWrapper = styled.div`
   display: flex;
@@ -27,6 +30,9 @@ const StyledWrapper = styled.div`
   align-items: flex-start;
   max-width: 114rem;
   margin: 0 auto;
+  ${({ theme }) => theme.tablet`
+    width: 100%;
+  `}
 `;
 const StyledCard = styled.div`
   flex: 1;
@@ -37,8 +43,16 @@ const StyledCard = styled.div`
   border-radius: 3px;
   box-shadow: 0 1.5rem 4rem ${({ theme }) => theme.color.blackOpLevel2};
   transition: transform .3s;
+
+  ${({ theme }) => theme.tablet`
+    padding: 2.5rem .5rem;
+  `}
+
   &:not(:last-child) {
     margin-right: 6rem;
+    ${({ theme }) => theme.tablet`
+      margin-right: 2rem;
+    `}
   }
   ${({ theme }) => theme.hoverable`
     &:hover {

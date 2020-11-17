@@ -8,11 +8,17 @@ const Container = styled.section`
   background-color: ${({ theme }) => theme.color.bgPrimary};
   padding: 30rem 0 5rem 0;
   margin-top: -20vh;
+  ${({ theme }) => theme.tablet`
+    margin-top: -15vh;
+  `}
 `;
 const StyledWrapper = styled.ul`
   margin: 4rem auto;
   position: relative;
-  width: 60%;
+  width: 70%;
+  ${({ theme }) => theme.tablet`
+    width: 80%;
+  `}
 
   &:before {
     background-color: ${({ theme }) => theme.color.primaryDark};
@@ -37,7 +43,7 @@ const StyledEventIcon = styled.label`
   height: 1rem;
 `;
 const StyledEventBox = styled.div`
-  padding: 2rem;
+  padding: 2rem 4rem 2rem 2rem;
   position: relative;
   top: -1.875rem;
   left: 4rem;

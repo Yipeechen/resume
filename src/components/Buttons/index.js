@@ -3,7 +3,7 @@ import { Link } from 'react-scroll';
 
 export const Button = styled(Link)`
   display: inline-block;
-  padding: 10px 40px;
+  padding: 10px 0px;
   font-weight: 300;
   text-decoration: none;
   border-radius: 15px;

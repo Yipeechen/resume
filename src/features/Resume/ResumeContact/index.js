@@ -150,12 +150,15 @@ const StyledCardWrapper = styled.a.attrs(({ link }) => ({
 `;
 const StyledCardIcon = styled.div`
   color: ${({ theme }) => theme.color.black};
-  font-size: 3.5rem;
+  font-size: 5rem;
   line-height: 230%;
   top: 50%;
   left: 50%;
   position: absolute;
   transform: translate(-50%, -50%);
+  ${({ theme }) => theme.mobile`
+    font-size: 3.5rem;
+  `}
 `;
 
 const Card = ({ link, icon, title, content }) => (

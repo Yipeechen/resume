@@ -19,6 +19,7 @@ const StyledWrapper = styled.ul`
   margin: 4rem auto;
   position: relative;
   width: 70%;
+  max-width: 114rem;
   ${({ theme }) => theme.tablet`
     width: 80%;
   `}

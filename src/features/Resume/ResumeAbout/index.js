@@ -9,7 +9,7 @@ const Container = styled.section`
   padding: 25rem 0 30rem 0;
   margin-top: -20vh;
   ${({ theme }) => theme.mobile`
-    padding: 15rem 0 15rem 0;
+    padding: 20rem 0 15rem 0;
   `}
 `;
 const StyledWrapper = styled.div`
@@ -43,6 +43,7 @@ const StyledAvatarImg = styled.img.attrs({
     width: 100%;
     transform: translate(0, 0);
     margin-bottom: 2.4rem;
+    border-radius: 50%;
   `}
 `;
 const StyledAvatarBordered = styled.div`
@@ -64,14 +65,15 @@ const StyledAvatarBordered = styled.div`
       height: 33vw;
     `}
     ${({ theme }) => theme.mobile`
-      border-width: 0px;
+      display: none;
     `}
   }
 `;
 const StyledAvatar = styled.div`
   width: 50%;
   ${({ theme }) => theme.mobile`
-    width: 100%;
+    width: 75%;
+    text-align: center;
   `}
 
   ${({ theme }) => theme.hoverable`
@@ -87,6 +89,7 @@ const StyledAvatar = styled.div`
         `}
         ${({ theme }) => theme.mobile`
           transform: translate(0%, 0%);
+          outline: 0rem solid ${({ theme }) => theme.color.secondaryOpLevel5};
         `}
       }
 
@@ -195,7 +198,7 @@ const resumeAbout = () => (
             activeClass="active"
             to="section_skills"
             smooth
-            offset={200}
+            offset={0}
             duration={500}
           >
             What I learn

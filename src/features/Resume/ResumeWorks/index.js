@@ -31,7 +31,7 @@ const StyledWorkWrapper = styled.li`
   width: 20%;
   ${({ theme }) => theme.mobile`
     width: 100%;
-    margin-bottom: .8rem;
+    margin-bottom: 1.8rem;
   `}
 `;
 const StyledWorkLink = styled.a.attrs(({ link }) => ({
@@ -79,6 +79,9 @@ const StyledInfoContent = styled.p`
   ${({ theme }) => theme.tablet_mobile`
     font-size: 1.4rem;
   `}
+  ${({ theme }) => theme.mobile`
+    font-weight: 600;
+  `}
 `;
 const StyledWorkImgWrapper = styled.figure`
   position: relative;
@@ -94,6 +97,12 @@ const StyledWorkImgWrapper = styled.figure`
 
   ${({ theme }) => theme.mobile`
     height: 15rem;
+    background: linear-gradient(
+      to bottom,
+      ${theme.color.white},
+      ${theme.color.transparent},
+      ${theme.color.blackOpLevel3}
+    );
   `}
 
   ${({ theme }) => theme.hoverable`

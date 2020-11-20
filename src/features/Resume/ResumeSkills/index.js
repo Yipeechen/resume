@@ -55,6 +55,7 @@ const StyledCard = styled.div`
   `}
   ${({ theme }) => theme.mobile`
     width: 100%;
+    padding: 2rem;
   `}
 
   &:not(:last-child) {
@@ -86,9 +87,17 @@ const StyledCardIcon = styled.i.attrs(({ className }) => ({
   );
   -webkit-background-clip: text;
   color: transparent;
+  ${({ theme }) => theme.mobile`
+    font-size: 5rem;
+    margin-bottom: -1.5rem;
+  `}
 `;
 const StyledCardListLi = styled.li`
   width: 100%;
+  ${({ theme }) => theme.mobile`
+    width: 50%;
+    display: inline-block;
+  `}
 `;
 const StyledCardList = styled.ul`
   ${({ isTwoColumn }) => isTwoColumn

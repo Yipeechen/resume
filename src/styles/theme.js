@@ -17,6 +17,7 @@ const color = {
   blackOpLevel3: '#0000004d',
   blackOpLevel5: '#00000080',
   blackOpLevel6: '#00000099',
+  transparent: '#ffffff00',
 
   bgPrimary: '#f7f7f7',
 };

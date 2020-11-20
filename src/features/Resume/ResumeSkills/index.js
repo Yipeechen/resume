@@ -11,7 +11,7 @@ const Container = styled.section`
     ${({ theme }) => theme.color.primaryLightOpLevel8},
     ${({ theme }) => theme.color.primaryDarkOpLevel8}
   ),
-  url('https://github.com/Yipeechen/resume/blob/master/images/skill-bg-min.jpg?raw=true');
+  url('https://yipeechen.github.io/resume/images/skill-bg-min.jpg');
   background-size: cover;
 
   transform: skewY(-7deg);
@@ -24,6 +24,12 @@ const Container = styled.section`
   `}
   ${({ theme }) => theme.mobile`
     padding: 5rem 3rem;
+    background-image: linear-gradient(
+      to right bottom,
+      ${({ theme }) => theme.color.primaryLightOpLevel8},
+      ${({ theme }) => theme.color.primaryDarkOpLevel8}
+    ),
+    url('https://yipeechen.github.io/resume/images/mobile/skill-bg-min.jpg');
   `}
 `;
 const StyledWrapper = styled.div`

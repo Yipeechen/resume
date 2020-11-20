@@ -4,6 +4,11 @@ import styled from 'styled-components';
 import { HeadingSecondary, HeadingTertiary } from '@src/components/TypoGraphy';
 import { ButtonFull, ButtonGhost } from '@src/components/Buttons';
 
+const MEDIA_QUERIES = {
+  isPc: '(min-width: 1024px)',
+  isPad: '(min-width:701px) and (max-width: 1023px)',
+  isMobile: '(max-width: 700px)',
+};
 const Container = styled.section`
   background-color: ${({ theme }) => theme.color.bgPrimary};
   padding: 25rem 0 30rem 0;
@@ -24,7 +29,9 @@ const StyledWrapper = styled.div`
   `}
 `;
 const StyledAvatarImg = styled.img.attrs({
-  src: 'https://yipeechen.github.io/resume/images/avatar.jpg',
+  src: window.matchMedia(MEDIA_QUERIES.isMobile).matches
+    ? 'https://yipeechen.github.io/resume/images/mobile/avatar.jpg'
+    : 'https://yipeechen.github.io/resume/images/avatar.jpg',
   alt: 'avatar',
 })`
   width: 75%;

@@ -41,6 +41,15 @@ const StyledHeader = styled.header`
   background-position: bottom;
   clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
   position: relative;
+  ${({ theme }) => theme.mobile`
+    background-image: 
+  linear-gradient(
+    to right bottom,  
+    ${({ theme }) => theme.color.primaryLightOpLevel8},
+    ${({ theme }) => theme.color.primaryDarkOpLevel8}
+    ), 
+    url('https://yipeechen.github.io/resume/images/mobile/header-bg-min.jpg');
+  `}
 `;
 const StyledHeaderTextBox = styled.div`
   position: absolute;

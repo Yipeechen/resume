@@ -4,6 +4,11 @@ import styled from 'styled-components';
 
 import { HeadingSecondary } from '@src/components/TypoGraphy';
 
+const MEDIA_QUERIES = {
+  isPc: '(min-width: 1024px)',
+  isPad: '(min-width:701px) and (max-width: 1023px)',
+  isMobile: '(max-width: 700px)',
+};
 const Container = styled.section`
   background-color: ${({ theme }) => theme.color.bgPrimary};
   padding: 5rem 0 10rem 0;
@@ -39,7 +44,8 @@ const StyledWorkLink = styled.a.attrs(({ link }) => ({
   target: '_blank',
 }))``;
 const StyledWorkImg = styled.img.attrs(({ img }) => ({
-  src: img,
+  src: window.matchMedia(MEDIA_QUERIES.isMobile).matches
+    ? img.mobile : img.pc,
 }))`
   opacity: 0.3;
   width: 100%;
@@ -137,13 +143,13 @@ const Work = ({ link, title, tool, img }) => (
   </StyledWorkWrapper>
 );
 Work.propTypes = {
-  img: PropTypes.string,
+  img: PropTypes.object,
   link: PropTypes.string,
   title: PropTypes.string,
   tool: PropTypes.string,
 };
 Work.defaultProps = {
-  img: '',
+  img: {},
   link: '',
   title: '',
   tool: '',
@@ -153,31 +159,46 @@ const works = [
     title: '人性化線下 CRM 平台',
     tool: 'Ruby on Rails | JS | Chart.js | Bootstrap3 | Git Version Control | Ajax | jQuery',
     link: 'https://github.com/Yipeechen/whale',
-    img: 'https://yipeechen.github.io/resume/images/work-1.jpg',
+    img: {
+      pc: 'https://yipeechen.github.io/resume/images/work-1.jpg',
+      mobile: 'https://yipeechen.github.io/resume/images/mobile/work-1.jpg',
+    },
   },
   {
     title: 'About Yiping',
     tool: ' JS | React | Git Version Control | CSS in JS | Webpack | Eslint',
     link: 'https://github.com/Yipeechen/stackoverflow',
-    img: 'https://yipeechen.github.io/resume/images/work-5.jpg',
+    img: {
+      pc: 'https://yipeechen.github.io/resume/images/work-5.jpg',
+      mobile: 'https://yipeechen.github.io/resume/images/mobile/work-5.jpg',
+    },
   },
   {
     title: 'Stackoverflow',
     tool: 'Ruby on Rails | JS | Bootstrap4 | Git Version Control | Ajax | jQuery',
     link: 'https://github.com/Yipeechen/stackoverflow',
-    img: 'https://yipeechen.github.io/resume/images/work-2.jpg',
+    img: {
+      pc: 'https://yipeechen.github.io/resume/images/work-2.jpg',
+      mobile: 'https://yipeechen.github.io/resume/images/mobile/work-2.jpg',
+    },
   },
   {
     title: 'Restaurant forum',
     tool: 'Ruby on Rails | Bootstrap3 | Git Version Control | Heroku',
     link: 'https://restaurant-forum-by-yipee.herokuapp.com',
-    img: 'https://yipeechen.github.io/resume/images/work-3.jpg',
+    img: {
+      pc: 'https://yipeechen.github.io/resume/images/work-3.jpg',
+      mobile: 'https://yipeechen.github.io/resume/images/mobile/work-3.jpg',
+    },
   },
   {
     title: 'Dojo forum',
     tool: 'Ruby on Rails | JS | Bootstrap3 | Git Version Control | Ajax | Heroku',
     link: 'https://dojooforum.herokuapp.com',
-    img: 'https://yipeechen.github.io/resume/images/work-4.jpg',
+    img: {
+      pc: 'https://yipeechen.github.io/resume/images/work-4.jpg',
+      mobile: 'https://yipeechen.github.io/resume/images/mobile/work-4.jpg',
+    },
   },
 ];
 

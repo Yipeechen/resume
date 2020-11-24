@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { PropTypes } from 'prop-types';
 import styled from 'styled-components';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAward } from '@fortawesome/free-solid-svg-icons';
 import { HeadingSecondary, HeadingTertiary } from '@src/components/TypoGraphy';
 
 const Container = styled.section`
@@ -82,13 +84,13 @@ const StyledEventWrapper = styled.div`
   `}
 
   ${StyledEventIcon} {
-    background-color: ${({ theme, isHightLight }) => isHightLight ? theme.color.secondary : theme.color.primaryDark};
-    ${({ isHightLight }) => isHightLight ? 'background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%)' : null};
+    background-color: ${({ theme, isMainEvent }) => isMainEvent ? theme.color.secondary : theme.color.primaryDark};
+    ${({ isMainEvent }) => isMainEvent ? 'background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%)' : null};
   }
 
   ${StyledEventPeriod} {
-    box-shadow: inset 40rem 0 0 0 ${({ theme, isHightLight }) => isHightLight ? 'transparent' : theme.color.primaryDark};
-    ${({ isHightLight }) => isHightLight
+    box-shadow: inset 40rem 0 0 0 ${({ theme, isMainEvent }) => isMainEvent ? 'transparent' : theme.color.primaryDark};
+    ${({ isMainEvent }) => isMainEvent
     ? `background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
     `
     : null};
@@ -115,6 +117,13 @@ const StyledEventContentHeading = styled.h5`
     display: inline-block;
     margin: 0 .8rem 0 0;
   }
+`;
+const StyledEventContentHeadingHighlight = styled(FontAwesomeIcon).attrs({
+  icon: faAward,
+})`
+  color: ${({ theme }) => theme.color.secondary};
+  margin-left: .8rem;
+  font-size: 1.8rem;
 `;
 const StyledEventContentSkills = styled.div`
   display: flex;
@@ -195,7 +204,7 @@ const StyledEventContentParagraphRead = styled.span`
   `}
 `;
 
-const Event = ({ period, title, subTitle, content, isHightLight }) => {
+const Event = ({ period, title, subTitle, content, isMainEvent }) => {
   const [selected, setSelected] = useState([]);
 
   const handleReadBtnOnPress = index => {
@@ -204,7 +213,7 @@ const Event = ({ period, title, subTitle, content, isHightLight }) => {
   };
 
   return (
-    <StyledEventWrapper isHightLight={isHightLight}>
+    <StyledEventWrapper isMainEvent={isMainEvent}>
       <StyledEventIcon />
       <StyledEventBox>
         <StyledEventPeriod>{period}</StyledEventPeriod>
@@ -220,12 +229,12 @@ const Event = ({ period, title, subTitle, content, isHightLight }) => {
               key={i}
               isLastOne={content.length === i + 1}
             >
-              {part.heading
-                ? (<StyledEventContentHeading>
-                  {part.heading}
-                </StyledEventContentHeading>)
-                : null
-              }
+              {part.heading &&
+              <StyledEventContentHeading isHighlight={part.isHighlight}>
+                {part.heading}
+                {part.isHighlight &&
+                <StyledEventContentHeadingHighlight />}
+              </StyledEventContentHeading>}
               <StyledEventContentParagraph
                 expanded={selected.some(idx => idx === i)}
                 onClick={() => handleReadBtnOnPress(i)}
@@ -253,14 +262,14 @@ const Event = ({ period, title, subTitle, content, isHightLight }) => {
 };
 Event.propTypes = {
   content: PropTypes.array,
-  isHightLight: PropTypes.bool,
+  isMainEvent: PropTypes.bool,
   period: PropTypes.string,
   subTitle: PropTypes.string,
   title: PropTypes.string,
 };
 Event.defaultProps = {
   content: [],
-  isHightLight: false,
+  isMainEvent: false,
   period: '',
   subTitle: '',
   title: '',
@@ -281,6 +290,7 @@ const events = [
     period: 'Sep. 2017 - Oct. 2018',
     content: [
       {
+        isHighlight: true,
         heading: '大航道計畫 - 啟航基金得主',
         body: '為 Alpha Camp - Demo Day 1 與茶籽堂合作的開發者之一，從前端的客情資料到頁面的 UI 與 UX 表現亮眼，在「入選 Demo Day 工程團隊」中，針對技術力的審核和對團隊的貢獻程度等，與「求職表現」衡量綜合表現優異的學生，獲予 10 萬元啟航基金。',
       },
@@ -331,7 +341,7 @@ const resumeExperience = () => (
           subTitle={event.subTitle}
           period={event.period}
           content={event.content}
-          isHightLight={event.isHightLight}
+          isMainEvent={event.isMainEvent}
         />
       ))}
     </StyledWrapper>

@@ -197,7 +197,7 @@ const cards = [
     link: 'mailto:yipeechen0418@gmail.com',
     icon: <FontAwesomeIcon icon={faEnvelope} />,
     title: 'Email',
-    content: 'Yipeechen0418@gmail.com',
+    content: 'yipeechen0418@gmail.com',
   },
   {
     link: 'https://medium.com/@yipeechen0418',

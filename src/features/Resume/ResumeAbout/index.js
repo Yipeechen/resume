@@ -198,7 +198,7 @@ const resumeAbout = () => (
           </StyledText>
         </StyledInfoContent>
         <StyledInfoSkill>
-          Html5 | CSS3 | JavaScript | React | Redux | Ruby on Rails
+          SCSS | CSS in JS | JavaScript | React | Redux | Ruby on Rails
         </StyledInfoSkill>
         <StyledInfoButtons>
           <StyledButtonFull

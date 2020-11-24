@@ -157,7 +157,7 @@ Work.defaultProps = {
 const works = [
   {
     title: '人性化線下 CRM 平台',
-    tool: 'Ruby on Rails | JS | Chart.js | Bootstrap3 | Git Version Control | Ajax | jQuery',
+    tool: 'Ruby on Rails | JS | Chart.js | Bootstrap3 | Git Version Control | AJAX | jQuery',
     link: 'https://github.com/Yipeechen/whale',
     img: {
       pc: 'https://yipeechen.github.io/resume/images/work-1.jpg',
@@ -175,7 +175,7 @@ const works = [
   },
   {
     title: 'Stackoverflow',
-    tool: 'Ruby on Rails | JS | Bootstrap4 | Git Version Control | Ajax | jQuery',
+    tool: 'Ruby on Rails | JS | Bootstrap4 | Git Version Control | AJAX | jQuery',
     link: 'https://github.com/Yipeechen/stackoverflow',
     img: {
       pc: 'https://yipeechen.github.io/resume/images/work-2.jpg',
@@ -193,7 +193,7 @@ const works = [
   },
   {
     title: 'Dojo forum',
-    tool: 'Ruby on Rails | JS | Bootstrap3 | Git Version Control | Ajax | Heroku',
+    tool: 'Ruby on Rails | JS | Bootstrap3 | Git Version Control | AJAX | Heroku',
     link: 'https://dojooforum.herokuapp.com',
     img: {
       pc: 'https://yipeechen.github.io/resume/images/work-4.jpg',

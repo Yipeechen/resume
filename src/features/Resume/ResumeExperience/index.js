@@ -269,41 +269,31 @@ Event.defaultProps = {
 const events = [
   {
     title: 'Biology Science',
-    subTitle: 'National Sun Yat-Sen University',
+    subTitle: 'National Sun Yat-Sen University  國立中山大學',
     period: 'Sep. 2013 - Jun. 2017',
     content: [
-      '生物科學是有關生命的、充滿多元化且具綜合性的科學，教育目標在培養生物科學研究人才、基礎科學教育人才、生物應用及技術開發人才，培育學生具有基本專業知識、獨立思考、執行課程實驗步驟和表達呈現生物科學相關知識。',
+      '',
     ],
   },
   {
     title: '大航道計畫 - 讓年輕人出航',
     subTitle: 'Alpha Camp',
-    period: 'Sep. 2017 - Jun. 2018',
+    period: 'Sep. 2017 - Oct. 2018',
     content: [
       {
-        body: '從無程式背景的小白，依序接觸基本 Html & Css 實作出靜態網頁，接續 Git 版本控制管理，提高專案開發效率，RWD & Bootstrap 點綴靜態網頁內容排版，RoR 學習 MVC 模式開發及運用套件，Heroku 網站部署，JS & Ajax & API 增加網頁動態效果提升互動，及相關資訊觀念課程，到參與專案開發實踐，藉由創建的線上社群社團，增進交流學習。',
-        skills: ['Github', 'Html5', 'CSS', 'JavaScript', 'jQuery', 'Ruby on Rails', 'Bootstrap', '金流串接'],
+        heading: '大航道計畫 - 啟航基金得主',
+        body: '為 Alpha Camp - Demo Day 1 與茶籽堂合作的開發者之一，從前端的客情資料到頁面的 UI 與 UX 表現亮眼，在「入選 Demo Day 工程團隊」中，針對技術力的審核和對團隊的貢獻程度等，與「求職表現」衡量綜合表現優異的學生，獲予 10 萬元啟航基金。',
       },
-    ],
-  },
-  {
-    title: '茶籽堂 - 人性化線下 CRM 平台',
-    subTitle: 'Alpha Camp - Demo Day 1',
-    period: 'Apr. 2018',
-    content: [
       {
+        heading: 'Demo Day 1 : 茶籽堂 - 人性化線下 CRM 平台',
         body: '真正著手非課程範例專案的開始，與團隊從最初的與企業主溝通需求、設計使用者故事、建立階段性目標至專案版本控制等，找出問題了解問題，學習如何發問並解決，實作出集合傳統的 POS 機、會員資料、庫存以及報表分析等功能，減少資料在不同系統間的繁複操作。',
-        skills: ['Ruby on Rails', 'Sass', 'jQuery', 'chart.js'],
+        skills: ['Ruby on Rails', 'SCSS', 'Bootstrap', 'jQuery', 'chart.js'],
       },
-    ],
-  },
-  {
-    isHightLight: true,
-    title: '大航道計畫 - 啟航基金得主',
-    subTitle: 'Alpha Camp',
-    period: 'Oct. 2018',
-    content: [
-      '為 Alpha Camp - Demo Day 1 與茶籽堂合作的開發者之一，從前端的客情資料到頁面的 UI 與 UX，表現皆相當的亮眼，在「入選 Demo Day 工程團隊」，針對技術力的審核和對團隊的貢獻程度等，與「求職表現」衡量綜合表現優異的學生，獲予 10 萬元啟航基金。',
+      {
+        heading: '全端網路開發，課程培訓',
+        body: '從無程式背景的小白，依序接觸基本 HTML & Css 實作出靜態網頁，接續 Git 版本控制管理，提高專案開發效率，RWD & Bootstrap 點綴靜態網頁內容排版，RoR 學習 MVC 模式開發及運用套件，Heroku 網站部署，JS & AJAX & API 增加網頁動態效果提升互動，及相關資訊觀念課程，到參與專案開發實踐，藉由創建的線上社群社團，增進交流學習。',
+        skills: ['Github', 'HTML5', 'CSS', 'JavaScript', 'jQuery', 'Ruby on Rails', 'Bootstrap', '金流串接'],
+      },
     ],
   },
   {
@@ -318,12 +308,12 @@ const events = [
       },
       {
         heading: '前台網頁：行銷活動｜產品購買｜亞太登入串接｜課程問卷',
-        body: '維護既有產品，整合 PHP 的 MVC 框架下與 React 併用的前端開發環境，執行產品購買商業邏輯相關流程規劃，活動制式內容的參數化並訂定 API 規格，以達快速開發 ; 亞太第三方登入的串接。',
-        skills: ['PHP', 'React', 'Sass', 'Styled-components', 'Webpack', 'Npm & Yarn', 'Eslint'],
+        body: '維護既有產品兼提升多瀏覽器兼容性，整合 PHP 的 MVC 框架下與 React 併用的前端開發環境，執行產品購買商業邏輯相關流程規劃，活動制式內容的參數化並訂定 API 規格，以達快速開發 ; 負責亞太第三方登入的串接。',
+        skills: ['PHP', 'React', 'SCSS', 'Styled-components', 'Webpack', 'Npm & Yarn', 'Eslint'],
       },
       {
         heading: 'App webview：多入口音檔教學牌卡列表｜Sign in with Apple｜靜態頁面',
-        body: '產品以 React-Native 開發，接觸 Webview 與 App 間的溝通格式訂定與實行，探討 mobile browser 與 Webview 的原生行為之差異，並處理 Sign in with Apple，教學牌卡分類顯示及多情境下音檔應用，至最佳使用者體驗。',
+        body: '產品以 React-Native 開發，接觸 Webview 與 App 間的溝通格式訂定與實行，探討 mobile browser 與 Webview 的原生行為之差異，並處理 Sign in with Apple，教學牌卡分類顯示及多情境下音檔之應用，至最佳使用者體驗。',
         skills: ['Webview', 'Babel'],
       },
     ],

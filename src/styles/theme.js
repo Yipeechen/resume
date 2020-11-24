@@ -7,6 +7,7 @@ const color = {
   primaryDarkOpLevel8: '#5578aacc',
   primaryDarkOpLevel9: '#5578aae6',
   secondary: '#ffa96a',
+  secondaryDark: '#f38e44',
   secondaryOpLevel5: '#ffa96a80',
   secondaryOpLevel9: '#ffa96be6',
   white: '#ffffff',

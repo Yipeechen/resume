@@ -157,7 +157,7 @@ Work.defaultProps = {
 const works = [
   {
     title: '人性化線下 CRM 平台',
-    tool: 'Ruby on Rails | JS | Chart.js | Bootstrap3 | Git Version Control | AJAX | jQuery',
+    tool: 'Ruby on Rails | JS | Chart.js | Bootstrap3 | Github | AJAX | jQuery',
     link: 'https://github.com/Yipeechen/whale',
     img: {
       pc: 'https://yipeechen.github.io/resume/images/work-1.jpg',
@@ -166,7 +166,7 @@ const works = [
   },
   {
     title: 'About Yiping',
-    tool: ' JS | React | Git Version Control | CSS in JS | Webpack | Eslint',
+    tool: ' JS | React | Github | CSS in JS | Webpack | Eslint',
     link: 'https://github.com/Yipeechen/stackoverflow',
     img: {
       pc: 'https://yipeechen.github.io/resume/images/work-5.jpg',
@@ -174,8 +174,8 @@ const works = [
     },
   },
   {
-    title: 'Stackoverflow',
-    tool: 'Ruby on Rails | JS | Bootstrap4 | Git Version Control | AJAX | jQuery',
+    title: 'Stack Overflow',
+    tool: 'Ruby on Rails | JS | Bootstrap4 | Github | AJAX | jQuery',
     link: 'https://github.com/Yipeechen/stackoverflow',
     img: {
       pc: 'https://yipeechen.github.io/resume/images/work-2.jpg',
@@ -184,7 +184,7 @@ const works = [
   },
   {
     title: 'Restaurant forum',
-    tool: 'Ruby on Rails | Bootstrap3 | Git Version Control | Heroku',
+    tool: 'Ruby on Rails | Bootstrap3 | Database Design | Github | Heroku',
     link: 'https://restaurant-forum-by-yipee.herokuapp.com',
     img: {
       pc: 'https://yipeechen.github.io/resume/images/work-3.jpg',
@@ -193,7 +193,7 @@ const works = [
   },
   {
     title: 'Dojo forum',
-    tool: 'Ruby on Rails | JS | Bootstrap3 | Git Version Control | AJAX | Heroku',
+    tool: 'Ruby on Rails | JS | Bootstrap3 | Github | AJAX | Heroku',
     link: 'https://dojooforum.herokuapp.com',
     img: {
       pc: 'https://yipeechen.github.io/resume/images/work-4.jpg',
@@ -204,7 +204,7 @@ const works = [
 
 const resumeWorks = () => (
   <Container id="section_works">
-    <HeadingSecondary>Works</HeadingSecondary>
+    <HeadingSecondary>Portfolio</HeadingSecondary>
     <StyledWrapper>
       {works.map((work, i) => (
         <Work

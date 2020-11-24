@@ -117,11 +117,12 @@ const StyledEventContentHeading = styled.h5`
     display: inline-block;
     margin: 0 .8rem 0 0;
   }
+
+  ${({ isHighlight, theme }) => isHighlight && `color: ${theme.color.secondaryDark}`}
 `;
 const StyledEventContentHeadingHighlight = styled(FontAwesomeIcon).attrs({
   icon: faAward,
 })`
-  color: ${({ theme }) => theme.color.secondary};
   margin-left: .8rem;
   font-size: 1.8rem;
 `;
@@ -297,7 +298,7 @@ const events = [
       {
         heading: 'Demo Day 1 : 茶籽堂 - 人性化線下 CRM 平台',
         body: '真正著手非課程範例專案的開始，與團隊從最初的與企業主溝通需求、設計使用者故事、建立階段性目標至專案版本控制等，找出問題了解問題，學習如何發問並解決，實作出集合傳統的 POS 機、會員資料、庫存以及報表分析等功能，減少資料在不同系統間的繁複操作。',
-        skills: ['Ruby on Rails', 'SCSS', 'Bootstrap', 'jQuery', 'chart.js'],
+        skills: ['Ruby on Rails', 'SCSS', 'Bootstrap', 'jQuery', 'Chart.js'],
       },
       {
         heading: '全端網路開發，課程培訓',

@@ -302,8 +302,8 @@ const events = [
       },
       {
         heading: '全端網路開發，課程培訓',
-        body: '從無程式背景的小白，依序接觸基本 HTML & Css 實作出靜態網頁，接續 Git 版本控制管理，提高專案開發效率，RWD & Bootstrap 點綴靜態網頁內容排版，RoR 學習 MVC 模式開發及運用套件，Heroku 網站部署，JS & AJAX & API 增加網頁動態效果提升互動，及相關資訊觀念課程，到參與專案開發實踐，藉由創建的線上社群社團，增進交流學習。',
-        skills: ['Github', 'HTML5', 'CSS', 'JavaScript', 'jQuery', 'Ruby on Rails', 'Bootstrap', '金流串接'],
+        body: '從無程式背景的小白，依序接觸基本 HTML & CSS 實作出靜態網頁，接續 Git 版本控制管理，提高專案開發效率，RWD & Bootstrap 點綴靜態網頁內容排版，RoR 學習 MVC 模式開發及運用套件，Heroku 網站部署，JS & AJAX & API 增加網頁動態效果提升互動，及相關資訊觀念課程，到參與專案開發實踐，藉由創建的線上社群社團，增進交流學習。',
+        skills: ['Github', 'HTML5', 'CSS', 'Bootstrap', 'JavaScript', 'jQuery', 'Ruby on Rails', 'Terminal Usage', '金流串接'],
       },
     ],
   },
@@ -320,7 +320,7 @@ const events = [
       {
         heading: '前台網頁：行銷活動｜產品購買｜亞太登入串接｜課程問卷',
         body: '維護既有產品兼提升多瀏覽器兼容性，整合 PHP 的 MVC 框架下與 React 併用的前端開發環境，執行產品購買商業邏輯相關流程規劃，活動制式內容的參數化並訂定 API 規格，以達快速開發 ; 負責亞太第三方登入的串接。',
-        skills: ['PHP', 'React', 'SCSS', 'Styled-components', 'Webpack', 'Npm & Yarn', 'Eslint'],
+        skills: ['PHP', 'React', 'SCSS', 'Styled-components', 'Webpack', 'Npm & Yarn', 'Eslint', 'Linux Shell Script'],
       },
       {
         heading: 'App webview：多入口音檔教學牌卡列表｜Sign in with Apple｜靜態頁面',

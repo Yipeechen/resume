@@ -313,12 +313,12 @@ const events = [
     period: 'Sep. 2018 - Oct. 2020',
     content: [
       {
-        heading: '課程後台：使用者進度查詢｜問答平台｜多產品後台',
-        body: '為採用前端主流 React 與 Redux 的 SPA 環境，從無到有的課程 & 系統問答平面、多產品之學員進度查詢介面及 UI / UX 設計，以 CSS in JS 攥寫樣式，近期加入 React hooks 運用，資料管理結合 RxJS 發送請求，處理商業邏輯與 response 初步整理。',
+        heading: '課程後台：登入入口｜使用者進度查詢｜問答平台｜多產品後台大廳',
+        body: '為採用前端主流 React 與 Redux 的 SPA 環境，從無到有的課程 & 系統問答平台、多產品之學員進度查詢介面及 UI / UX 設計，以 CSS in JS 攥寫樣式，近期加入 React hooks 運用，資料管理結合 RxJS 發送請求，處理商業邏輯與 response 初步整理。',
         skills: ['React', 'Redux', 'RxJS', 'Styled-components', 'Webpack', 'Antd', 'Npm & Yarn', 'Eslint'],
       },
       {
-        heading: '前台網頁：行銷活動｜產品購買｜亞太登入串接｜課程問卷',
+        heading: '前台網頁：行銷活動｜產品購買｜亞太登入串接｜課程問卷｜行銷廣告',
         body: '維護既有產品兼提升多瀏覽器兼容性，整合 PHP 的 MVC 框架下與 React 併用的前端開發環境，執行產品購買商業邏輯相關流程規劃，活動制式內容的參數化並訂定 API 規格，以達快速開發 ; 負責亞太第三方登入的串接。',
         skills: ['PHP', 'React', 'SCSS', 'Styled-components', 'Webpack', 'Npm & Yarn', 'Eslint', 'Linux Shell Script'],
       },

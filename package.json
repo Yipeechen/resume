@@ -1,32 +1,65 @@
 {
   "name": "resume",
-  "version": "1.0.0",
+  "version": "1.2.2",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint . --ext .js,.jsx",
     "build-css": "node-sass sass/style.scss css/style.css -w",
-    "dev": "webpack --mode development",
-    "build": "webpack --mode production",
-    "start": "webpack-dev-server --mode development --open"
+    "prestart": "rm ./node_modules/webpack-dev-server/ssl/server.pem && cp -f ./ssl/server.pem ./node_modules/webpack-dev-server/ssl",
+    "start": "webpack-dev-server --mode development --config webpack.dev.js",
+    "prod": "webpack --mode production --config webpack.prod.js"
   },
   "author": "",
   "license": "ISC",
+  "pre-commit": {
+    "run": [
+      "lint"
+    ]
+  },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "1.2.32",
+    "@fortawesome/free-brands-svg-icons": "5.15.1",
+    "@fortawesome/free-solid-svg-icons": "5.15.1",
+    "@fortawesome/react-fontawesome": "0.1.11",
     "babel-polyfill": "6.26.0",
     "extract-text-webpack-plugin": "4.0.0-beta.0",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-router-dom": "5.2.0",
+    "react-scroll": "1.8.1",
     "sass-loader": "7.1.0",
+    "styled-components": "5.2.0",
     "webpack-dev-server": "3.1.11"
   },
   "devDependencies": {
-    "babel-core": "6.26.3",
-    "babel-loader": "7.1.5",
+    "@babel/core": "7.11.6",
+    "@babel/plugin-proposal-export-default-from": "7.10.4",
+    "@babel/preset-env": "7.11.5",
+    "@babel/preset-react": "7.10.4",
+    "babel-eslint": "10.1.0",
+    "babel-loader": "8.1.0",
     "babel-preset-env": "1.7.0",
+    "clean-webpack-plugin": "3.0.0",
+    "copy-webpack-plugin": "6.2.0",
     "css-loader": "1.0.0",
+    "eslint": "7.11.0",
+    "eslint-config-semistandard": "13.0.0",
+    "eslint-config-standard": "12.0.0",
+    "eslint-config-standard-jsx": "6.0.2",
+    "eslint-config-standard-react": "7.0.2",
+    "eslint-plugin-import": "2.18.0",
+    "eslint-plugin-node": "9.1.0",
+    "eslint-plugin-promise": "4.2.1",
+    "eslint-plugin-react": "7.14.2",
+    "eslint-plugin-standard": "4.0.0",
     "file-loader": "2.0.0",
     "html-webpack-plugin": "3.2.0",
     "node-sass": "4.13.1",
+    "pre-commit": "1.2.2",
     "style-loader": "0.22.1",
-    "webpack": "4.17.1",
-    "webpack-cli": "3.1.0"
+    "webpack": "4.37.0",
+    "webpack-cli": "3.1.0",
+    "webpack-merge": "5.2.0"
   },
   "repository": {
     "type": "git",

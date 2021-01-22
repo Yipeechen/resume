@@ -5,7 +5,7 @@
   "scripts": {
     "lint": "eslint . --ext .js,.jsx",
     "build-css": "node-sass sass/style.scss css/style.css -w",
-    "prestart": "rm ./node_modules/webpack-dev-server/ssl/server.pem && cp -f ./ssl/server.pem ./node_modules/webpack-dev-server/ssl",
+    "prestart": "rm -rf ./node_modules/webpack-dev-server/ssl/server.pem && cp -f ./ssl/server.pem ./node_modules/webpack-dev-server/ssl",
     "start": "webpack-dev-server --mode development --config webpack.dev.js",
     "prod": "webpack --mode production --config webpack.prod.js"
   },

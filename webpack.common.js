@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 const { version: APP_VERSION } = require('./package.json');
 
@@ -44,6 +45,13 @@ module.exports = {
     ],
   },
   plugins: [
+    new Dotenv({
+      path: `./.env.${process.env.ENV_MODE}`,
+      safe: true,
+      systemvars: true,
+      silent: true,
+      defaults: false,
+    }),
     new HtmlWebpackPlugin({
       title: 'About Yiping',
       template: path.resolve(__dirname, SRC_ROOT, 'index.html'),

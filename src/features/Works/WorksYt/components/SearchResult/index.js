@@ -5,8 +5,8 @@ import styled from 'styled-components';
 const StyledContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: baseline;
   width: 90%;
   margin: 40px auto;
 `;
@@ -15,9 +15,9 @@ const StyledCard = styled.a.attrs(props => ({
   target: '_blank',
 }))`
   overflow: hidden;
-  width: 33%;
+  width: calc(25% - 8px);
   text-align: center;
-  margin: 16px auto;
+  margin: 16px 4px;
   ${({ theme }) => theme.mobile`
     width: 100%;
   `}
@@ -44,12 +44,12 @@ const ResultCard = ({ img, title, videoId }) => {
 ResultCard.propTypes = {
   img: PropTypes.string,
   title: PropTypes.string,
-  videoId: PropTypes.number,
+  videoId: PropTypes.string,
 };
 ResultCard.defaultProps = {
   img: '',
   title: '',
-  videoId: 0,
+  videoId: '',
 };
 
 const SearchResult = ({ data = [] }) => {

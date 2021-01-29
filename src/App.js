@@ -1,8 +1,10 @@
 import React, { lazy, Suspense } from 'react';
+import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { Helmet } from 'react-helmet';
 
+import store from './redux/configureStore';
 import theme from '@src/styles/theme';
 import mediaQueries from './styles/mediaQueries';
 import { ResetStyle, GlobalStyle } from '@src/styles/reset';
@@ -31,34 +33,36 @@ const routes = [
 ];
 
 const App = () => (
-  <ThemeProvider theme={{ ...theme, ...mediaQueries }}>
-    <BrowserRouter>
-      <ResetStyle />
-      <GlobalStyle />
-      <Suspense fallback={<PageSpinner size="50vh" style={{ margin: '25vh auto' }} />}>
-        <Switch>
-          {routes.map((route, i) => (
+  <Provider store={store()} >
+    <ThemeProvider theme={{ ...theme, ...mediaQueries }}>
+      <BrowserRouter>
+        <ResetStyle />
+        <GlobalStyle />
+        <Suspense fallback={<PageSpinner size="50vh" style={{ margin: '25vh auto' }} />}>
+          <Switch>
+            {routes.map((route, i) => (
+              <Route
+                key={i}
+                path={route.path}
+                exact={route.exact}
+                render={routeProps => (
+                  <>
+                    <Helmet>
+                      <title>{route.pageMeta.title}</title>
+                    </Helmet>
+                    <route.component {...routeProps} />
+                  </>
+                )} />
+            ))}
             <Route
-              key={i}
-              path={route.path}
-              exact={route.exact}
-              render={routeProps => (
-                <>
-                  <Helmet>
-                    <title>{route.pageMeta.title}</title>
-                  </Helmet>
-                  <route.component {...routeProps} />
-                </>
-              )} />
-          ))}
-          <Route
-            exact
-            path="*"
-            render={() => <Redirect to="/resume" />} />
-        </Switch>
-      </Suspense>
-    </BrowserRouter>
-  </ThemeProvider>
+              exact
+              path="*"
+              render={() => <Redirect to="/resume" />} />
+          </Switch>
+        </Suspense>
+      </BrowserRouter>
+    </ThemeProvider>
+  </Provider>
 );
 
 export default App;

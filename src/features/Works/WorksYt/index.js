@@ -9,6 +9,7 @@ import * as actionCreators from '../../../redux/modules/worksYt';
 
 const StyledContainer = styled.div`
   margin: 40px auto;
+  width: 90%;
 `;
 class Yt extends React.Component {
   constructor (props) {

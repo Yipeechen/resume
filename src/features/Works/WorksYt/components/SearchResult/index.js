@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+import { useSelector } from 'react-redux';
 
 const StyledContainer = styled.div`
   display: grid;
@@ -14,6 +15,11 @@ const StyledContainer = styled.div`
     grid-template-columns: repeat(1 ,1fr);
   `}
 `;
+const loading = keyframes`
+  100% { 
+    transform: translateX(100%); 
+  } 
+`;
 const StyledCard = styled.a.attrs(props => ({
   href: `https://www.youtube.com/watch?v=${props.videoId}`,
   target: '_blank',
@@ -21,11 +27,34 @@ const StyledCard = styled.a.attrs(props => ({
   overflow: hidden;
   width: 100%;
   text-align: center;
+
+  &:empty {
+    position: relative; 
+    background: ${({ theme }) => theme.color.grey};
+    min-height: 200px;
+    &::after {
+      display: block; 
+      content: ''; 
+      position: absolute; 
+      width: 100%; 
+      height: 100%; 
+      transform: translateX(-100%); 
+      background: -webkit-gradient(linear, left top, right top,
+                  from(transparent),  
+                  color-stop(rgba(255, 255, 255, 0.2)), 
+                  to(transparent)); 
+                    
+      background: linear-gradient(90deg, transparent, 
+                  rgba(255, 255, 255, 0.2), transparent); 
+      animation: ${loading} 0.8s infinite;
+    }
+  }
 `;
 const StyledCardImg = styled.img.attrs(props => ({
   src: props.img,
 }))`
   width: 100%;
+  background: ${({ theme }) => theme.color.grey};
 `;
 const StyledCardDetail = styled.div`
   margin: 8px auto;
@@ -77,57 +106,66 @@ const StyledCardInfoChannel = styled.p`
   display: -webkit-box;
 `;
 
-const ResultCard = ({ img, title, videoId, channelTitle, publishTime }) => {
+const ResultCard = ({ cardDetail }) => {
   return (
-    <StyledCard videoId={videoId}>
-      <StyledCardImg img={img} />
-      <StyledCardDetail>
-        <StyledCardAvatarWrapper>
-          <StyledAvatar />
-        </StyledCardAvatarWrapper>
-        <StyledCardTitle>
-          {title}
-        </StyledCardTitle>
-        <StyledCardInfo>
-          <StyledCardInfoChannel>
-            {channelTitle}
-          </StyledCardInfoChannel>
-          {publishTime}
-        </StyledCardInfo>
-      </StyledCardDetail>
-    </StyledCard>
+    <>
+      {cardDetail
+        ? <StyledCard videoId={cardDetail.videoId}>
+          <StyledCardImg img={cardDetail.img} />
+          <StyledCardDetail>
+            <StyledCardAvatarWrapper>
+              <StyledAvatar />
+            </StyledCardAvatarWrapper>
+            <StyledCardTitle>
+              {cardDetail.title}
+            </StyledCardTitle>
+            <StyledCardInfo>
+              <StyledCardInfoChannel>
+                {cardDetail.channelTitle}
+              </StyledCardInfoChannel>
+              {cardDetail.publishTime}
+            </StyledCardInfo>
+          </StyledCardDetail>
+        </StyledCard>
+        : <StyledCard />
+      }
+    </>
   );
 };
 ResultCard.propTypes = {
-  channelTitle: PropTypes.string,
-  img: PropTypes.string,
-  publishTime: PropTypes.string,
-  title: PropTypes.string,
-  videoId: PropTypes.string,
+  cardDetail: PropTypes.object,
 };
 ResultCard.defaultProps = {
-  channelTitle: '',
-  img: '',
-  title: '',
-  publishTime: '',
-  videoId: '',
+  cardDetail: {},
 };
 
-const SearchResult = ({ data = [] }) => {
+const SearchResult = ({ data }) => {
+  const isLoading = useSelector(state => state.yt.loading);
+
   return (
     <StyledContainer>
       {data.map((item, i) => {
         return (
           <ResultCard
             key={i}
-            videoId={item.id.videoId}
-            img={item.snippet.thumbnails.medium.url}
-            title={item.snippet.title}
-            channelTitle={item.snippet.channelTitle}
-            publishTime={item.snippet.publishTime}
+            cardDetail={{
+              videoId: item?.id?.videoId,
+              img: item?.snippet?.thumbnails.medium.url,
+              title: item?.snippet?.title,
+              channelTitle: item?.snippet?.channelTitle,
+              publishTime: item?.snippet?.publishTime,
+            }}
           />
         );
       })}
+      {isLoading &&
+        [...Array(4)].map((e, i) => (
+          <ResultCard
+            key={i}
+            cardDetail={null}
+          />
+        ))
+      }
     </StyledContainer>
   );
 };

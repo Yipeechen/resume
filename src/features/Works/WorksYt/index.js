@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import SearchBar from './components/SearchBar';
 import SearchResult from './components/SearchResult';
-import * as actionCreators from '../../../redux/modules/worksYt';
+import * as actionCreators from '../../../redux/modules/worksYt/worksYtActions';
 
 const StyledContainer = styled.div`
   margin: 40px auto;

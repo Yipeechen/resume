@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -35,14 +35,21 @@ const StyledSearchButton = styled.button.attrs({
   cursor: pointer;
 `;
 
-const SearchBar = ({ fetchPlaylist }) => {
-  const [searchTerm, setSearchTerm] = useState('');
+const SearchBar = ({
+  searchTerm,
+  updateSearchTerm,
+  fetchPlaylist,
+  resetPlaylist,
+}) => {
   const handleChange = event => {
     const value = event.target.value;
-    setSearchTerm(value);
+    updateSearchTerm(value);
   };
   const handleClick = () => {
-    fetchPlaylist(searchTerm);
+    resetPlaylist();
+    fetchPlaylist({
+      searchTerm,
+    });
   };
 
   return (
@@ -62,9 +69,15 @@ const SearchBar = ({ fetchPlaylist }) => {
 
 SearchBar.propTypes = {
   fetchPlaylist: PropTypes.func,
+  resetPlaylist: PropTypes.func,
+  searchTerm: PropTypes.string,
+  updateSearchTerm: PropTypes.func,
 };
 SearchBar.defaultProps = {
   fetchPlaylist: null,
+  resetPlaylist: null,
+  searchTerm: '',
+  updateSearchTerm: null,
 };
 
 export default SearchBar;

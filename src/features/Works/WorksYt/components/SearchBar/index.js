@@ -45,17 +45,29 @@ const SearchBar = ({
     const value = event.target.value;
     updateSearchTerm(value);
   };
+  const handleKeyUp = event => {
+    const code = event.keyCode || event.which;
+    if (code === 13 && !!searchTerm) {
+      resetPlaylist();
+      fetchPlaylist({
+        searchTerm,
+      });
+    }
+  };
   const handleClick = () => {
-    resetPlaylist();
-    fetchPlaylist({
-      searchTerm,
-    });
+    if (searchTerm) {
+      resetPlaylist();
+      fetchPlaylist({
+        searchTerm,
+      });
+    }
   };
 
   return (
     <StyledContainer>
       <StyledInput
         onChange={handleChange}
+        onKeyUp={handleKeyUp}
         value={searchTerm}
       />
       <StyledSearchButton

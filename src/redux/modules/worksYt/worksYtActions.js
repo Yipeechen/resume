@@ -1,5 +1,5 @@
-import axios from 'axios';
 import * as actionTypes from './worksYtActionTypes';
+import { fetchYtVideo } from '../../../apis/worksYt/videos';
 
 const clearPlaylist = () => ({
   type: actionTypes.CLEAR_PLAYLIST,
@@ -29,16 +29,9 @@ export function fetchVideo ({ searchTerm, nextPageToken = null }) {
     dispatch(getVideo());
 
     try {
-      const API_KEY = process.env.API_KEY;
-      const response = await axios.get('https://www.googleapis.com/youtube/v3/search', {
-        params: {
-          part: 'snippet',
-          type: 'video',
-          pageToken: nextPageToken,
-          q: searchTerm,
-          maxResults: 10,
-          key: API_KEY,
-        },
+      const response = await fetchYtVideo({
+        nextPageToken,
+        searchTerm,
       });
 
       dispatch(getVideoSuccess({

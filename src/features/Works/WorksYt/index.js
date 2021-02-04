@@ -31,7 +31,8 @@ class Yt extends React.Component {
     const { videos, onSearchVideo, nextPageToken, loading } = this.props;
     const { searchTerm } = this.state;
 
-    if (videos.length && window.innerHeight + document.documentElement.scrollTop >=
+    if (videos.length && !!nextPageToken &&
+      window.innerHeight + document.documentElement.scrollTop >=
     document.documentElement.offsetHeight - 300) {
       if (!loading) {
         onSearchVideo({

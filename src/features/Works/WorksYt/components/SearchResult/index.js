@@ -159,7 +159,7 @@ const SearchResult = ({ data }) => {
         );
       })}
       {isLoading &&
-        [...Array(4)].map((e, i) => (
+        [...Array(8)].map((e, i) => (
           <ResultCard
             key={i}
             cardDetail={null}

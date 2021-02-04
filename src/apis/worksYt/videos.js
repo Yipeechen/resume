@@ -8,7 +8,7 @@ export const fetchYtVideo = async data => {
       type: 'video',
       pageToken: data.nextPageToken,
       q: data.searchTerm,
-      maxResults: 10,
+      maxResults: 12,
       key: API_KEY,
     },
   });

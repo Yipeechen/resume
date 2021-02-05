@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import styled, { keyframes } from 'styled-components';
 import { useSelector } from 'react-redux';
 
+import timeUtils from '@src/utils/time';
+
 const StyledContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(4 ,1fr);
@@ -153,7 +155,8 @@ const SearchResult = ({ data }) => {
               img: item?.snippet?.thumbnails.medium.url,
               title: item?.snippet?.title,
               channelTitle: item?.snippet?.channelTitle,
-              publishTime: item?.snippet?.publishTime,
+              publishTime: timeUtils.relativeNow(
+                timeUtils.convertISOtoTimestamp(item?.snippet?.publishTime)),
             }}
           />
         );

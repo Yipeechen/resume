@@ -20,7 +20,9 @@ class Yt extends React.Component {
   }
 
   componentDidMount = () => {
+    const { onFetchMostPopularVideo } = this.props;
     window.addEventListener('scroll', this.infiniteScroll);
+    onFetchMostPopularVideo({});
   }
 
   componentWillUnmount = () => {
@@ -28,15 +30,19 @@ class Yt extends React.Component {
   }
 
   infiniteScroll = () => {
-    const { videos, onSearchVideo, nextPageToken, loading } = this.props;
+    const { videos, onSearchVideo, nextPageToken, loading, onFetchMostPopularVideo } = this.props;
     const { searchTerm } = this.state;
+    const hasScrolledToBottom = (window.innerHeight + document.documentElement.scrollTop >=
+    document.documentElement.offsetHeight - 300);
 
-    if (videos.length && !!nextPageToken &&
-      window.innerHeight + document.documentElement.scrollTop >=
-    document.documentElement.offsetHeight - 300) {
-      if (!loading) {
+    if (videos.length && !!nextPageToken && !loading && hasScrolledToBottom) {
+      if (searchTerm) {
         onSearchVideo({
           searchTerm,
+          nextPageToken,
+        });
+      } else {
+        onFetchMostPopularVideo({
           nextPageToken,
         });
       }
@@ -73,6 +79,7 @@ Yt.propTypes = {
   loading: PropTypes.bool,
   nextPageToken: PropTypes.string,
   videos: PropTypes.array,
+  onFetchMostPopularVideo: PropTypes.func,
   onResetPlaylist: PropTypes.func,
   onSearchVideo: PropTypes.func,
 };
@@ -80,6 +87,7 @@ Yt.defaultProps = {
   loading: false,
   nextPageToken: '',
   videos: [],
+  onFetchMostPopularVideo: null,
   onResetPlaylist: null,
   onSearchVideo: null,
 };
@@ -93,6 +101,7 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
   return {
+    onFetchMostPopularVideo: result => dispatch(actionCreators.fetchMostPopularVideo(result)),
     onSearchVideo: result => dispatch(actionCreators.fetchVideo(result)),
     onResetPlaylist: () => dispatch(actionCreators.resetPlaylist()),
   };

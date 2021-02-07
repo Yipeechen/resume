@@ -1,10 +1,23 @@
 import * as actionTypes from './worksYtActionTypes';
-import { fetchYtVideo } from '../../../apis/worksYt/videos';
+import { fetchYtVideo, fetchMostPopularYtVideo } from '../../../apis/worksYt/videos';
 
 const clearPlaylist = () => ({
   type: actionTypes.CLEAR_PLAYLIST,
 });
 
+const fetchPopularVideo = () => ({
+  type: actionTypes.FETCH_POPULAR_VIDEO,
+});
+
+const fetchPopularVideoSuccess = payload => ({
+  type: actionTypes.FETCH_POPULAR_VIDEO_SUCCESS,
+  payload,
+});
+
+const fetchPopularVideoFailure = error => ({
+  type: actionTypes.FETCH_POPULAR_VIDEO_FAILURE,
+  payload: error,
+});
 const getVideo = () => ({
   type: actionTypes.SEARCH_VIDEO,
 });
@@ -22,6 +35,25 @@ const getVideoFailure = error => ({
 export function resetPlaylist () {
   return dispatch => {
     dispatch(clearPlaylist());
+  };
+}
+export function fetchMostPopularVideo ({ nextPageToken = null }) {
+  return async dispatch => {
+    dispatch(fetchPopularVideo());
+
+    try {
+      const response = await fetchMostPopularYtVideo({
+        nextPageToken,
+      });
+
+      dispatch(fetchPopularVideoSuccess({
+        items: response.data.items,
+        nextPageToken: response.data.nextPageToken,
+      }));
+    } catch (error) {
+      console.warn(error);
+      dispatch(fetchPopularVideoFailure(error));
+    }
   };
 }
 export function fetchVideo ({ searchTerm, nextPageToken = null }) {

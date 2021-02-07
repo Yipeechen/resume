@@ -156,7 +156,7 @@ const SearchResult = ({ data }) => {
               title: item?.snippet?.title,
               channelTitle: item?.snippet?.channelTitle,
               publishTime: timeUtils.relativeNow(
-                timeUtils.convertISOtoTimestamp(item?.snippet?.publishTime)),
+                timeUtils.convertISOtoTimestamp(item?.snippet?.publishedAt)),
             }}
           />
         );

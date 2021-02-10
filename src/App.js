@@ -15,7 +15,7 @@ const Yt = lazy(() => import(/* webpackChunkName: "Yt" */'@src/features/Works/Wo
 
 const routes = [
   {
-    path: '/resume',
+    path: '/',
     exact: true,
     component: Resume,
     pageMeta: {
@@ -35,7 +35,7 @@ const routes = [
 const App = () => (
   <Provider store={store()} >
     <ThemeProvider theme={{ ...theme, ...mediaQueries }}>
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <ResetStyle />
         <GlobalStyle />
         <Suspense fallback={<PageSpinner size="50vh" style={{ margin: '25vh auto' }} />}>
@@ -57,7 +57,7 @@ const App = () => (
             <Route
               exact
               path="*"
-              render={() => <Redirect to="/resume" />} />
+              render={() => <Redirect to="/" />} />
           </Switch>
         </Suspense>
       </BrowserRouter>

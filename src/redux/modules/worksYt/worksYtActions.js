@@ -47,8 +47,8 @@ export function fetchMostPopularVideo ({ nextPageToken = null }) {
       });
 
       dispatch(fetchPopularVideoSuccess({
-        items: response.data.items,
-        nextPageToken: response.data.nextPageToken,
+        items: response.items,
+        nextPageToken: response.nextPageToken,
       }));
     } catch (error) {
       console.warn(error);
@@ -67,8 +67,8 @@ export function fetchVideo ({ searchTerm, nextPageToken = null }) {
       });
 
       dispatch(getVideoSuccess({
-        items: response.data.items,
-        nextPageToken: response.data.nextPageToken,
+        items: response.items,
+        nextPageToken: response.nextPageToken,
       }));
     } catch (error) {
       console.warn(error);

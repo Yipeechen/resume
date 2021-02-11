@@ -8,6 +8,7 @@
     "prestart": "rm -rf ./node_modules/webpack-dev-server/ssl/server.pem && cp -f ./ssl/server.pem ./node_modules/webpack-dev-server/ssl",
     "start": "ENV_MODE=development webpack-dev-server  --config webpack.dev.js",
     "prod": "ENV_MODE=production webpack  --config webpack.prod.js",
+    "predeploy": "npm run prod",
     "deploy": "gh-pages -d docs"
   },
   "author": "",

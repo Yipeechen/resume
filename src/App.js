@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from 'react';
 import { Provider } from 'react-redux';
-import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
+import { HashRouter, Route, Redirect, Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { Helmet } from 'react-helmet';
 
@@ -35,7 +35,7 @@ const routes = [
 const App = () => (
   <Provider store={store()} >
     <ThemeProvider theme={{ ...theme, ...mediaQueries }}>
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <HashRouter basename="/">
         <ResetStyle />
         <GlobalStyle />
         <Suspense fallback={<PageSpinner size="50vh" style={{ margin: '25vh auto' }} />}>
@@ -60,7 +60,7 @@ const App = () => (
               render={() => <Redirect to="/" />} />
           </Switch>
         </Suspense>
-      </BrowserRouter>
+      </HashRouter>
     </ThemeProvider>
   </Provider>
 );

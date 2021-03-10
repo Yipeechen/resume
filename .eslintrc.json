@@ -1,5 +1,5 @@
 {
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   "extends": [
     "standard",
     "standard-jsx",
@@ -51,6 +51,8 @@
         "callbacksLast": true
       }
     ],
-    "react/sort-comp": 2
+    "react/sort-comp": 2,
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off"
   }
 }

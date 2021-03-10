@@ -1,4 +1,4 @@
-import React from 'react';
+import { useMemo } from 'react';
 import { PropTypes } from 'prop-types';
 import styled from 'styled-components';
 
@@ -218,7 +218,7 @@ const works = [
 ];
 
 const resumeWorks = () => {
-  const slides = React.useMemo(() => {
+  const slides = useMemo(() => {
     const slidesArray = [];
     works.map((work, i) => {
       slidesArray.push(

@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
@@ -11,7 +11,7 @@ const StyledContainer = styled.div`
   margin: 40px auto;
   width: 90%;
 `;
-class Yt extends React.Component {
+class Yt extends Component {
   constructor (props) {
     super();
     this.state = {

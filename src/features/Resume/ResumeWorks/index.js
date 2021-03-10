@@ -53,7 +53,7 @@ const StyledWorkImg = styled.img.attrs(({ img }) => ({
   src: window.matchMedia(MEDIA_QUERIES.isMobile).matches
     ? img.mobile : img.pc,
 }))`
-  opacity: 0.3;
+  opacity: 0.15;
   width: 100%;
   height: auto;
   transform: translateY(1.8rem) scale(1.3) skewY(-4deg);
@@ -181,7 +181,7 @@ const works = [
   },
   {
     title: 'Fake Youtube',
-    tool: 'Infinite scrolling | Youtube Data API | Redux',
+    tool: 'Skeleton loading | Infinite scrolling | Youtube Data API | Redux',
     link: 'https://yipeechen.github.io/resume/#/works/yt',
     img: {
       pc: 'https://yipeechen.github.io/resume/images/work-6.jpg',

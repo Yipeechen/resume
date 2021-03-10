@@ -121,7 +121,7 @@ const cards = [
   {
     icon: 'icon-basic-sheet-pen',
     title: 'Document Processing',
-    list: ['Word', 'PowerPoint', 'AutoCad', 'Illustrator'],
+    list: ['Word', 'PowerPoint', 'AutoCad'],
   },
   {
     icon: 'icon-basic-webpage-img-txt',

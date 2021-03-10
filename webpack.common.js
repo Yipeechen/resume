@@ -31,7 +31,14 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env', '@babel/react'],
+            presets: [
+              [
+                '@babel/preset-react',
+                {
+                  'runtime': 'automatic',
+                },
+              ],
+            ],
             plugins: [
               '@babel/plugin-proposal-class-properties',
               '@babel/plugin-proposal-export-default-from',

@@ -12,6 +12,7 @@ const color = {
   secondaryOpLevel9: '#ffa96be6',
   white: '#ffffff',
   whiteOpLevel8: '#ffffffcc',
+  grey: '#d0cece',
   greyDark: '#777777',
   black: '#000000',
   blackOpLevel2: '#00000033',

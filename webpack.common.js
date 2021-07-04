@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 const { version: APP_VERSION } = require('./package.json');
 
@@ -30,7 +31,15 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env', '@babel/react'],
+            presets: [
+              ['@babel/preset-env'],
+              [
+                '@babel/preset-react',
+                {
+                  'runtime': 'automatic',
+                },
+              ],
+            ],
             plugins: [
               '@babel/plugin-proposal-class-properties',
               '@babel/plugin-proposal-export-default-from',
@@ -41,9 +50,20 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.css$/,
+        loaders: ['style-loader', 'css-loader'],
+      },
     ],
   },
   plugins: [
+    new Dotenv({
+      path: `./.env.${process.env.ENV_MODE}`,
+      safe: true,
+      systemvars: true,
+      silent: true,
+      defaults: false,
+    }),
     new HtmlWebpackPlugin({
       title: 'About Yiping',
       template: path.resolve(__dirname, SRC_ROOT, 'index.html'),

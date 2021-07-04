@@ -1,8 +1,14 @@
-import React from 'react';
+import { useMemo } from 'react';
 import { PropTypes } from 'prop-types';
 import styled from 'styled-components';
 
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, { Navigation, Pagination } from 'swiper/core';
+import 'swiper/swiper-bundle.css';
+
 import { HeadingSecondary } from '@src/components/TypoGraphy';
+
+SwiperCore.use([Navigation, Pagination]);
 
 const MEDIA_QUERIES = {
   isPc: '(min-width: 1024px)',
@@ -33,7 +39,7 @@ const StyledWrapper = styled.ul`
 const StyledWorkWrapper = styled.li`
   display: block;
   float: left;
-  width: 20%;
+  width: 100%;
   ${({ theme }) => theme.mobile`
     width: 100%;
     margin-bottom: 1.8rem;
@@ -47,7 +53,7 @@ const StyledWorkImg = styled.img.attrs(({ img }) => ({
   src: window.matchMedia(MEDIA_QUERIES.isMobile).matches
     ? img.mobile : img.pc,
 }))`
-  opacity: 0.3;
+  opacity: 0.15;
   width: 100%;
   height: auto;
   transform: translateY(1.8rem) scale(1.3) skewY(-4deg);
@@ -167,10 +173,19 @@ const works = [
   {
     title: 'About Yiping',
     tool: ' JS | React | Github | CSS in JS | Webpack | Eslint',
-    link: 'https://github.com/Yipeechen/stackoverflow',
+    link: 'https://github.com/Yipeechen/resume',
     img: {
       pc: 'https://yipeechen.github.io/resume/images/work-5.jpg',
       mobile: 'https://yipeechen.github.io/resume/images/mobile/work-5.jpg',
+    },
+  },
+  {
+    title: 'Fake Youtube',
+    tool: 'Skeleton loading | Infinite scrolling | Youtube Data API | Redux',
+    link: 'https://yipeechen.github.io/resume/#/works/yt',
+    img: {
+      pc: 'https://yipeechen.github.io/resume/images/work-6.jpg',
+      mobile: 'https://yipeechen.github.io/resume/images/mobile/work-6.jpg',
     },
   },
   {
@@ -202,21 +217,47 @@ const works = [
   },
 ];
 
-const resumeWorks = () => (
-  <Container id="section_works">
-    <HeadingSecondary>Portfolio</HeadingSecondary>
-    <StyledWrapper>
-      {works.map((work, i) => (
-        <Work
-          key={i}
-          title={work.title}
-          link={work.link}
-          tool={work.tool}
-          img={work.img}
-        />
-      ))}
-    </StyledWrapper>
-  </Container>
-);
+const resumeWorks = () => {
+  const slides = useMemo(() => {
+    const slidesArray = [];
+    works.map((work, i) => {
+      slidesArray.push(
+        <SwiperSlide key={`slide-${i}`} style={{ listStyle: 'none' }}>
+          <div className="slide">
+            <Work
+              title={work.title}
+              link={work.link}
+              tool={work.tool}
+              img={work.img}
+            />
+          </div>
+        </SwiperSlide>,
+      );
+    });
+    return slidesArray;
+  }, [works]);
+
+  return (
+    <Container id="section_works">
+      <HeadingSecondary>Portfolio</HeadingSecondary>
+      <StyledWrapper>
+        <Swiper
+          id="swiper"
+          slidesPerView={window.matchMedia(MEDIA_QUERIES.isMobile).matches
+            ? 1 : window.matchMedia(MEDIA_QUERIES.isPad).matches
+              ? 3 : 4}
+          spaceBetween={16}
+          navigation
+          pagination
+          loop
+          // loopFillGroupWithBlank
+        >
+          {slides}
+        </Swiper>
+      </StyledWrapper>
+    </Container>
+  );
+}
+;
 
 export default resumeWorks;

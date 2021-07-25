@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { PropTypes } from 'prop-types';
 import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAward } from '@fortawesome/free-solid-svg-icons';
 import { HeadingSecondary, HeadingTertiary } from '@src/components/TypoGraphy';
+import * as actionCreators from '@src/redux/modules/resume/events/actions';
 
 const Container = styled.section`
   background-color: ${({ theme }) => theme.color.bgPrimary};
@@ -276,77 +278,31 @@ Event.defaultProps = {
   title: '',
 };
 
-const events = [
-  {
-    title: 'Biology Science',
-    subTitle: 'National Sun Yat-Sen University  國立中山大學',
-    period: 'Sep. 2013 - Jun. 2017',
-    content: [
-      '',
-    ],
-  },
-  {
-    title: '大航道計畫 - 讓年輕人出航',
-    subTitle: 'Alpha Camp',
-    period: 'Sep. 2017 - Oct. 2018',
-    content: [
-      {
-        isHighlight: true,
-        heading: '大航道計畫 - 啟航基金得主',
-        body: '為 Alpha Camp - Demo Day 1 與茶籽堂合作的開發者之一，從前端的客情資料到頁面的 UI 與 UX 表現亮眼，在「入選 Demo Day 工程團隊」中，針對技術力的審核和對團隊的貢獻程度等，與「求職表現」衡量綜合表現優異的學生，獲予 10 萬元啟航基金。',
-      },
-      {
-        heading: 'Demo Day 1 : 茶籽堂 - 人性化線下 CRM 平台',
-        body: '真正著手非課程範例專案的開始，與團隊從最初的與企業主溝通需求、設計使用者故事、建立階段性目標至專案版本控制等，找出問題了解問題，學習如何發問並解決，實作出集合傳統的 POS 機、會員資料、庫存以及報表分析等功能，減少資料在不同系統間的繁複操作。',
-        skills: ['Ruby on Rails', 'SCSS', 'Bootstrap', 'jQuery', 'Chart.js'],
-      },
-      {
-        heading: '全端網路開發，課程培訓',
-        body: '從無程式背景的小白，依序接觸基本 HTML & CSS 實作出靜態網頁，接續 Git 版本控制管理，提高專案開發效率，RWD & Bootstrap 點綴靜態網頁內容排版，RoR 學習 MVC 模式開發及運用套件，Heroku 網站部署，JS & AJAX & API 增加網頁動態效果提升互動，及相關資訊觀念課程，到參與專案開發實踐，藉由創建的線上社群社團，增進交流學習。',
-        skills: ['Github', 'HTML5', 'CSS', 'Bootstrap', 'JavaScript', 'jQuery', 'Ruby on Rails', 'Terminal Usage', '金流串接'],
-      },
-    ],
-  },
-  {
-    title: '希平方 - 數位教育平台',
-    subTitle: 'Frontend Developer',
-    period: 'Sep. 2018 - Oct. 2020',
-    content: [
-      {
-        heading: '課程後台：登入入口｜使用者進度查詢｜問答平台｜多產品後台大廳',
-        body: '為採用前端主流 React 與 Redux 的 SPA 環境，從無到有的課程 & 系統問答平台、多產品之學員進度查詢介面及 UI / UX 設計，以 CSS in JS 攥寫樣式，近期加入 React hooks 運用，資料管理結合 RxJS 發送請求，處理商業邏輯與 response 初步整理。',
-        skills: ['React', 'Redux', 'RxJS', 'Styled-components', 'Webpack', 'Antd', 'Npm & Yarn', 'Eslint'],
-      },
-      {
-        heading: '前台網頁：行銷活動｜產品購買｜亞太登入串接｜課程問卷｜行銷廣告',
-        body: '維護既有產品兼提升多瀏覽器兼容性，整合 PHP 的 MVC 框架下與 React 併用的前端開發環境，執行產品購買商業邏輯相關流程規劃，活動制式內容的參數化並訂定 API 規格，以達快速開發 ; 負責亞太第三方登入的串接。',
-        skills: ['PHP', 'React', 'SCSS', 'Styled-components', 'Webpack', 'Npm & Yarn', 'Eslint', 'Linux Shell Script'],
-      },
-      {
-        heading: 'App webview：多入口音檔教學牌卡列表｜Sign in with Apple｜靜態頁面',
-        body: '產品以 React-Native 開發，接觸 Webview 與 App 間的溝通格式訂定與實行，探討 mobile browser 與 Webview 的原生行為之差異，並處理 Sign in with Apple，教學牌卡分類顯示及多情境下音檔之應用，至最佳使用者體驗。',
-        skills: ['Webview', 'Babel'],
-      },
-    ],
-  },
-];
+const resumeExperience = () => {
+  const events = useSelector(state => state.resume.events.events);
+  const dispatch = useDispatch();
 
-const resumeExperience = () => (
-  <Container>
-    <HeadingSecondary>Experience</HeadingSecondary>
-    <StyledWrapper>
-      {events.reverse().map((event, i) => (
-        <Event
-          key={i}
-          title={event.title}
-          subTitle={event.subTitle}
-          period={event.period}
-          content={event.content}
-          isMainEvent={event.isMainEvent}
-        />
-      ))}
-    </StyledWrapper>
-  </Container>
-);
+  useEffect(() => {
+    dispatch(actionCreators.getEvents());
+  }, []);
+
+  return (
+    <Container>
+      <HeadingSecondary>Experience</HeadingSecondary>
+      <StyledWrapper>
+        {events.reverse().map((event, i) => (
+          <Event
+            key={i}
+            title={event.title}
+            subTitle={event.subTitle}
+            period={event.period}
+            content={event.content}
+            isMainEvent={event.isMainEvent}
+          />
+        ))}
+      </StyledWrapper>
+    </Container>
+  );
+};
 
 export default resumeExperience;

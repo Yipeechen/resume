@@ -10,7 +10,7 @@ const SRC_ROOT = './src';
 module.exports = {
   context: path.resolve(__dirname, SRC_ROOT),
   entry: {
-    app: './index.js',
+    app: './index.tsx',
   },
   output: {
     path: path.resolve(__dirname, OUTPUT),
@@ -22,9 +22,15 @@ module.exports = {
       '@root': path.resolve('./'),
       '@src': path.resolve('./src'),
     },
+    extensions: ['.js', '.jsx', '.react.js', '.ts', '.tsx'],
   },
   module: {
     rules: [
+      {
+        test: /\.(ts|tsx)$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/,
+      },
       {
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,

@@ -15,11 +15,11 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, OUTPUT),
     filename: 'scripts/[hash:8].js',
-    publicPath: './',
+    // publicPath: './',
+    publicPath: '/',
   },
   resolve: {
     alias: {
-      '@root': path.resolve('./'),
       '@src': path.resolve('./src'),
     },
     extensions: ['.js', '.jsx', '.react.js', '.ts', '.tsx'],
@@ -32,7 +32,7 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.jsx?$/,
+        test: /\.(js|jsx|tsx)$/,
         exclude: /(node_modules|bower_components)/,
         use: {
           loader: 'babel-loader',
@@ -58,7 +58,10 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loaders: ['style-loader', 'css-loader'],
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
+        ],
       },
     ],
   },

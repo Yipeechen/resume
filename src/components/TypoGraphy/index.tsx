@@ -1,5 +1,5 @@
-import { PropTypes } from 'prop-types';
 import styled from 'styled-components';
+import { ReactNode } from 'react';
 
 const StyledHeadingSecondaryWrapper = styled.div`
   text-align: center;
@@ -20,19 +20,17 @@ const StyledHeadingSecondary = styled.h2`
   letter-spacing: 2px;
 `;
 
-export const HeadingSecondary = ({ children }) => (
+interface HeadingSecondaryProps {
+  children: ReactNode;
+}
+
+export const HeadingSecondary = ({ children }: HeadingSecondaryProps) => (
   <StyledHeadingSecondaryWrapper>
     <StyledHeadingSecondary>
       {children}
     </StyledHeadingSecondary>
   </StyledHeadingSecondaryWrapper>
 );
-HeadingSecondary.propTypes = {
-  children: PropTypes.any,
-};
-HeadingSecondary.defaultProps = {
-  children: null,
-};
 
 const StyledHeadingTertiary = styled.h3.attrs(({ className }) => ({
   className: className,
@@ -43,16 +41,13 @@ const StyledHeadingTertiary = styled.h3.attrs(({ className }) => ({
   margin-bottom: 1.5rem;
 `;
 
-export const HeadingTertiary = ({ className, children }) => (
+interface HeadingTertiaryProps {
+  className?: string;
+  children: ReactNode;
+}
+
+export const HeadingTertiary = ({ className, children }: HeadingTertiaryProps) => (
   <StyledHeadingTertiary className={className}>
     {children}
   </StyledHeadingTertiary>
 );
-HeadingTertiary.propTypes = {
-  children: PropTypes.any,
-  className: PropTypes.string,
-};
-HeadingTertiary.defaultProps = {
-  children: null,
-  className: '',
-};

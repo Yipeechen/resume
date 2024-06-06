@@ -1,4 +1,3 @@
-import { PropTypes } from 'prop-types';
 import styled from 'styled-components';
 
 import { HeadingTertiary } from '@src/components/TypoGraphy';
@@ -25,8 +24,8 @@ const Container = styled.section`
     padding: 5rem 3rem;
     background-image: linear-gradient(
       to right bottom,
-      ${({ theme }) => theme.color.primaryLightOpLevel8},
-      ${({ theme }) => theme.color.primaryDarkOpLevel8}
+      ${theme.color.primaryLightOpLevel8},
+      ${theme.color.primaryDarkOpLevel8}
     ),
     url('https://yipeechen.github.io/resume/images/mobile/skill-bg-min.jpg');
   `}
@@ -104,7 +103,7 @@ const StyledCardListLi = styled.li`
     display: inline-block;
   `}
 `;
-const StyledCardList = styled.ul`
+const StyledCardList = styled.ul<{ isTwoColumn: boolean }>`
   ${({ isTwoColumn }) => isTwoColumn
     ? `display: flex;
       flex-wrap: wrap;
@@ -149,7 +148,13 @@ const cards = [
   },
 ];
 
-const Card = ({ title, className, content }) => (
+interface CardProps {
+  className: string;
+  content: string[];
+  title: string;
+}
+
+const Card = ({ title, className, content }: CardProps) => (
   <StyledCard>
     <StyledCardIcon className={className} />
     <HeadingTertiary>{title}</HeadingTertiary>
@@ -160,16 +165,6 @@ const Card = ({ title, className, content }) => (
     </StyledCardList>
   </StyledCard>
 );
-Card.propTypes = {
-  className: PropTypes.string,
-  content: PropTypes.array,
-  title: PropTypes.string,
-};
-Card.defaultProps = {
-  className: '',
-  content: [],
-  title: '',
-};
 
 const resumeSkills = () => (
   <Container id="section_skills">

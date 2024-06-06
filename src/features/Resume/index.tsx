@@ -7,7 +7,7 @@ import Experience from './ResumeExperience';
 import Works from './ResumeWorks';
 import Contact from './ResumeContact';
 
-const resume = props => (
+const resume = () => (
   <Fragment>
     <Header />
     <About />

@@ -1,4 +1,3 @@
-import { PropTypes } from 'prop-types';
 import styled, { keyframes } from 'styled-components';
 
 const bounceScale = keyframes`
@@ -28,11 +27,10 @@ const StyledPageSpinnerChild = styled.div`
     animation-delay: calc(3000ms / -2);
   }
 `;
-const StyledPageSpinner = styled.div`
+const StyledPageSpinner = styled.div<PageSpinnerProps>`
   position: relative;
   width: ${({ size }) => size};
   height: ${({ size }) => size};
-  ${({ size, ...rest }) => rest};
 
   ${StyledPageSpinnerChild} {
     top: ${({ size }) => `calc(50% - ${size} / 2)`};
@@ -42,16 +40,14 @@ const StyledPageSpinner = styled.div`
   }
 `;
 
-export const PageSpinner = ({ size, ...rest }) => (
-  <StyledPageSpinner size={size} {...rest}>
+interface PageSpinnerProps {
+  size: string;
+  style?: React.CSSProperties;
+}
+
+export const PageSpinner = (props: PageSpinnerProps) => (
+  <StyledPageSpinner {...props}>
     <StyledPageSpinnerChild />
     <StyledPageSpinnerChild />
   </StyledPageSpinner>
 );
-
-PageSpinner.propTypes = {
-  size: PropTypes.string,
-};
-PageSpinner.defaultProps = {
-  size: '',
-};

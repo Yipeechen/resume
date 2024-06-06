@@ -1,7 +1,7 @@
 import { request } from '@src/services/ytServer';
 
 const API_KEY = process.env.API_KEY;
-export const fetchMostPopularYtVideo = async data => {
+export const fetchMostPopularYtVideo = async (data: { nextPageToken: string | null }) => {
   const response = await request({
     url: `/videos`,
     method: 'GET',
@@ -15,7 +15,8 @@ export const fetchMostPopularYtVideo = async data => {
   });
   return response;
 };
-export const fetchYtVideo = async data => {
+
+export const fetchYtVideo = async (data: { nextPageToken: string | null, searchTerm: string }) => {
   const response = await request({
     url: '/search',
     method: 'GET',

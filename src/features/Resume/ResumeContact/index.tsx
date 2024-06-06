@@ -1,10 +1,10 @@
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faGithubAlt, faMediumM } from '@fortawesome/free-brands-svg-icons';
 import { HeadingSecondary } from '@src/components/TypoGraphy';
+import { ReactElement } from 'react';
 
 const StyledContainer = styled.section`
   background-color: ${({ theme }) => theme.color.bgPrimary};
@@ -103,8 +103,8 @@ const StyledCardInfoContent = styled.div`
     margin: 0;
   `}
 `;
-const StyledCardWrapper = styled.a.attrs(({ link }) => ({
-  href: link,
+const StyledCardWrapper = styled.a.attrs(({ href }: { href: string }) => ({
+  href: href,
   target: '_blank',
 }))`
   position: relative;
@@ -160,8 +160,8 @@ const StyledCardIcon = styled.div`
   `}
 `;
 
-const Card = ({ link, icon, title, content }) => (
-  <StyledCardWrapper link={link}>
+const Card = ({ link, icon, title, content }: { link: string, icon: ReactElement, title: string, content: string }) => (
+  <StyledCardWrapper href={link}>
     <StyledCardLink>
       <StyledCardIcon>
         {icon}
@@ -173,18 +173,7 @@ const Card = ({ link, icon, title, content }) => (
     </StyledCardLink>
   </StyledCardWrapper>
 );
-Card.propTypes = {
-  content: PropTypes.string,
-  icon: PropTypes.element,
-  link: PropTypes.string,
-  title: PropTypes.string,
-};
-Card.defaultProps = {
-  content: '',
-  icon: null,
-  link: '',
-  title: '',
-};
+
 const cards = [
   {
     link: 'https://github.com/Yipeechen',

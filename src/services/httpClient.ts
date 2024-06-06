@@ -1,9 +1,20 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig, AxiosInstance, AxiosResponse, AxiosError } from 'axios';
 
 const LOGGER_MAX_LENGTH = 300;
 
-export const createInstance = config => {
-  function handleRequest (req) {
+interface CustomInterceptors {
+  request?: (config: AxiosRequestConfig) => AxiosRequestConfig | Promise<AxiosRequestConfig>;
+  response?: (response: AxiosResponse) => AxiosResponse | Promise<AxiosResponse>;
+  responseError?: (error: AxiosError) => any;
+}
+
+interface CustomAxiosRequestConfig extends AxiosRequestConfig {
+  interceptors?: CustomInterceptors;
+}
+
+
+export const createInstance = (config: CustomAxiosRequestConfig): AxiosInstance => {
+  function handleRequest (req: AxiosRequestConfig): AxiosRequestConfig | Promise<AxiosRequestConfig> {
     // transform logged data
     let loggedData = { ...req.data };
 
@@ -23,7 +34,7 @@ export const createInstance = config => {
     return req;
   }
 
-  function handleResponseSuccess (res) {
+  function handleResponseSuccess (res: AxiosResponse): any {
     // log response success info
     const logged = {
       status: res.status,
@@ -46,7 +57,7 @@ export const createInstance = config => {
     return res.data;
   }
 
-  function handleResponseFailure (error) {
+  function handleResponseFailure (error: AxiosError): Promise<never> {
     // log request failure info
     const logged = {
       status: error.response?.status,

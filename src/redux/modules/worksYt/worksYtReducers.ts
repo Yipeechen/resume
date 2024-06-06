@@ -1,4 +1,4 @@
-import * as actionTypes from './worksYtActionTypes';
+import { ActionTypes } from './worksYtActionTypes';
 
 const initialState = {
   videos: [],
@@ -7,16 +7,21 @@ const initialState = {
   error: null,
 };
 
-export default function ytVideosReducer (state = initialState, action) {
+interface Action {
+  type: ActionTypes;
+  payload: any;
+}
+
+export default function ytVideosReducer (state = initialState, action: Action) {
   switch (action.type) {
-    case actionTypes.CLEAR_PLAYLIST:
+    case ActionTypes.CLEAR_PLAYLIST:
       return initialState;
-    case actionTypes.FETCH_POPULAR_VIDEO:
+    case ActionTypes.FETCH_POPULAR_VIDEO:
       return {
         ...state,
         loading: true,
       };
-    case actionTypes.FETCH_POPULAR_VIDEO_SUCCESS:
+    case ActionTypes.FETCH_POPULAR_VIDEO_SUCCESS:
       return {
         ...state,
         videos: [...state.videos, ...action.payload.items],
@@ -24,18 +29,18 @@ export default function ytVideosReducer (state = initialState, action) {
         loading: false,
         error: null,
       };
-    case actionTypes.FETCH_POPULAR_VIDEO_FAILURE:
+    case ActionTypes.FETCH_POPULAR_VIDEO_FAILURE:
       return {
         ...state,
         loading: false,
         error: action.payload,
       };
-    case actionTypes.SEARCH_VIDEO:
+    case ActionTypes.SEARCH_VIDEO:
       return {
         ...state,
         loading: true,
       };
-    case actionTypes.SEARCH_VIDEO_SUCCESS:
+    case ActionTypes.SEARCH_VIDEO_SUCCESS:
       return {
         ...state,
         videos: [...state.videos, ...action.payload.items],
@@ -43,7 +48,7 @@ export default function ytVideosReducer (state = initialState, action) {
         loading: false,
         error: null,
       };
-    case actionTypes.SEARCH_VIDEO_FAILURE:
+    case ActionTypes.SEARCH_VIDEO_FAILURE:
       return {
         ...state,
         loading: false,

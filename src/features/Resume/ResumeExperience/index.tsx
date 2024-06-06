@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { PropTypes } from 'prop-types';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -7,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAward } from '@fortawesome/free-solid-svg-icons';
 import { HeadingSecondary, HeadingTertiary } from '@src/components/TypoGraphy';
 import * as actionCreators from '@src/redux/modules/resume/events/actions';
+import { RootState } from '@src/redux/root';
 
 const Container = styled.section`
   background-color: ${({ theme }) => theme.color.bgPrimary};
@@ -68,19 +68,19 @@ const StyledEventPeriod = styled.p`
   margin-bottom: 1.2rem;
   padding: 0.3rem 2rem;
 `;
-const StyledEventWrapper = styled.div`
+const StyledEventWrapper = styled.div<{ isMainEvent: boolean }>`
   position: relative;
 
   ${({ theme }) => theme.hoverable`
     &:hover {
       ${StyledEventIcon} {
         transform: rotate(-45deg);
-        background-color: ${({ theme }) => theme.color.secondary};
+        background-color: ${theme.color.secondary};
         background-image: none;
       }
     
       ${StyledEventPeriod} {
-        box-shadow: inset 40rem 0 0 0 ${({ theme }) => theme.color.secondaryOpLevel9};
+        box-shadow: inset 40rem 0 0 0 ${theme.color.secondaryOpLevel9};
       }
     }
   `}
@@ -93,8 +93,7 @@ const StyledEventWrapper = styled.div`
   ${StyledEventPeriod} {
     box-shadow: inset 40rem 0 0 0 ${({ theme, isMainEvent }) => isMainEvent ? 'transparent' : theme.color.primaryDark};
     ${({ isMainEvent }) => isMainEvent
-    ? `background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
-    `
+    ? `background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);`
     : null};
   }
 `;
@@ -110,7 +109,7 @@ const StyledEventSubTitle = styled.span`
 `;
 const StyledEventContent = styled.div`
 `;
-const StyledEventContentHeading = styled.h5`
+const StyledEventContentHeading = styled.h5<{ isHighlight: boolean }>`
   margin-bottom: .8rem;
   font-weight: 600;
 
@@ -128,13 +127,13 @@ const StyledEventContentHeadingHighlight = styled(FontAwesomeIcon).attrs({
   margin-left: .8rem;
   font-size: 1.8rem;
 `;
-const StyledEventContentSkills = styled.div`
+const StyledEventContentSkills = styled.div<{ expanded: boolean }>`
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
   margin-top: .8rem;
-  ${({ theme }) => theme.mobile`
-    margin-top: ${({ expanded }) => expanded ? '4.8rem' : '.8rem'};
+  ${({ theme, expanded }) => theme.mobile`
+    margin-top: ${expanded ? '4.8rem' : '.8rem'};
   `}
 `;
 const StyledEventContentSkill = styled.span`
@@ -146,16 +145,16 @@ const StyledEventContentSkill = styled.span`
   color: ${({ theme }) => theme.color.primaryDark};
   font-weight: 600;
 `;
-const StyledEventContentPart = styled.div`
+const StyledEventContentPart = styled.div<{ isLastOne: boolean }>`
   &:not(:last-child) {
     margin-bottom: 2.4rem;
   }
 `;
-const StyledEventContentParagraph = styled.p`
-  ${({ theme }) => theme.mobile`
+const StyledEventContentParagraph = styled.p<{ expanded: boolean }>`
+  ${({ theme, expanded }) => theme.mobile`
     position: relative;
-    max-height: ${({ expanded }) => expanded ? '80rem' : '11rem'};
-    overflow: ${({ expanded }) => expanded ? 'visible' : 'hidden'};
+    max-height: ${expanded ? '80rem' : '11rem'};
+    overflow: ${expanded ? 'visible' : 'hidden'};
     transition: all .3s;
 
     &::before {
@@ -165,35 +164,34 @@ const StyledEventContentParagraph = styled.p`
       position: absolute;
       left: 0;
       top: 0;
-      background: ${({ expanded, theme }) => expanded
-    ? 'none' : `linear-gradient(to bottom, #ffffff00, ${theme.color.bgPrimary})`};
+      background: ${expanded ? 'none' : `linear-gradient(to bottom, #ffffff00, ${theme.color.bgPrimary})`};
       transition: all .3s;
     }
   `}
 `;
-const StyledEventContentParagraphRead = styled.span`
+const StyledEventContentParagraphRead = styled.span<{ expanded: boolean }>`
   display: none;
-  ${({ theme }) => theme.mobile`
+  ${({ theme, expanded }) => theme.mobile`
     display: block;
     width: 3rem;
     height: 3rem;
     position: absolute;
     left: 50%;
-    bottom: ${({ expanded }) => expanded ? '-3.5rem' : '.8rem'};
+    bottom: ${expanded ? '-3.5rem' : '.8rem'};
     text-align: center;
-    border: 2px solid ${({ expanded, theme }) => expanded ? theme.color.primaryDark : theme.color.primary};
-    background-color: ${({ expanded, theme }) => expanded ? theme.color.bgPrimary : theme.color.primary};
-    color: ${({ theme }) => theme.color.white};
+    border: 2px solid ${expanded ? theme.color.primaryDark : theme.color.primary};
+    background-color: ${expanded ? theme.color.bgPrimary : theme.color.primary};
+    color: ${theme.color.white};
     font-weight: bold;
     line-height: 1.5;
     border-radius: 50%;
     cursor: pointer;
-    transform: ${({ expanded }) => expanded ? 'rotate(180deg) translate(-50%, 0)' : 'translate(-50%, 0)'};
+    transform: ${expanded ? 'rotate(180deg) translate(-50%, 0)' : 'translate(-50%, 0)'};
     transform-origin: left;
 
     &::after {
       content: '';
-      border: solid ${({ expanded, theme }) => expanded ? theme.color.primaryDark : theme.color.white};
+      border: solid ${expanded ? theme.color.primaryDark : theme.color.white};
       border-width: 0 3px 3px 0;
       border-bottom-right-radius: 2px;
       display: inline-block;
@@ -207,12 +205,13 @@ const StyledEventContentParagraphRead = styled.span`
   `}
 `;
 
-const Event = ({ period, title, subTitle, content, isMainEvent }) => {
-  const [selected, setSelected] = useState([]);
+const Event = ({ period, title, subTitle, content = [], isMainEvent }: EventProps) => {
+  const [selected, setSelected] = useState<number[]>([]);
 
-  const handleReadBtnOnPress = index => {
+  const handleReadBtnOnPress = (index: number) => {
     const isSelected = selected.some(idx => idx === index);
-    setSelected(isSelected ? selected.filter(idx => idx !== index) : [...selected, index]);
+    const nextSelected = isSelected ? selected.filter(idx => idx !== index) : [...selected, index];
+    setSelected(nextSelected);
   };
 
   return (
@@ -263,23 +262,23 @@ const Event = ({ period, title, subTitle, content, isMainEvent }) => {
     </StyledEventWrapper>
   );
 };
-Event.propTypes = {
-  content: PropTypes.array,
-  isMainEvent: PropTypes.bool,
-  period: PropTypes.string,
-  subTitle: PropTypes.string,
-  title: PropTypes.string,
-};
-Event.defaultProps = {
-  content: [],
-  isMainEvent: false,
-  period: '',
-  subTitle: '',
-  title: '',
-};
+
+interface ContentProps {
+  heading: string;
+  isHighlight: boolean;
+  body: string;
+  skills: string[]
+}
+interface EventProps {
+  content: ContentProps[];
+  isMainEvent: boolean;
+  period: string;
+  subTitle: string;
+  title: string;
+}
 
 const resumeExperience = () => {
-  const events = useSelector(state => state.resume.events.events);
+  const events: EventProps[] = useSelector((state: RootState) => state.resume.events.events);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -290,16 +289,18 @@ const resumeExperience = () => {
     <Container>
       <HeadingSecondary>Experience</HeadingSecondary>
       <StyledWrapper>
-        {events.reverse().map((event, i) => (
-          <Event
-            key={i}
-            title={event.title}
-            subTitle={event.subTitle}
-            period={event.period}
-            content={event.content}
-            isMainEvent={event.isMainEvent}
-          />
-        ))}
+        {events
+          .reverse()
+          .map((event, i) => (
+            <Event
+              key={i}
+              title={event.title}
+              subTitle={event.subTitle}
+              period={event.period}
+              content={event.content}
+              isMainEvent={event.isMainEvent}
+            />
+          ))}
       </StyledWrapper>
     </Container>
   );

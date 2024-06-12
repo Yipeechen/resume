@@ -5,10 +5,10 @@ const MS_DAY = 1000 * 60 * 60 * 24;
 const MS_HOUR = 1000 * 60 * 60;
 const MS_MIN = 1000 * 60;
 
-function convertISOtoTimestamp (isoString) {
+function convertISOtoTimestamp (isoString: string) {
   return new Date(isoString).getTime();
 }
-function relativeNow (timestamp) {
+function relativeNow (timestamp: number) {
   const now = new Date();
   const diff = now.getTime() - timestamp;
   if (diff < MS_HOUR) {

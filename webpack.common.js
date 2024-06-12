@@ -22,17 +22,19 @@ module.exports = {
     alias: {
       '@src': path.resolve('./src'),
     },
-    extensions: ['.js', '.jsx', '.react.js', '.ts', '.tsx'],
+    extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
   },
   module: {
     rules: [
       {
         test: /\.(ts|tsx)$/,
-        loader: 'ts-loader',
+        use: {
+          loader: 'ts-loader',
+        },
         exclude: /node_modules/,
       },
       {
-        test: /\.(js|jsx|tsx)$/,
+        test: /\.(js|jsx)$/,
         exclude: /(node_modules|bower_components)/,
         use: {
           loader: 'babel-loader',

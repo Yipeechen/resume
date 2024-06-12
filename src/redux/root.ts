@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from '@reduxjs/toolkit'
 
 import ytVideosReducer from '@src/redux/modules/worksYt/worksYtReducers';
 import resumeReducer from '@src/redux/modules/resume';

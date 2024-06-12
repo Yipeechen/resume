@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import SearchBar from './components/SearchBar';
 import SearchResult from './components/SearchResult';
 import * as actionCreators from '../../../redux/modules/worksYt/worksYtActions';
+import { RootState } from '@src/redux/root';
 
 const StyledContainer = styled.div`
   margin: 40px auto;
@@ -14,7 +15,7 @@ const StyledContainer = styled.div`
 const Yt = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
-  const { videos, loading, nextPageToken } = useSelector(state => ({
+  const { videos, loading, nextPageToken } = useSelector((state: RootState) => ({
     videos: state.yt.videos,
     loading: state.yt.loading,
     nextPageToken: state.yt.nextPageToken,
@@ -43,7 +44,7 @@ const Yt = () => {
     };
   }, [videos, loading, nextPageToken, searchTerm, dispatch]);
 
-  const updateSearchTerm = value => {
+  const updateSearchTerm = (value: string) => {
     setSearchTerm(value);
   };
 

@@ -8,6 +8,20 @@ import { HeadingSecondary, HeadingTertiary } from '@src/components/TypoGraphy';
 import * as actionCreators from '@src/redux/modules/resume/events/actions';
 import { RootState } from '@src/redux/root';
 
+interface ContentProps {
+  heading: string;
+  isHighlight: boolean;
+  body: string;
+  skills: string[]
+}
+interface EventProps {
+  content: ContentProps[];
+  isMainEvent: boolean;
+  period: string;
+  subTitle: string;
+  title: string;
+}
+
 const Container = styled.section`
   background-color: ${({ theme }) => theme.color.bgPrimary};
   padding: 30rem 0 5rem 0;
@@ -262,20 +276,6 @@ const Event = ({ period, title, subTitle, content = [], isMainEvent }: EventProp
     </StyledEventWrapper>
   );
 };
-
-interface ContentProps {
-  heading: string;
-  isHighlight: boolean;
-  body: string;
-  skills: string[]
-}
-interface EventProps {
-  content: ContentProps[];
-  isMainEvent: boolean;
-  period: string;
-  subTitle: string;
-  title: string;
-}
 
 const resumeExperience = () => {
   const events: EventProps[] = useSelector((state: RootState) => state.resume.events.events);

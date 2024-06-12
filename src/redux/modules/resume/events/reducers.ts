@@ -15,6 +15,11 @@ interface EventProps {
   title: string;
 }
 
+interface Action {
+  type: ActionTypes;
+  payload: any;
+}
+
 const initialState: {
   events: EventProps[];
   loading: boolean;
@@ -24,11 +29,6 @@ const initialState: {
   loading: false,
   error: null,
 };
-
-interface Action {
-  type: ActionTypes;
-  payload: any;
-}
 
 export default function reducer (state = initialState, action: Action) {
   switch (action.type) {

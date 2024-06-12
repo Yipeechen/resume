@@ -1,12 +1,11 @@
 import { Dispatch } from 'redux';
-import { ActionTypes } from './worksYtActionTypes';
-import { fetchYtVideo, fetchMostPopularYtVideo } from '../../../apis/worksYt/videos';
 import { AxiosResponse } from 'axios';
 
-interface VideoItem {
-  id: string;
-  [key: string]: any;
-}
+import { ActionTypes } from './worksYtActionTypes';
+import type { VideoItem } from './worksYtReducers';
+import { fetchYtVideo, fetchMostPopularYtVideo } from '../../../apis/worksYt/videos';
+
+
 interface ApiResponse {
   items: VideoItem[];
   nextPageToken: string | null;
@@ -52,7 +51,7 @@ export function resetPlaylist () {
     dispatch(clearPlaylist());
   };
 }
-export function fetchMostPopularVideo ({ nextPageToken = null }: { nextPageToken: string | null }) {
+export function fetchMostPopularVideo ({ nextPageToken = null }: { nextPageToken?: string | null }) {
   return async (dispatch: Dispatch) => {
     dispatch(fetchPopularVideo());
 

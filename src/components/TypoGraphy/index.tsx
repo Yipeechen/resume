@@ -1,6 +1,15 @@
 import styled from 'styled-components';
 import { ReactNode } from 'react';
 
+interface HeadingSecondaryProps {
+  children: ReactNode;
+}
+
+interface HeadingTertiaryProps {
+  className?: string;
+  children: ReactNode;
+}
+
 const StyledHeadingSecondaryWrapper = styled.div`
   text-align: center;
   margin-bottom: 8rem;
@@ -19,19 +28,6 @@ const StyledHeadingSecondary = styled.h2`
   color: transparent;
   letter-spacing: 2px;
 `;
-
-interface HeadingSecondaryProps {
-  children: ReactNode;
-}
-
-export const HeadingSecondary = ({ children }: HeadingSecondaryProps) => (
-  <StyledHeadingSecondaryWrapper>
-    <StyledHeadingSecondary>
-      {children}
-    </StyledHeadingSecondary>
-  </StyledHeadingSecondaryWrapper>
-);
-
 const StyledHeadingTertiary = styled.h3.attrs(({ className }) => ({
   className: className,
 }))`
@@ -41,10 +37,13 @@ const StyledHeadingTertiary = styled.h3.attrs(({ className }) => ({
   margin-bottom: 1.5rem;
 `;
 
-interface HeadingTertiaryProps {
-  className?: string;
-  children: ReactNode;
-}
+export const HeadingSecondary = ({ children }: HeadingSecondaryProps) => (
+  <StyledHeadingSecondaryWrapper>
+    <StyledHeadingSecondary>
+      {children}
+    </StyledHeadingSecondary>
+  </StyledHeadingSecondaryWrapper>
+);
 
 export const HeadingTertiary = ({ className, children }: HeadingTertiaryProps) => (
   <StyledHeadingTertiary className={className}>

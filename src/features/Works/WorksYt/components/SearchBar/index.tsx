@@ -1,5 +1,11 @@
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
+
+interface SearchBarProps {
+  searchTerm: string;
+  updateSearchTerm: (v: string) => void;
+  fetchPlaylist: (payload: { searchTerm: string }) => void;
+  resetPlaylist: () => void;
+}
 
 const StyledContainer = styled.div`
   display: flex;
@@ -39,12 +45,12 @@ const SearchBar = ({
   updateSearchTerm,
   fetchPlaylist,
   resetPlaylist,
-}) => {
-  const handleChange = event => {
+}: SearchBarProps) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     updateSearchTerm(value);
   };
-  const handleKeyUp = event => {
+  const handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
     const code = event.keyCode || event.which;
     if (code === 13 && !!searchTerm) {
       resetPlaylist();
@@ -76,19 +82,6 @@ const SearchBar = ({
       </StyledSearchButton>
     </StyledContainer>
   );
-};
-
-SearchBar.propTypes = {
-  fetchPlaylist: PropTypes.func,
-  resetPlaylist: PropTypes.func,
-  searchTerm: PropTypes.string,
-  updateSearchTerm: PropTypes.func,
-};
-SearchBar.defaultProps = {
-  fetchPlaylist: null,
-  resetPlaylist: null,
-  searchTerm: '',
-  updateSearchTerm: null,
 };
 
 export default SearchBar;

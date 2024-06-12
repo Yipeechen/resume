@@ -1,5 +1,10 @@
 import styled, { keyframes } from 'styled-components';
 
+interface PageSpinnerProps {
+  size: string;
+  style?: React.CSSProperties;
+}
+
 const bounceScale = keyframes`
   0%,
   100% {
@@ -39,11 +44,6 @@ const StyledPageSpinner = styled.div<PageSpinnerProps>`
     height: ${({ size }) => size};
   }
 `;
-
-interface PageSpinnerProps {
-  size: string;
-  style?: React.CSSProperties;
-}
 
 export const PageSpinner = (props: PageSpinnerProps) => (
   <StyledPageSpinner {...props}>

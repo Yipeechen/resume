@@ -2,6 +2,12 @@ import styled from 'styled-components';
 
 import { HeadingTertiary } from '@src/components/TypoGraphy';
 
+interface CardProps {
+  className: string;
+  content: string[];
+  title: string;
+}
+
 const Container = styled.section`
   padding: 20rem 10rem;
   background-image: linear-gradient(
@@ -147,12 +153,6 @@ const cards = [
     list: ['Chinese', 'Taiwanese', 'English', 'Korean'],
   },
 ];
-
-interface CardProps {
-  className: string;
-  content: string[];
-  title: string;
-}
 
 const Card = ({ title, className, content }: CardProps) => (
   <StyledCard>

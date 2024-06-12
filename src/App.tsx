@@ -1,8 +1,9 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, FC } from 'react';
 import { Provider } from 'react-redux';
 import { HashRouter, Route, Redirect, Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { Helmet } from 'react-helmet';
+import { RouteComponentProps } from 'react-router-dom';
 
 import store from './redux/configureStore';
 import theme from '@src/styles/theme';
@@ -10,8 +11,8 @@ import mediaQueries from './styles/mediaQueries';
 import { ResetStyle, GlobalStyle } from '@src/styles/reset';
 import { PageSpinner } from '@src/components/Spinner';
 
-const Resume = lazy(() => import(/* webpackChunkName: "Resume" */'@src/features/Resume'));
-const Yt = lazy(() => import(/* webpackChunkName: "Yt" */'@src/features/Works/WorksYt'));
+const Resume: FC<RouteComponentProps> = lazy(() => import(/* webpackChunkName: "Resume" */'@src/features/Resume'));
+const Yt: FC<RouteComponentProps> = lazy(() => import(/* webpackChunkName: "Yt" */'@src/features/Works/WorksYt'));
 
 const routes = [
   {

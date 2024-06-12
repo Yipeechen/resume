@@ -1,12 +1,34 @@
 import { ActionTypes } from './worksYtActionTypes';
 
-const initialState = {
+// https://developers.google.com/youtube/v3/docs/videos?hl=zh-tw#resource
+export interface VideoItem {
+  id: {
+    videoId: string;
+  };
+  snippet: {
+    title: string;
+    channelTitle: string;
+    publishedAt: string;
+    thumbnails: {
+      medium: {
+        url: string;
+      }
+    }
+  }
+  [key: string]: any;
+}
+
+const initialState: {
+  videos: VideoItem[];
+  nextPageToken: string | null;
+  loading: boolean;
+  error: any;
+} = {
   videos: [],
   nextPageToken: null,
   loading: false,
   error: null,
 };
-
 interface Action {
   type: ActionTypes;
   payload: any;

@@ -1,3 +1,4 @@
+import { AxiosRequestConfig } from 'axios';
 import { createInstance } from './httpClient';
 import * as TIME from '@src/constants/time';
 
@@ -14,6 +15,6 @@ const instance = createInstance({
   },
 });
 
-export const request = config => {
+export const request = (config: AxiosRequestConfig) => {
   return instance(config);
 };

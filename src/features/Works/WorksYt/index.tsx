@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
@@ -23,26 +23,27 @@ const Yt = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const infiniteScroll = () => {
-      const hasScrolledToBottom = (window.innerHeight + document.documentElement.scrollTop >=
-        document.documentElement.offsetHeight - 300);
+  const infiniteScroll = useCallback(() => {
+    const hasScrolledToBottom = (window.innerHeight + document.documentElement.scrollTop >=
+      document.documentElement.offsetHeight - 300);
 
-      if (videos.length && !!nextPageToken && !loading && hasScrolledToBottom) {
-        if (searchTerm) {
-          dispatch(actionCreators.fetchVideo({ searchTerm, nextPageToken }));
-        } else {
-          dispatch(actionCreators.fetchMostPopularVideo({ nextPageToken }));
-        }
+    if (videos.length && !!nextPageToken && !loading && hasScrolledToBottom) {
+      if (searchTerm) {
+        dispatch(actionCreators.fetchVideo({ searchTerm, nextPageToken }));
+      } else {
+        dispatch(actionCreators.fetchMostPopularVideo({ nextPageToken }));
       }
-    };
+    }
+  }, [videos, loading, nextPageToken, searchTerm, dispatch]);
+
+  useEffect(() => {
     window.addEventListener('scroll', infiniteScroll);
     dispatch(actionCreators.fetchMostPopularVideo({}));
 
     return () => {
       window.removeEventListener('scroll', infiniteScroll);
     };
-  }, [videos, loading, nextPageToken, searchTerm, dispatch]);
+  }, []);
 
   const updateSearchTerm = (value: string) => {
     setSearchTerm(value);

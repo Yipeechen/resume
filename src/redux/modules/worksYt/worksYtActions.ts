@@ -1,9 +1,9 @@
 import { Dispatch } from 'redux';
 import { AxiosResponse } from 'axios';
 
-import { ActionTypes } from './worksYtActionTypes';
-import type { VideoItem } from './worksYtReducers';
-import { fetchYtVideo, fetchMostPopularYtVideo } from '../../../apis/worksYt/videos';
+import { ActionTypes } from '@src/redux/modules/worksYt/worksYtActionTypes';
+import type { VideoItem } from '@src/redux/modules/worksYt/worksYtReducers';
+import { fetchYtVideo, fetchMostPopularYtVideo } from '@src/apis/worksYt/videos';
 
 
 interface ApiResponse {

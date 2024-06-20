@@ -1,4 +1,4 @@
-import { ActionTypes } from './actionTypes';
+import { ActionTypes } from '@src/redux/modules/resume/events/actionTypes';
 
 interface ContentProps {
   heading: string;

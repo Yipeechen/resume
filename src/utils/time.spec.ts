@@ -1,4 +1,4 @@
-import TimeUtils from './time';
+import TimeUtils from '@src/utils/time';
 
 describe('convertISOtoTimestamp', () => {
   it('should accept ISO string and then return timestamp format value', () => {

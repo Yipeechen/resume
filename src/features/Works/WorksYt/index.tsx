@@ -2,9 +2,9 @@ import { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import SearchBar from './components/SearchBar';
-import SearchResult from './components/SearchResult';
-import * as actionCreators from '../../../redux/modules/worksYt/worksYtActions';
+import SearchBar from '@src/features/Works/WorksYt/components/SearchBar';
+import SearchResult from '@src/features/Works/WorksYt/components/SearchResult';
+import * as actionCreators from '@src/redux/modules/worksYt/worksYtActions';
 import { RootState } from '@src/redux/root';
 
 const StyledContainer = styled.div`

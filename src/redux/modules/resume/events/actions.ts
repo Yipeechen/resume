@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { ActionTypes } from './actionTypes';
+import { ActionTypes } from '@src/redux/modules/resume/events/actionTypes';
 import { fetchEvents } from '@src/apis/resume/events';
 
 const getAllEvents = () => ({

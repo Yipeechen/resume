@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import eventsReducer from './events/reducers';
+import eventsReducer from '@src/redux/modules/resume/events/reducers';
 
 const resumeReducer = combineReducers({
   events: eventsReducer,

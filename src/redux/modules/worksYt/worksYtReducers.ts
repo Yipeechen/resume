@@ -1,4 +1,4 @@
-import { ActionTypes } from './worksYtActionTypes';
+import { ActionTypes } from '@src/redux/modules/worksYt/worksYtActionTypes';
 
 // https://developers.google.com/youtube/v3/docs/videos?hl=zh-tw#resource
 export interface VideoItem {

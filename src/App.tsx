@@ -5,9 +5,9 @@ import { ThemeProvider } from 'styled-components';
 import { Helmet } from 'react-helmet';
 import { RouteComponentProps } from 'react-router-dom';
 
-import store from './redux/configureStore';
+import store from '@src/redux/configureStore';
 import theme from '@src/styles/theme';
-import mediaQueries from './styles/mediaQueries';
+import mediaQueries from '@src/styles/mediaQueries';
 import { ResetStyle, GlobalStyle } from '@src/styles/reset';
 import { PageSpinner } from '@src/components/Spinner';
 

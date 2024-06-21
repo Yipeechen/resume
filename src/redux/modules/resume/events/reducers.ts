@@ -7,8 +7,8 @@ interface ContentProps {
   skills: string[]
 }
 
-interface EventProps {
-  content: ContentProps[];
+export interface EventProps {
+  content?: ContentProps[];
   isMainEvent: boolean;
   period: string;
   subTitle: string;

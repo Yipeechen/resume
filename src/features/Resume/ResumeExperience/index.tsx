@@ -7,20 +7,7 @@ import { faAward } from '@fortawesome/free-solid-svg-icons';
 import { HeadingSecondary, HeadingTertiary } from '@src/components/TypoGraphy';
 import * as actionCreators from '@src/redux/modules/resume/events/actions';
 import { RootState } from '@src/redux/root';
-
-interface ContentProps {
-  heading: string;
-  isHighlight: boolean;
-  body: string;
-  skills: string[]
-}
-interface EventProps {
-  content: ContentProps[];
-  isMainEvent: boolean;
-  period: string;
-  subTitle: string;
-  title: string;
-}
+import { EventProps } from '@src/redux/modules/resume/events/reducers';
 
 const Container = styled.section`
   background-color: ${({ theme }) => theme.color.bgPrimary};

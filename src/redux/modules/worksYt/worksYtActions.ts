@@ -1,10 +1,19 @@
 import { Dispatch } from 'redux';
 import { AxiosResponse } from 'axios';
 
-import { ActionTypes } from '@src/redux/modules/worksYt/worksYtActionTypes';
+import { createRequestedActions } from '@src/redux/modules/actionFactory';
 import type { VideoItem } from '@src/redux/modules/worksYt/worksYtReducers';
 import { fetchYtVideo, fetchMostPopularYtVideo } from '@src/apis/worksYt/videos';
 
+enum ActionTypes {
+  CLEAR_PLAYLIST = 'CLEAR_PLAYLIST',
+  FETCH_POPULAR_VIDEO = 'FETCH_POPULAR_VIDEO',
+  SEARCH_VIDEO = 'SEARCH_VIDEO',
+};
+
+const { types: definedTypes, actions } = createRequestedActions(Object.values(ActionTypes));
+
+export const types = definedTypes;
 
 interface ApiResponse {
   items: VideoItem[];
@@ -15,64 +24,33 @@ interface ApiError {
   [key: string]: any;
 }
 
-const clearPlaylist = () => ({
-  type: ActionTypes.CLEAR_PLAYLIST,
-});
-
-const fetchPopularVideo = () => ({
-  type: ActionTypes.FETCH_POPULAR_VIDEO,
-});
-
-const fetchPopularVideoSuccess = (payload: ApiResponse) => ({
-  type: ActionTypes.FETCH_POPULAR_VIDEO_SUCCESS,
-  payload,
-});
-
-const fetchPopularVideoFailure = (error: ApiError) => ({
-  type: ActionTypes.FETCH_POPULAR_VIDEO_FAILURE,
-  payload: error,
-});
-const getVideo = () => ({
-  type: ActionTypes.SEARCH_VIDEO,
-});
-
-const getVideoSuccess = (payload: ApiResponse) => ({
-  type: ActionTypes.SEARCH_VIDEO_SUCCESS,
-  payload,
-});
-
-const getVideoFailure = (error: ApiError) => ({
-  type: ActionTypes.SEARCH_VIDEO_FAILURE,
-  payload: error,
-});
-
 export function resetPlaylist () {
   return (dispatch: Dispatch) => {
-    dispatch(clearPlaylist());
+    dispatch(actions.clearPlaylistRequest());
   };
 }
 export function fetchMostPopularVideo ({ nextPageToken = null }: { nextPageToken?: string | null }) {
   return async (dispatch: Dispatch) => {
-    dispatch(fetchPopularVideo());
+    dispatch(actions.fetchPopularVideoRequest());
 
     try {
       const response = await fetchMostPopularYtVideo({
         nextPageToken,
       }) as AxiosResponse & ApiResponse;
 
-      dispatch(fetchPopularVideoSuccess({
+      dispatch(actions.fetchPopularVideoSuccess({
         items: response.items,
         nextPageToken: response.nextPageToken,
       }));
     } catch (error: any) {
       console.warn(error);
-      dispatch(fetchPopularVideoFailure(error));
+      dispatch(actions.fetchPopularVideoFailure(error));
     }
   };
 }
 export function fetchVideo ({ searchTerm, nextPageToken = null }: { searchTerm: string, nextPageToken?: string | null }) {
   return async (dispatch: Dispatch) => {
-    dispatch(getVideo());
+    dispatch(actions.getVideoRequest());
 
     try {
       const response = await fetchYtVideo({
@@ -80,13 +58,13 @@ export function fetchVideo ({ searchTerm, nextPageToken = null }: { searchTerm: 
         searchTerm,
       }) as AxiosResponse & ApiResponse;
 
-      dispatch(getVideoSuccess({
+      dispatch(actions.getVideoSuccess({
         items: response.items,
         nextPageToken: response.nextPageToken,
       }));
     } catch (error: any) {
       console.warn(error);
-      dispatch(getVideoFailure(error));
+      dispatch(actions.getVideoFailure(error));
     }
   };
 }

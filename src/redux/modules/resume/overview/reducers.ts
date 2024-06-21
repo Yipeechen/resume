@@ -1,7 +1,7 @@
-import { ActionTypes } from '@src/redux/modules/resume/overview/actionTypes';
+import { types as actionTypes } from '@src/redux/modules/resume/overview/actions';
 
 interface Action {
-  type: ActionTypes;
+  type: string;
   payload: any;
 }
 
@@ -30,19 +30,19 @@ const initialState: {
 
 export default function reducer (state = initialState, action: Action) {
   switch (action.type) {
-    case ActionTypes.GET_OVERVIEW_DETAIL: 
+    case actionTypes.GET_OVERVIEW_DETAIL: 
       return ({
         ...state,
         loading: true,
       });
-    case ActionTypes.GET_OVERVIEW_DETAIL_SUCCESS: 
+    case actionTypes.GET_OVERVIEW_DETAIL_SUCCESS: 
       return ({
         ...state,
         overview: { ...state.overview, ...action.payload.overview },
         loading: false,
         error: null,
       });
-    case ActionTypes.GET_OVERVIEW_DETAIL_FAILURE:
+    case actionTypes.GET_OVERVIEW_DETAIL_FAILURE:
       return ({
         ...state,
         loading: false,

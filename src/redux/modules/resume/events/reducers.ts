@@ -1,4 +1,4 @@
-import { ActionTypes } from '@src/redux/modules/resume/events/actionTypes';
+import { types as actionTypes } from '@src/redux/modules/resume/events/actions';
 
 interface ContentProps {
   heading: string;
@@ -16,7 +16,7 @@ export interface EventProps {
 }
 
 interface Action {
-  type: ActionTypes;
+  type: string;
   payload: any;
 }
 
@@ -32,19 +32,19 @@ const initialState: {
 
 export default function reducer (state = initialState, action: Action) {
   switch (action.type) {
-    case ActionTypes.GET_ALL_EVENTS:
+    case actionTypes.GET_ALL_EVENTS:
       return {
         ...state,
         loading: true,
       };
-    case ActionTypes.GET_ALL_EVENTS_SUCCESS:
+    case actionTypes.GET_ALL_EVENTS_SUCCESS:
       return {
         ...state,
         events: [...state.events, ...action.payload.events],
         loading: false,
         error: null,
       };
-    case ActionTypes.GET_ALL_EVENTS_FAILURE:
+    case actionTypes.GET_ALL_EVENTS_FAILURE:
       return {
         ...state,
         loading: false,

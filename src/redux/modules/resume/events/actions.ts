@@ -1,34 +1,29 @@
 import { Dispatch } from 'redux';
-import { ActionTypes } from '@src/redux/modules/resume/events/actionTypes';
+
+import { createRequestedActions } from '@src/redux/modules/actionFactory';
 import { fetchEvents } from '@src/apis/resume/events';
 
-const getAllEvents = () => ({
-  type: ActionTypes.GET_ALL_EVENTS,
-});
+enum ActionTypes {
+  GET_ALL_EVENTS = 'GET_ALL_EVENTS',
+}
 
-const getAllEventsSuccess = (payload: { events: any }) => ({
-  type: ActionTypes.GET_ALL_EVENTS_SUCCESS,
-  payload,
-});
+const { types: definedTypes, actions } = createRequestedActions(Object.values(ActionTypes));
 
-const getAllEventsFailure = (error: Error) => ({
-  type: ActionTypes.GET_ALL_EVENTS_FAILURE,
-  payload: error,
-});
+export const types = definedTypes;
 
 export function getEvents () {
   return async (dispatch: Dispatch) => {
-    dispatch(getAllEvents());
+    dispatch(actions.getAllEventsRequest());
 
     try {
       const response = await fetchEvents();
 
-      dispatch(getAllEventsSuccess({
+      dispatch(actions.getAllEventsSuccess({
         events: response,
       }));
     } catch (error: any) {
       console.warn(error);
-      dispatch(getAllEventsFailure(error));
+      dispatch(actions.getAllEventsFailure(error));
     }
   };
 }

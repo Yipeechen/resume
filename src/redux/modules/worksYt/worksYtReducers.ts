@@ -1,4 +1,4 @@
-import { ActionTypes } from '@src/redux/modules/worksYt/worksYtActionTypes';
+import { types as actionTypes } from '@src/redux/modules/worksYt/worksYtActions';
 
 // https://developers.google.com/youtube/v3/docs/videos?hl=zh-tw#resource
 export interface VideoItem {
@@ -30,20 +30,20 @@ const initialState: {
   error: null,
 };
 interface Action {
-  type: ActionTypes;
+  type: string;
   payload: any;
 }
 
 export default function ytVideosReducer (state = initialState, action: Action) {
   switch (action.type) {
-    case ActionTypes.CLEAR_PLAYLIST:
+    case actionTypes.CLEAR_PLAYLIST:
       return initialState;
-    case ActionTypes.FETCH_POPULAR_VIDEO:
+    case actionTypes.FETCH_POPULAR_VIDEO:
       return {
         ...state,
         loading: true,
       };
-    case ActionTypes.FETCH_POPULAR_VIDEO_SUCCESS:
+    case actionTypes.FETCH_POPULAR_VIDEO_SUCCESS:
       return {
         ...state,
         videos: [...state.videos, ...action.payload.items],
@@ -51,18 +51,18 @@ export default function ytVideosReducer (state = initialState, action: Action) {
         loading: false,
         error: null,
       };
-    case ActionTypes.FETCH_POPULAR_VIDEO_FAILURE:
+    case actionTypes.FETCH_POPULAR_VIDEO_FAILURE:
       return {
         ...state,
         loading: false,
         error: action.payload,
       };
-    case ActionTypes.SEARCH_VIDEO:
+    case actionTypes.SEARCH_VIDEO:
       return {
         ...state,
         loading: true,
       };
-    case ActionTypes.SEARCH_VIDEO_SUCCESS:
+    case actionTypes.SEARCH_VIDEO_SUCCESS:
       return {
         ...state,
         videos: [...state.videos, ...action.payload.items],
@@ -70,7 +70,7 @@ export default function ytVideosReducer (state = initialState, action: Action) {
         loading: false,
         error: null,
       };
-    case ActionTypes.SEARCH_VIDEO_FAILURE:
+    case actionTypes.SEARCH_VIDEO_FAILURE:
       return {
         ...state,
         loading: false,

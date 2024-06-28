@@ -206,7 +206,7 @@ const StyledEventContentParagraphRead = styled.span<{ expanded: boolean }>`
   `}
 `;
 
-const Event = ({ period, title, subTitle, content = [], isMainEvent }: EventProps) => {
+const Event = ({ period, title, subTitle, content = [], isMainEvent = false }: EventProps) => {
   const [selected, setSelected] = useState<number[]>([]);
 
   const handleReadBtnOnPress = (index: number) => {
@@ -227,22 +227,22 @@ const Event = ({ period, title, subTitle, content = [], isMainEvent }: EventProp
           </StyledEventSubTitle>
         </HeadingTertiary>
         <StyledEventContent>
-          {content.map((part, i) => (
+          {content.map(({ heading, body, skills, isHighlight = false }, i) => (
             <StyledEventContentPart
               key={i}
               isLastOne={content.length === i + 1}
             >
-              {part.heading &&
-              <StyledEventContentHeading isHighlight={part.isHighlight}>
-                {part.heading}
-                {part.isHighlight &&
+              {heading &&
+              <StyledEventContentHeading isHighlight={isHighlight}>
+                {heading}
+                {isHighlight &&
                 <StyledEventContentHeadingHighlight />}
               </StyledEventContentHeading>}
               <StyledEventContentParagraph
                 expanded={selected.some(idx => idx === i)}
                 onClick={() => handleReadBtnOnPress(i)}
               >
-                {part.body ?? part}
+                {body}
                 <StyledEventContentParagraphRead
                   expanded={selected.some(idx => idx === i)}
                   onClick={() => handleReadBtnOnPress(i)}
@@ -251,7 +251,7 @@ const Event = ({ period, title, subTitle, content = [], isMainEvent }: EventProp
               <StyledEventContentSkills
                 expanded={selected.some(idx => idx === i)}
               >
-                {part?.skills?.map((skill, i) => (
+                {skills?.map((skill, i) => (
                   <StyledEventContentSkill key={i}>
                     {skill}
                   </StyledEventContentSkill>

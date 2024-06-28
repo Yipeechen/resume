@@ -199,7 +199,7 @@ const resumeAbout = () => {
               </StyledHeadingTertiarySub>
             </StyledHeadingTertiary>
             {overview.body.map(eachContent => (
-              <StyledText>{eachContent}</StyledText>
+              <StyledText key={eachContent}>{eachContent}</StyledText>
             ))}
           </StyledInfoContent>
           <StyledInfoSkill>

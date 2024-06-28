@@ -2,14 +2,14 @@ import { types as actionTypes } from '@src/redux/modules/resume/events/actions';
 
 interface ContentProps {
   heading: string;
-  isHighlight: boolean;
+  isHighlight?: boolean;
   body: string;
   skills: string[]
 }
 
 export interface EventProps {
   content?: ContentProps[];
-  isMainEvent: boolean;
+  isMainEvent?: boolean;
   period: string;
   subTitle: string;
   title: string;

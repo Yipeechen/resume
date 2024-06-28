@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
 import { HeadingTertiary } from '@src/components/TypoGraphy';
+import * as actionCreators from '@src/redux/modules/resume/abilities/actions';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@src/redux/root';
 
 interface CardProps {
   className: string;
@@ -121,39 +125,6 @@ const StyledCardList = styled.ul<{ isTwoColumn: boolean }>`
 }
 `;
 
-const cards = [
-  {
-    icon: 'icon-basic-sheet-pen',
-    title: 'Document Processing',
-    list: ['Word', 'PowerPoint', 'AutoCad'],
-  },
-  {
-    icon: 'icon-basic-webpage-img-txt',
-    title: 'Web Development',
-    list: [
-      'HTML5',
-      'CSS3 & SCSS',
-      'CSS in JS',
-      'JavaScript',
-      'Webpack',
-      'Npm & Yarn',
-      'Ruby on Rails',
-      'Antd & Bootstrap',
-      'Eslint',
-      'React & hooks',
-      'Redux',
-      'Webview',
-      'Linux Shell Script',
-      'Git Version Control',
-    ],
-  },
-  {
-    icon: 'icon-basic-world',
-    title: 'Language',
-    list: ['Chinese', 'Taiwanese', 'English', 'Korean'],
-  },
-];
-
 const Card = ({ title, className, content }: CardProps) => (
   <StyledCard>
     <StyledCardIcon className={className} />
@@ -166,19 +137,28 @@ const Card = ({ title, className, content }: CardProps) => (
   </StyledCard>
 );
 
-const resumeSkills = () => (
-  <Container id="section_skills">
-    <StyledWrapper>
-      {cards.map((card, i) => (
-        <Card
-          key={i}
-          className={card.icon}
-          title={card.title}
-          content={card.list}
-        />
-      ))}
-    </StyledWrapper>
-  </Container>
-);
+const resumeSkills = () => {
+  const dispatch = useDispatch();
+  const abilities = useSelector((state: RootState) => state.resume.abilities.abilities)
+
+  useEffect(() => {
+    dispatch(actionCreators.getAbilities())
+  }, []);
+
+  return (
+    <Container id="section_skills">
+      <StyledWrapper>
+        {abilities.map((ability, i) => (
+          <Card
+            key={ability.title}
+            className={ability.icon}
+            title={ability.title}
+            content={ability.list}
+          />
+        ))}
+      </StyledWrapper>
+    </Container>
+  )
+};
 
 export default resumeSkills;

@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import { PropTypes } from 'prop-types';
 import styled from 'styled-components';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -15,7 +14,7 @@ const MEDIA_QUERIES = {
   isPad: '(min-width:701px) and (max-width: 1023px)',
   isMobile: '(max-width: 700px)',
 };
-const Container = styled.section`
+const Container = styled.section<{id: string}>`
   background-color: ${({ theme }) => theme.color.bgPrimary};
   padding: 5rem 0 10rem 0;
   ${({ theme }) => theme.tablet_mobile`
@@ -45,14 +44,14 @@ const StyledWorkWrapper = styled.li`
     margin-bottom: 1.8rem;
   `}
 `;
-const StyledWorkLink = styled.a.attrs(({ link }) => ({
+const StyledWorkLink = styled.a.attrs<{ link: string }>(({ link }) => ({
   href: link,
   target: '_blank',
-}))``;
-const StyledWorkImg = styled.img.attrs(({ img }) => ({
+}))<{ link: string }>``;
+const StyledWorkImg = styled.img.attrs<{ img: { pc: string; mobile: string; } }>(({ img }) => ({
   src: window.matchMedia(MEDIA_QUERIES.isMobile).matches
     ? img.mobile : img.pc,
-}))`
+}))<{ img: { pc: string; mobile: string; } }>`
   opacity: 0.15;
   width: 100%;
   height: auto;
@@ -122,7 +121,7 @@ const StyledWorkImgWrapper = styled.figure`
       ${StyledWorkImg} {
         opacity: 1;
         transform: translateY(1.8rem) scale(1.17) skewY(-4deg);
-        ${({ theme }) => theme.mobile`
+        ${theme.mobile`
           transform: translateY(1.8rem) scale(1.17) skewY(0deg);
         `}
       }
@@ -134,8 +133,16 @@ const StyledWorkImgWrapper = styled.figure`
     }
   `}
 `;
-
-const Work = ({ link, title, tool, img }) => (
+interface WorkProps {
+  link: string;
+  title: string;
+  tool: string;
+  img: {
+    pc: string;
+    mobile: string;
+  };
+}
+const Work = ({ link, title, tool, img }: WorkProps) => (
   <StyledWorkWrapper>
     <StyledWorkLink link={link}>
       <StyledWorkImgWrapper>
@@ -148,18 +155,7 @@ const Work = ({ link, title, tool, img }) => (
     </StyledWorkLink>
   </StyledWorkWrapper>
 );
-Work.propTypes = {
-  img: PropTypes.object,
-  link: PropTypes.string,
-  title: PropTypes.string,
-  tool: PropTypes.string,
-};
-Work.defaultProps = {
-  img: {},
-  link: '',
-  title: '',
-  tool: '',
-};
+
 const works = [
   {
     title: '人性化線下 CRM 平台',
@@ -218,24 +214,26 @@ const works = [
 ];
 
 const resumeWorks = () => {
-  const slides = useMemo(() => {
-    const slidesArray = [];
-    works.map((work, i) => {
-      slidesArray.push(
-        <SwiperSlide key={`slide-${i}`} style={{ listStyle: 'none' }}>
-          <div className="slide">
-            <Work
-              title={work.title}
-              link={work.link}
-              tool={work.tool}
-              img={work.img}
-            />
-          </div>
-        </SwiperSlide>,
-      );
-    });
-    return slidesArray;
-  }, [works]);
+  
+  const slides = useMemo(() => (
+    works.map(work => (
+      <SwiperSlide style={{ listStyle: 'none' }}>
+        <div className="slide">
+          <Work
+            title={work.title}
+            link={work.link}
+            tool={work.tool}
+            img={work.img}
+          />
+        </div>
+      </SwiperSlide>
+    ))
+  ), [works]);
+  const slidesPerViewCondition = useMemo(() => (
+    window.matchMedia(MEDIA_QUERIES.isMobile).matches
+      ? 1 : window.matchMedia(MEDIA_QUERIES.isPad).matches
+        ? 3 : 4
+  ), [])
 
   return (
     <Container id="section_works">
@@ -243,9 +241,7 @@ const resumeWorks = () => {
       <StyledWrapper>
         <Swiper
           id="swiper"
-          slidesPerView={window.matchMedia(MEDIA_QUERIES.isMobile).matches
-            ? 1 : window.matchMedia(MEDIA_QUERIES.isPad).matches
-              ? 3 : 4}
+          slidesPerView={slidesPerViewCondition}
           spaceBetween={16}
           navigation
           pagination

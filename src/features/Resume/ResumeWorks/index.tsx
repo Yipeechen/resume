@@ -1,11 +1,14 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Pagination } from 'swiper/core';
 import 'swiper/swiper-bundle.css';
 
 import { HeadingSecondary } from '@src/components/TypoGraphy';
+import { getAllWorks } from '@src/redux/modules/resume/works/actions';
+import { RootState } from '@src/redux/root';
 
 SwiperCore.use([Navigation, Pagination]);
 
@@ -50,7 +53,7 @@ const StyledWorkLink = styled.a.attrs<{ link: string }>(({ link }) => ({
 }))<{ link: string }>``;
 const StyledWorkImg = styled.img.attrs<{ img: { pc: string; mobile: string; } }>(({ img }) => ({
   src: window.matchMedia(MEDIA_QUERIES.isMobile).matches
-    ? img.mobile : img.pc,
+    ? img?.mobile : img?.pc,
 }))<{ img: { pc: string; mobile: string; } }>`
   opacity: 0.15;
   width: 100%;
@@ -156,68 +159,20 @@ const Work = ({ link, title, tool, img }: WorkProps) => (
   </StyledWorkWrapper>
 );
 
-const works = [
-  {
-    title: '人性化線下 CRM 平台',
-    tool: 'Ruby on Rails | JS | Chart.js | Bootstrap3 | Github | AJAX | jQuery',
-    link: 'https://github.com/Yipeechen/whale',
-    img: {
-      pc: 'https://yipeechen.github.io/resume/images/work-1.jpg',
-      mobile: 'https://yipeechen.github.io/resume/images/mobile/work-1.jpg',
-    },
-  },
-  {
-    title: 'About Yiping',
-    tool: ' JS | React | Github | CSS in JS | Webpack | Eslint',
-    link: 'https://github.com/Yipeechen/resume',
-    img: {
-      pc: 'https://yipeechen.github.io/resume/images/work-5.jpg',
-      mobile: 'https://yipeechen.github.io/resume/images/mobile/work-5.jpg',
-    },
-  },
-  {
-    title: 'Fake Youtube',
-    tool: 'Skeleton loading | Infinite scrolling | Youtube Data API | Redux',
-    link: 'https://yipeechen.github.io/resume/#/works/yt',
-    img: {
-      pc: 'https://yipeechen.github.io/resume/images/work-6.jpg',
-      mobile: 'https://yipeechen.github.io/resume/images/mobile/work-6.jpg',
-    },
-  },
-  {
-    title: 'Stack Overflow',
-    tool: 'Ruby on Rails | JS | Bootstrap4 | Github | AJAX | jQuery',
-    link: 'https://github.com/Yipeechen/stackoverflow',
-    img: {
-      pc: 'https://yipeechen.github.io/resume/images/work-2.jpg',
-      mobile: 'https://yipeechen.github.io/resume/images/mobile/work-2.jpg',
-    },
-  },
-  {
-    title: 'Restaurant forum',
-    tool: 'Ruby on Rails | Bootstrap3 | Database Design | Github | Heroku',
-    link: 'https://restaurant-forum-by-yipee.herokuapp.com',
-    img: {
-      pc: 'https://yipeechen.github.io/resume/images/work-3.jpg',
-      mobile: 'https://yipeechen.github.io/resume/images/mobile/work-3.jpg',
-    },
-  },
-  {
-    title: 'Dojo forum',
-    tool: 'Ruby on Rails | JS | Bootstrap3 | Github | AJAX | Heroku',
-    link: 'https://dojooforum.herokuapp.com',
-    img: {
-      pc: 'https://yipeechen.github.io/resume/images/work-4.jpg',
-      mobile: 'https://yipeechen.github.io/resume/images/mobile/work-4.jpg',
-    },
-  },
-];
-
 const resumeWorks = () => {
+  const works = useSelector((state: RootState) => state.resume.works.works);
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getAllWorks())
+  }, [])
   
   const slides = useMemo(() => (
     works.map(work => (
-      <SwiperSlide style={{ listStyle: 'none' }}>
+      <SwiperSlide
+        key={work.title}
+        style={{ listStyle: 'none' }}
+      >
         <div className="slide">
           <Work
             title={work.title}
@@ -242,6 +197,7 @@ const resumeWorks = () => {
         <Swiper
           id="swiper"
           slidesPerView={slidesPerViewCondition}
+          initialSlide={4}
           spaceBetween={16}
           navigation
           pagination

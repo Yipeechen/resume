@@ -17,13 +17,10 @@ export const getAbilities = () => {
 
     try {
       const response = await fetchAbilities();
-      console.log('sss', response)
-      console.log('actions', actions)
       
       dispatch(actions.getAbilitiesSuccess({
         abilities: response,
       }));
-      console.log('doneeee====================')
     } catch (error: any) {
       console.warn(error);
       dispatch(actions.getAbilitiesFailure(error));

@@ -1,4 +1,4 @@
-import { types as actionTypes } from '@src/redux/modules/resume/events/actions';
+import { createSlice } from '@reduxjs/toolkit'
 
 interface ContentProps {
   heading: string;
@@ -15,11 +15,6 @@ export interface EventProps {
   title: string;
 }
 
-interface Action {
-  type: string;
-  payload: any;
-}
-
 const initialState: {
   events: EventProps[];
   loading: boolean;
@@ -30,27 +25,24 @@ const initialState: {
   error: null,
 };
 
-export default function reducer (state = initialState, action: Action) {
-  switch (action.type) {
-    case actionTypes.GET_ALL_EVENTS:
-      return {
-        ...state,
-        loading: true,
-      };
-    case actionTypes.GET_ALL_EVENTS_SUCCESS:
-      return {
-        ...state,
-        events: [...state.events, ...action.payload.events],
-        loading: false,
-        error: null,
-      };
-    case actionTypes.GET_ALL_EVENTS_FAILURE:
-      return {
-        ...state,
-        loading: false,
-        error: action.payload,
-      };
-    default:
-      return state;
+const eventsSlice = createSlice({
+  name: 'events',
+  initialState,
+  reducers: {
+    getAllEventsRequest(state) {
+      state.loading = true
+    },
+    getAllEventsSuccess(state, action) {
+      state.events = [...state.events, ...action.payload.events];
+      state.loading = false;
+      state.error = null;
+    },
+    getAllEventsFailure(state, action) {
+      state.loading = false;
+      state.error = action.payload;
+    },
   }
-}
+})
+
+export const { getAllEventsRequest, getAllEventsSuccess, getAllEventsFailure } = eventsSlice.actions;
+export default eventsSlice.reducer;

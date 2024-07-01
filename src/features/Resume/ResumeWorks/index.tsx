@@ -1,14 +1,13 @@
 import { useEffect, useMemo } from 'react';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
 
+import { useAppSelector, useAppDispatch } from '@src/redux/hooks';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Pagination } from 'swiper/core';
 import 'swiper/swiper-bundle.css';
 
 import { HeadingSecondary } from '@src/components/TypoGraphy';
 import { getAllWorks } from '@src/redux/modules/resume/works/actions';
-import { RootState } from '@src/redux/root';
 
 SwiperCore.use([Navigation, Pagination]);
 
@@ -160,8 +159,8 @@ const Work = ({ link, title, tool, img }: WorkProps) => (
 );
 
 const resumeWorks = () => {
-  const works = useSelector((state: RootState) => state.resume.works.works);
-  const dispatch = useDispatch()
+  const works = useAppSelector(state => state.resume.works.works);
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
     dispatch(getAllWorks())

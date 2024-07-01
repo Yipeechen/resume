@@ -5,7 +5,7 @@ import { ThemeProvider } from 'styled-components';
 import { Helmet } from 'react-helmet';
 import { RouteComponentProps } from 'react-router-dom';
 
-import store from '@src/redux/configureStore';
+import { store } from '@src/redux/configureStore';
 import theme from '@src/styles/theme';
 import mediaQueries from '@src/styles/mediaQueries';
 import { ResetStyle, GlobalStyle } from '@src/styles/reset';
@@ -34,7 +34,7 @@ const routes = [
 ];
 
 const App = () => (
-  <Provider store={store()} >
+  <Provider store={store} >
     <ThemeProvider theme={{ ...theme, ...mediaQueries }}>
       <HashRouter basename="/">
         <ResetStyle />

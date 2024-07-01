@@ -1,29 +1,21 @@
 import { Dispatch } from 'redux';
 
-import { createRequestedActions } from '@src/redux/modules/actionFactory';
 import { fetchOverviewDetail } from '@src/apis/resume/overview';
-
-enum ActionTypes {
-  GET_OVERVIEW_DETAIL = 'GET_OVERVIEW_DETAIL',
-}
-
-const { types: definedTypes, actions } = createRequestedActions(Object.values(ActionTypes));
-
-export const types = definedTypes;
+import { getOverviewDetailRequest, getOverviewDetailSuccess, getOverviewDetailFailure } from '@src/redux/modules/resume/overview/reducers';
 
 export const getOverview = () => {
   return async (dispatch: Dispatch) => {
-    dispatch(actions.getOverviewDetailRequest());
+    dispatch(getOverviewDetailRequest());
 
     try {
       const response = await fetchOverviewDetail();
       
-      dispatch(actions.getOverviewDetailSuccess({
+      dispatch(getOverviewDetailSuccess({
         overview: response,
       }));
     } catch (error: any) {
       console.warn(error);
-      dispatch(actions.getOverviewDetailFailure(error));
+      dispatch(getOverviewDetailFailure(error));
     }
   }
 }

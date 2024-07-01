@@ -1,11 +1,10 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
+import { useAppSelector, useAppDispatch } from '@src/redux/hooks';
 import SearchBar from '@src/features/Works/WorksYt/components/SearchBar';
 import SearchResult from '@src/features/Works/WorksYt/components/SearchResult';
 import * as actionCreators from '@src/redux/modules/worksYt/worksYtActions';
-import { RootState } from '@src/redux/root';
 
 const StyledContainer = styled.div`
   margin: 40px auto;
@@ -15,13 +14,13 @@ const StyledContainer = styled.div`
 const Yt = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
-  const { videos, loading, nextPageToken } = useSelector((state: RootState) => ({
+  const { videos, loading, nextPageToken } = useAppSelector(state => ({
     videos: state.yt.videos,
     loading: state.yt.loading,
     nextPageToken: state.yt.nextPageToken,
   }));
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const infiniteScroll = useCallback(() => {
     const hasScrolledToBottom = (window.innerHeight + document.documentElement.scrollTop >=

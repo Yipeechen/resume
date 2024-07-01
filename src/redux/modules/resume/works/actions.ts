@@ -1,29 +1,21 @@
 import { Dispatch } from 'redux';
 
-import { createRequestedActions } from '@src/redux/modules/actionFactory';
 import { fetchWorks } from '@src/apis/resume/works';
-
-enum ActionTypes {
-  GET_ALL_WORKS = 'GET_ALL_WORKS',
-}
-
-const { types: definedTypes, actions } = createRequestedActions(Object.values(ActionTypes));
-
-export const types = definedTypes;
+import { getAllWorksRequest, getAllWorksSuccess, getAllWorksFailure } from '@src/redux/modules/resume/works/reducers';
 
 export const getAllWorks = () => {
   return async (dispatch: Dispatch) => {
-    dispatch(actions.getAllWorksRequest());
+    dispatch(getAllWorksRequest());
 
     try {
       const response = await fetchWorks();
 
-      dispatch(actions.getAllWorksSuccess({
+      dispatch(getAllWorksSuccess({
         works: response,
       }));
     } catch (error) {
       console.warn(error);
-      dispatch(actions.getAllWorksFailure(error))
+      dispatch(getAllWorksFailure(error))
     }
   }
 }

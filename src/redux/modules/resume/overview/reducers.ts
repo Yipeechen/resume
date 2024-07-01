@@ -1,9 +1,4 @@
-import { types as actionTypes } from '@src/redux/modules/resume/overview/actions';
-
-interface Action {
-  type: string;
-  payload: any;
-}
+import { createSlice } from '@reduxjs/toolkit'
 
 export interface OverViewProps {
   title: string;
@@ -28,27 +23,24 @@ const initialState: {
   error: null,
 };
 
-export default function reducer (state = initialState, action: Action) {
-  switch (action.type) {
-    case actionTypes.GET_OVERVIEW_DETAIL: 
-      return ({
-        ...state,
-        loading: true,
-      });
-    case actionTypes.GET_OVERVIEW_DETAIL_SUCCESS: 
-      return ({
-        ...state,
-        overview: { ...state.overview, ...action.payload.overview },
-        loading: false,
-        error: null,
-      });
-    case actionTypes.GET_OVERVIEW_DETAIL_FAILURE:
-      return ({
-        ...state,
-        loading: false,
-        error: action.payload,
-      });
-    default:
-      return state;
+const overviewSlice = createSlice({
+  name: 'overview',
+  initialState,
+  reducers: {
+    getOverviewDetailRequest(state) {
+      state.loading = true;
+    },
+    getOverviewDetailSuccess(state, action) {
+      state.overview = { ...state.overview, ...action.payload.overview };
+      state.loading = false;
+      state.error = null;
+    },
+    getOverviewDetailFailure(state, action) {
+      state.loading = false;
+      state.error = action.payload;
+    }
   }
-}
+})
+
+export const { getOverviewDetailRequest, getOverviewDetailSuccess, getOverviewDetailFailure } = overviewSlice.actions
+export default overviewSlice.reducer;

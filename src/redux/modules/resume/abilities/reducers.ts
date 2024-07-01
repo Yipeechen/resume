@@ -1,4 +1,4 @@
-import { types as actionTypes } from '@src/redux/modules/resume/abilities/actions';
+import { createSlice } from '@reduxjs/toolkit';
 
 interface Ability {
   icon: string;
@@ -16,28 +16,24 @@ const initialState: {
   error: null,
 }
 
-
-export default function reducer (state = initialState, action: { type: string, payload: any }) {
-  switch (action.type) {
-    case actionTypes.GET_ABILITIES:
-      return {
-        ...state,
-        loading: true,
-      };
-    case actionTypes.GET_ABILITIES_SUCCESS:
-      return {
-        ...state,
-        abilities: [...state.abilities, ...action.payload.abilities],
-        loading: false,
-        error: null,
-      };
-    case actionTypes.GET_ABILITIES_FAILURE:
-      return {
-        ...state,
-        loading: false,
-        error: action.payload,
-      };
-    default:
-      return state;
+const abilitiesSlice = createSlice({
+  name: 'abilities',
+  initialState,
+  reducers: {
+    getAbilitiesRequest(state) {
+      state.loading = true;
+    },
+    getAbilitiesSuccess(state, action) {
+      state.abilities = [...state.abilities, ...action.payload.abilities];
+      state.loading = false;
+      state.error = null;
+    },
+    getAbilitiesFailure(state, action) {
+      state.loading = false;
+      state.error = action.payload;
+    }
   }
-}
+});
+
+export const { getAbilitiesRequest, getAbilitiesSuccess, getAbilitiesFailure } = abilitiesSlice.actions;
+export default abilitiesSlice.reducer;

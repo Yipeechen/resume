@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 
+import { useAppSelector, useAppDispatch } from '@src/redux/hooks';
 import { HeadingSecondary, HeadingTertiary } from '@src/components/TypoGraphy';
 import { ButtonFull, ButtonGhost } from '@src/components/Buttons';
 import { getOverview } from '@src/redux/modules/resume/overview/actions';
-import { RootState } from '@src/redux/root';
 import { OverViewProps } from '@src/redux/modules/resume/overview/reducers';
 
 const MEDIA_QUERIES = {
@@ -172,8 +171,8 @@ const StyledButtonGhost = styled(ButtonGhost)`
 `;
 
 const resumeAbout = () => {
-  const overview: OverViewProps = useSelector((state: RootState) => state.resume.overview.overview)
-  const dispatch = useDispatch();
+  const overview: OverViewProps = useAppSelector(state => state.resume.overview.overview)
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(getOverview())

@@ -3,8 +3,7 @@ import styled from 'styled-components';
 import { HeadingTertiary } from '@src/components/TypoGraphy';
 import * as actionCreators from '@src/redux/modules/resume/abilities/actions';
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@src/redux/root';
+import { useAppDispatch, useAppSelector } from '@src/redux/hooks';
 
 interface CardProps {
   className: string;
@@ -138,8 +137,8 @@ const Card = ({ title, className, content }: CardProps) => (
 );
 
 const resumeSkills = () => {
-  const dispatch = useDispatch();
-  const abilities = useSelector((state: RootState) => state.resume.abilities.abilities)
+  const dispatch = useAppDispatch();
+  const abilities = useAppSelector(state => state.resume.abilities.abilities)
 
   useEffect(() => {
     dispatch(actionCreators.getAbilities())

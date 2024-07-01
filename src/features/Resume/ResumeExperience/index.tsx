@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
 
+import { useAppSelector, useAppDispatch } from '@src/redux/hooks';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAward } from '@fortawesome/free-solid-svg-icons';
 import { HeadingSecondary, HeadingTertiary } from '@src/components/TypoGraphy';
 import * as actionCreators from '@src/redux/modules/resume/events/actions';
-import { RootState } from '@src/redux/root';
 import { EventProps } from '@src/redux/modules/resume/events/reducers';
 
 const Container = styled.section`
@@ -265,8 +264,8 @@ const Event = ({ period, title, subTitle, content = [], isMainEvent = false }: E
 };
 
 const resumeExperience = () => {
-  const events: EventProps[] = useSelector((state: RootState) => state.resume.events.events);
-  const dispatch = useDispatch();
+  const events: EventProps[] = useAppSelector(state => state.resume.events.events);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(actionCreators.getEvents());
@@ -276,7 +275,7 @@ const resumeExperience = () => {
     <Container>
       <HeadingSecondary>Experience</HeadingSecondary>
       <StyledWrapper>
-        {events
+        {[...events]
           .reverse()
           .map((event, i) => (
             <Event

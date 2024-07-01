@@ -1,8 +1,7 @@
 import styled, { keyframes } from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '@src/redux/hooks';
 
 import timeUtils from '@src/utils/time';
-import { RootState } from '@src/redux/root';
 import { VideoItem } from '@src/redux/modules/worksYt/worksYtReducers';
 
 const StyledContainer = styled.div`
@@ -142,7 +141,7 @@ const ResultCard = ({ cardDetail }: { cardDetail: CardDetailProps | null }) => (
 );
 
 const SearchResult = ({ data }: { data: VideoItem[]}) => {
-  const isLoading: boolean = useSelector((state: RootState) => state.yt.loading);
+  const isLoading: boolean = useAppSelector(state => state.yt.loading);
 
   return (
     <StyledContainer>

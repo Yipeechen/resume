@@ -4,19 +4,12 @@ const Dotenv = require('dotenv-webpack');
 
 const { version: APP_VERSION } = require('./package.json');
 
-const OUTPUT = './docs';
 const SRC_ROOT = './src';
 
 module.exports = {
   context: path.resolve(__dirname, SRC_ROOT),
   entry: {
     app: './index.tsx',
-  },
-  output: {
-    path: path.resolve(__dirname, OUTPUT),
-    filename: 'scripts/[hash:8].js',
-    // publicPath: './',
-    publicPath: '/',
   },
   resolve: {
     alias: {

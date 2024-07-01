@@ -55,7 +55,10 @@ const ytSlice = createSlice({
     // any additional "normal" case reducers here.
     // these will generate new action creators
     clearPlaylist(state) {
-      state = initialState;
+      state.videos = [];
+      state.loading = false;
+      state.nextPageToken = null;
+      state.error = null;
     },
   },
   extraReducers: builder => {

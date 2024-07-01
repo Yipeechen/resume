@@ -36,13 +36,16 @@ const Yt = () => {
   }, [videos, loading, nextPageToken, searchTerm, dispatch]);
 
   useEffect(() => {
-    window.addEventListener('scroll', infiniteScroll);
     dispatch(fetchMostPopularVideo({}));
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('scroll', infiniteScroll);
 
     return () => {
       window.removeEventListener('scroll', infiniteScroll);
     };
-  }, []);
+  }, [infiniteScroll]);
 
   const updateSearchTerm = (value: string) => {
     setSearchTerm(value);

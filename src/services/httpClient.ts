@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig, AxiosInstance, AxiosResponse, AxiosError } from 'axios';
+import axios, { AxiosRequestConfig, InternalAxiosRequestConfig, AxiosInstance, AxiosResponse, AxiosError } from 'axios';
 
 const LOGGER_MAX_LENGTH = 300;
 
@@ -19,8 +19,8 @@ interface CustomAxiosInstance {
 
 interface CustomInterceptors<T = any> {
   request?: (
-    config: AxiosRequestConfig
-  ) => AxiosRequestConfig | Promise<AxiosRequestConfig>;
+    config: InternalAxiosRequestConfig
+  ) => InternalAxiosRequestConfig | Promise<InternalAxiosRequestConfig>;
   response?: (
     response: AxiosResponse<T>
   ) => T | AxiosResponse<T> | Promise<T>;
@@ -31,7 +31,7 @@ interface CustomAxiosRequestConfig extends AxiosRequestConfig {
 }
 
 export const createInstance = (config: CustomAxiosRequestConfig): CustomAxiosInstance => {
-  function handleRequest (req: AxiosRequestConfig): AxiosRequestConfig | Promise<AxiosRequestConfig> {
+  function handleRequest (req: InternalAxiosRequestConfig): InternalAxiosRequestConfig | Promise<InternalAxiosRequestConfig> {
     // transform logged data
     let loggedData = { ...req.data };
 

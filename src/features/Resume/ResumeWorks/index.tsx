@@ -1,15 +1,16 @@
 import { useEffect, useMemo } from 'react';
 import styled from 'styled-components';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Autoplay, Parallax } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/parallax';
+import 'swiper/css/autoplay';
 
 import { useAppSelector, useAppDispatch } from '@src/redux/hooks';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Navigation, Pagination } from 'swiper/core';
-import 'swiper/swiper-bundle.css';
-
 import { HeadingSecondary } from '@src/components/TypoGraphy';
 import { getWorks } from '@src/redux/modules/resume/works/slice';
-
-SwiperCore.use([Navigation, Pagination]);
 
 const MEDIA_QUERIES = {
   isPc: '(min-width: 1024px)',
@@ -196,11 +197,13 @@ const resumeWorks = () => {
         <Swiper
           id="swiper"
           slidesPerView={slidesPerViewCondition}
-          initialSlide={4}
           spaceBetween={16}
+          modules={[Navigation, Pagination, Autoplay, Parallax]}
           navigation
-          pagination
+          pagination={{ clickable: true }}
+          parallax={{ enabled: true }}
           loop
+          autoplay={{ pauseOnMouseEnter: true }}
           // loopFillGroupWithBlank
         >
           {slides}

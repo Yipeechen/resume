@@ -5,8 +5,7 @@ import { useAppSelector, useAppDispatch } from '@src/redux/hooks';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAward } from '@fortawesome/free-solid-svg-icons';
 import { HeadingSecondary, HeadingTertiary } from '@src/components/TypoGraphy';
-import * as actionCreators from '@src/redux/modules/resume/events/actions';
-import { EventProps } from '@src/redux/modules/resume/events/reducers';
+import { EventProps, getEvents } from '@src/redux/modules/resume/events/slice';
 
 const Container = styled.section`
   background-color: ${({ theme }) => theme.color.bgPrimary};
@@ -268,7 +267,7 @@ const resumeExperience = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(actionCreators.getEvents());
+    dispatch(getEvents());
   }, []);
 
   return (

@@ -2,7 +2,7 @@ import styled, { keyframes } from 'styled-components';
 import { useAppSelector } from '@src/redux/hooks';
 
 import timeUtils from '@src/utils/time';
-import { VideoItem } from '@src/redux/modules/worksYt/worksYtReducers';
+import { VideoItem } from '@src/redux/modules/worksYt/worksYtSlice';
 
 const StyledContainer = styled.div`
   display: grid;

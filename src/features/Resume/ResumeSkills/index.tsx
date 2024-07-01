@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { HeadingTertiary } from '@src/components/TypoGraphy';
-import * as actionCreators from '@src/redux/modules/resume/abilities/actions';
+import { getAbilities } from '@src/redux/modules/resume/abilities/slice';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@src/redux/hooks';
 
@@ -141,7 +141,7 @@ const resumeSkills = () => {
   const abilities = useAppSelector(state => state.resume.abilities.abilities)
 
   useEffect(() => {
-    dispatch(actionCreators.getAbilities())
+    dispatch(getAbilities())
   }, []);
 
   return (

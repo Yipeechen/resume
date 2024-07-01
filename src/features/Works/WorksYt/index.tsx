@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useAppSelector, useAppDispatch } from '@src/redux/hooks';
 import SearchBar from '@src/features/Works/WorksYt/components/SearchBar';
 import SearchResult from '@src/features/Works/WorksYt/components/SearchResult';
-import * as actionCreators from '@src/redux/modules/worksYt/worksYtActions';
+import { clearPlaylist, fetchMostPopularVideo, fetchVideo } from '@src/redux/modules/worksYt/worksYtSlice';
 
 const StyledContainer = styled.div`
   margin: 40px auto;
@@ -28,16 +28,16 @@ const Yt = () => {
 
     if (videos.length && !!nextPageToken && !loading && hasScrolledToBottom) {
       if (searchTerm) {
-        dispatch(actionCreators.fetchVideo({ searchTerm, nextPageToken }));
+        dispatch(fetchVideo({ searchTerm, nextPageToken }));
       } else {
-        dispatch(actionCreators.fetchMostPopularVideo({ nextPageToken }));
+        dispatch(fetchMostPopularVideo({ nextPageToken }));
       }
     }
   }, [videos, loading, nextPageToken, searchTerm, dispatch]);
 
   useEffect(() => {
     window.addEventListener('scroll', infiniteScroll);
-    dispatch(actionCreators.fetchMostPopularVideo({}));
+    dispatch(fetchMostPopularVideo({}));
 
     return () => {
       window.removeEventListener('scroll', infiniteScroll);
@@ -53,8 +53,8 @@ const Yt = () => {
       <SearchBar
         searchTerm={searchTerm}
         updateSearchTerm={updateSearchTerm}
-        fetchPlaylist={result => dispatch(actionCreators.fetchVideo(result))}
-        resetPlaylist={() => dispatch(actionCreators.resetPlaylist())}
+        fetchPlaylist={result => dispatch(fetchVideo(result))}
+        resetPlaylist={() => dispatch(clearPlaylist())}
       />
       <SearchResult
         data={videos}

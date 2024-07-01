@@ -7,7 +7,7 @@ import SwiperCore, { Navigation, Pagination } from 'swiper/core';
 import 'swiper/swiper-bundle.css';
 
 import { HeadingSecondary } from '@src/components/TypoGraphy';
-import { getAllWorks } from '@src/redux/modules/resume/works/actions';
+import { getWorks } from '@src/redux/modules/resume/works/slice';
 
 SwiperCore.use([Navigation, Pagination]);
 
@@ -163,7 +163,7 @@ const resumeWorks = () => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(getAllWorks())
+    dispatch(getWorks())
   }, [])
   
   const slides = useMemo(() => (

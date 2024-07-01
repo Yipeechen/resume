@@ -4,8 +4,8 @@ import { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '@src/redux/hooks';
 import { HeadingSecondary, HeadingTertiary } from '@src/components/TypoGraphy';
 import { ButtonFull, ButtonGhost } from '@src/components/Buttons';
-import { getOverview } from '@src/redux/modules/resume/overview/actions';
-import { OverViewProps } from '@src/redux/modules/resume/overview/reducers';
+import { getOverview } from '@src/redux/modules/resume/overview/slice';
+import { OverViewProps } from '@src/redux/modules/resume/overview/slice';
 
 const MEDIA_QUERIES = {
   isPc: '(min-width: 1024px)',

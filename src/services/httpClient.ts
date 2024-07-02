@@ -1,20 +1,37 @@
-import axios, { AxiosRequestConfig, AxiosInstance, AxiosResponse, AxiosError } from 'axios';
+import axios, { AxiosRequestConfig, InternalAxiosRequestConfig, AxiosInstance, AxiosResponse, AxiosError } from 'axios';
 
 const LOGGER_MAX_LENGTH = 300;
 
-interface CustomInterceptors {
-  request?: (config: AxiosRequestConfig) => AxiosRequestConfig | Promise<AxiosRequestConfig>;
-  response?: (response: AxiosResponse) => AxiosResponse | Promise<AxiosResponse>;
-  responseError?: (error: AxiosError) => any;
+type CustomAxiosResponse<T = any> = T;
+
+interface CustomAxiosInstance {
+  <T = any>(config: AxiosRequestConfig): Promise<CustomAxiosResponse<T>>;
+  <T = any>(url: string, config?: AxiosRequestConfig): Promise<CustomAxiosResponse<T>>;
+
+  get<T = any>(url: string, config?: AxiosRequestConfig): Promise<CustomAxiosResponse<T>>;
+  delete<T = any>(url: string, config?: AxiosRequestConfig): Promise<CustomAxiosResponse<T>>;
+  head<T = any>(url: string, config?: AxiosRequestConfig): Promise<CustomAxiosResponse<T>>;
+  options<T = any>(url: string, config?: AxiosRequestConfig): Promise<CustomAxiosResponse<T>>;
+  post<T = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<CustomAxiosResponse<T>>;
+  put<T = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<CustomAxiosResponse<T>>;
+  patch<T = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<CustomAxiosResponse<T>>;
+}
+
+interface CustomInterceptors<T = any> {
+  request?: (
+    config: InternalAxiosRequestConfig
+  ) => InternalAxiosRequestConfig | Promise<InternalAxiosRequestConfig>;
+  response?: (
+    response: AxiosResponse<T>
+  ) => T | AxiosResponse<T> | Promise<T>;
 }
 
 interface CustomAxiosRequestConfig extends AxiosRequestConfig {
   interceptors?: CustomInterceptors;
 }
 
-
-export const createInstance = (config: CustomAxiosRequestConfig): AxiosInstance => {
-  function handleRequest (req: AxiosRequestConfig): AxiosRequestConfig | Promise<AxiosRequestConfig> {
+export const createInstance = (config: CustomAxiosRequestConfig): CustomAxiosInstance => {
+  function handleRequest (req: InternalAxiosRequestConfig): InternalAxiosRequestConfig | Promise<InternalAxiosRequestConfig> {
     // transform logged data
     let loggedData = { ...req.data };
 

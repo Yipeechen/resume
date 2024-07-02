@@ -1,11 +1,11 @@
 import { Fragment } from 'react';
 
-import Header from './ResumeHeader';
-import About from './ResumeAbout';
-import Skills from './ResumeSkills';
-import Experience from './ResumeExperience';
-import Works from './ResumeWorks';
-import Contact from './ResumeContact';
+import Header from '@src/features/Resume/ResumeHeader';
+import About from '@src/features/Resume/ResumeAbout';
+import Skills from '@src/features/Resume/ResumeSkills';
+import Experience from '@src/features/Resume/ResumeExperience';
+import Works from '@src/features/Resume/ResumeWorks';
+import Contact from '@src/features/Resume/ResumeContact';
 
 const resume = () => (
   <Fragment>

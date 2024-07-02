@@ -1,26 +1,11 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
 
+import { useAppSelector, useAppDispatch } from '@src/redux/hooks';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAward } from '@fortawesome/free-solid-svg-icons';
 import { HeadingSecondary, HeadingTertiary } from '@src/components/TypoGraphy';
-import * as actionCreators from '@src/redux/modules/resume/events/actions';
-import { RootState } from '@src/redux/root';
-
-interface ContentProps {
-  heading: string;
-  isHighlight: boolean;
-  body: string;
-  skills: string[]
-}
-interface EventProps {
-  content: ContentProps[];
-  isMainEvent: boolean;
-  period: string;
-  subTitle: string;
-  title: string;
-}
+import { EventProps, getEvents } from '@src/redux/modules/resume/events/slice';
 
 const Container = styled.section`
   background-color: ${({ theme }) => theme.color.bgPrimary};
@@ -219,7 +204,7 @@ const StyledEventContentParagraphRead = styled.span<{ expanded: boolean }>`
   `}
 `;
 
-const Event = ({ period, title, subTitle, content = [], isMainEvent }: EventProps) => {
+const Event = ({ period, title, subTitle, content = [], isMainEvent = false }: EventProps) => {
   const [selected, setSelected] = useState<number[]>([]);
 
   const handleReadBtnOnPress = (index: number) => {
@@ -240,22 +225,22 @@ const Event = ({ period, title, subTitle, content = [], isMainEvent }: EventProp
           </StyledEventSubTitle>
         </HeadingTertiary>
         <StyledEventContent>
-          {content.map((part, i) => (
+          {content.map(({ heading, body, skills, isHighlight = false }, i) => (
             <StyledEventContentPart
               key={i}
               isLastOne={content.length === i + 1}
             >
-              {part.heading &&
-              <StyledEventContentHeading isHighlight={part.isHighlight}>
-                {part.heading}
-                {part.isHighlight &&
+              {heading &&
+              <StyledEventContentHeading isHighlight={isHighlight}>
+                {heading}
+                {isHighlight &&
                 <StyledEventContentHeadingHighlight />}
               </StyledEventContentHeading>}
               <StyledEventContentParagraph
                 expanded={selected.some(idx => idx === i)}
                 onClick={() => handleReadBtnOnPress(i)}
               >
-                {part.body ?? part}
+                {body}
                 <StyledEventContentParagraphRead
                   expanded={selected.some(idx => idx === i)}
                   onClick={() => handleReadBtnOnPress(i)}
@@ -264,7 +249,7 @@ const Event = ({ period, title, subTitle, content = [], isMainEvent }: EventProp
               <StyledEventContentSkills
                 expanded={selected.some(idx => idx === i)}
               >
-                {part?.skills?.map((skill, i) => (
+                {skills?.map((skill, i) => (
                   <StyledEventContentSkill key={i}>
                     {skill}
                   </StyledEventContentSkill>
@@ -278,18 +263,18 @@ const Event = ({ period, title, subTitle, content = [], isMainEvent }: EventProp
 };
 
 const resumeExperience = () => {
-  const events: EventProps[] = useSelector((state: RootState) => state.resume.events.events);
-  const dispatch = useDispatch();
+  const events: EventProps[] = useAppSelector(state => state.resume.events.events);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(actionCreators.getEvents());
+    dispatch(getEvents());
   }, []);
 
   return (
     <Container>
       <HeadingSecondary>Experience</HeadingSecondary>
       <StyledWrapper>
-        {events
+        {[...events]
           .reverse()
           .map((event, i) => (
             <Event

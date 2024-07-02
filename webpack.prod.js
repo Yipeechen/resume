@@ -3,8 +3,15 @@ const { merge } = require('webpack-merge');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const common = require('./webpack.common.js');
 
+const OUTPUT = './docs';
+
 module.exports = merge(common, {
   mode: 'production',
+  output: {
+    path: path.resolve(__dirname, OUTPUT),
+    filename: 'scripts/[hash:8].js',
+    publicPath: './',
+  },
   plugins: [
     new CleanWebpackPlugin({
       cleanOnceBeforeBuildPatterns: [

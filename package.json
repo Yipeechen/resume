@@ -27,7 +27,7 @@
     "@fortawesome/free-solid-svg-icons": "5.15.1",
     "@fortawesome/react-fontawesome": "0.1.11",
     "@reduxjs/toolkit": "^2.2.5",
-    "axios": "0.21.1",
+    "axios": "0.28.0",
     "babel-polyfill": "6.26.0",
     "dotenv-webpack": "6.0.0",
     "extract-text-webpack-plugin": "4.0.0-beta.0",

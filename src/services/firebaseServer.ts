@@ -1,3 +1,4 @@
+import { AxiosRequestConfig } from 'axios';
 import { createInstance } from './httpClient';
 import * as TIME from '@src/constants/time';
 
@@ -6,7 +7,7 @@ const instance = createInstance({
   headers: {
     'content-type': 'application/json;charset=UTF-8',
   },
-  baseURL: 'https://www.googleapis.com/youtube/v3',
+  baseURL: 'https://yipee-resume-default-rtdb.firebaseio.com',
   interceptors: {
     response: res => {
       return res.data;
@@ -14,6 +15,6 @@ const instance = createInstance({
   },
 });
 
-export const request = config => {
+export const request = (config: AxiosRequestConfig) => {
   return instance(config);
 };

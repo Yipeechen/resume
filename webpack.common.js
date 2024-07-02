@@ -10,23 +10,31 @@ const SRC_ROOT = './src';
 module.exports = {
   context: path.resolve(__dirname, SRC_ROOT),
   entry: {
-    app: './index.js',
+    app: './index.tsx',
   },
   output: {
     path: path.resolve(__dirname, OUTPUT),
     filename: 'scripts/[hash:8].js',
-    publicPath: './',
+    // publicPath: './',
+    publicPath: '/',
   },
   resolve: {
     alias: {
-      '@root': path.resolve('./'),
       '@src': path.resolve('./src'),
     },
+    extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
   },
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.(ts|tsx)$/,
+        use: {
+          loader: 'ts-loader',
+        },
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.(js|jsx)$/,
         exclude: /(node_modules|bower_components)/,
         use: {
           loader: 'babel-loader',
@@ -52,7 +60,10 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loaders: ['style-loader', 'css-loader'],
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
+        ],
       },
     ],
   },

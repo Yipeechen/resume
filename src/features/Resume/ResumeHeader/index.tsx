@@ -44,8 +44,8 @@ const StyledHeader = styled.header`
     background-image: 
   linear-gradient(
     to right bottom,  
-    ${({ theme }) => theme.color.primaryLightOpLevel8},
-    ${({ theme }) => theme.color.primaryDarkOpLevel8}
+    ${theme.color.primaryLightOpLevel8},
+    ${theme.color.primaryDarkOpLevel8}
     ), 
     url('https://yipeechen.github.io/resume/images/mobile/header-bg-min.jpg');
   `}
@@ -104,7 +104,7 @@ const StyledHeadingMain = styled.span`
   }
 `;
 
-const resumeHeader = props => (
+const resumeHeader = () => (
   <StyledHeader>
     <StyledHeaderTextBox>
       <StyledHeadingPrimary>

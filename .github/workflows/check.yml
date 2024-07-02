@@ -1,0 +1,25 @@
+name: repo/check
+on:
+  pull_request:
+    branches:    
+      - 'feature/**'
+      - 'dev/**'
+defaults:
+  run:
+    working-directory: src
+jobs:
+  check:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout
+        - uses: actions/checkout@v4
+      - name: Cache Dependencies
+        - uses: actions/cache@v4
+          with:
+            path: '**/node_modules'
+            key: ${{ runner.os }}-node-${{ hashFiles('**/package.json') }}
+
+      - name: Check lint
+        run: npx eslint .
+      - name: Check type
+        run: npx tsc -p tsconfig.json

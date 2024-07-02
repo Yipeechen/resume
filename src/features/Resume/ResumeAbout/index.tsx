@@ -1,7 +1,11 @@
 import styled from 'styled-components';
+import { useEffect } from 'react';
 
+import { useAppSelector, useAppDispatch } from '@src/redux/hooks';
 import { HeadingSecondary, HeadingTertiary } from '@src/components/TypoGraphy';
 import { ButtonFull, ButtonGhost } from '@src/components/Buttons';
+import { getOverview } from '@src/redux/modules/resume/overview/slice';
+import { OverViewProps } from '@src/redux/modules/resume/overview/slice';
 
 const MEDIA_QUERIES = {
   isPc: '(min-width: 1024px)',
@@ -166,71 +170,75 @@ const StyledButtonGhost = styled(ButtonGhost)`
   `}
 `;
 
-const resumeAbout = () => (
-  <Container>
-    <HeadingSecondary>
-      About Me
-    </HeadingSecondary>
-    <StyledWrapper>
-      <StyledAvatar>
-        <StyledAvatarBordered />
-        <StyledAvatarImg />
-      </StyledAvatar>
-      <StyledInfo>
-        <StyledInfoContent>
-          <StyledHeadingTertiary>
-            挑戰自我，學習新技能
-            <StyledHeadingTertiarySub>
-              2 years + Frontend Developer
-            </StyledHeadingTertiarySub>
-          </StyledHeadingTertiary>
-          <StyledText>
-          參與從零到有的環境開發設置，與一名資深工程師開創後台系統，使用前端主流生態 React 與 Redux，搭配 RxJS 進行非同步請求處理，近期加入 React hooks 應用，
-            學習到模組化管理、前端框架應用、Webview 實作經驗。
-          </StyledText>
-          <StyledText>
-            與後端工程師討論 API 規格，構想多種錯誤情況處理，產品開發上獨自完成 UI / UX，聽取使用者回饋進行改善，細心特質可交付高完成度、低錯誤率的作品。
-          </StyledText>
-          <StyledText>
-            透過其他學習網站 Udemy 課程和書籍精進與驗證技能，
-            閱覽 Medium 文章及加入社團接收新知，成為擁有設計觀感、提升使用者體驗的開發者。
-          </StyledText>
-        </StyledInfoContent>
-        <StyledInfoSkill>
-          SCSS | CSS in JS | JavaScript | React | Redux | Ruby on Rails
-        </StyledInfoSkill>
-        <StyledInfoButtons>
-          <StyledButtonFull
-            activeClass="active"
-            to="section_skills"
-            smooth
-            offset={0}
-            duration={500}
-          >
-            What I learn
-          </StyledButtonFull>
-          <StyledButtonGhost
-            activeClass="active"
-            to="section_works"
-            smooth
-            offset={-70}
-            duration={500}
-          >
-            My works
-          </StyledButtonGhost>
-          <StyledButtonGhost
-            activeClass="active"
-            to="section_contact"
-            smooth
-            offset={-70}
-            duration={500}
-          >
-            Contact me
-          </StyledButtonGhost>
-        </StyledInfoButtons>
-      </StyledInfo>
-    </StyledWrapper>
-  </Container>
-);
+const resumeAbout = () => {
+  const overview: OverViewProps = useAppSelector(state => state.resume.overview.overview)
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getOverview())
+  }, [])
+
+
+  return (
+    <Container>
+      <HeadingSecondary>
+        About Me
+      </HeadingSecondary>
+      <StyledWrapper>
+        <StyledAvatar>
+          <StyledAvatarBordered />
+          <StyledAvatarImg />
+        </StyledAvatar>
+        <StyledInfo>
+          <StyledInfoContent>
+            <StyledHeadingTertiary>
+              {overview.title}
+              <StyledHeadingTertiarySub>
+                {overview.subtitle}
+              </StyledHeadingTertiarySub>
+            </StyledHeadingTertiary>
+            {overview.body.map(eachContent => (
+              <StyledText key={eachContent}>{eachContent}</StyledText>
+            ))}
+          </StyledInfoContent>
+          <StyledInfoSkill>
+            {overview.skills.map((each, index) => (
+              `${index !== 0 ? ' | ' : ''}${each}`
+            ))}
+          </StyledInfoSkill>
+          <StyledInfoButtons>
+            <StyledButtonFull
+              activeClass="active"
+              to="section_skills"
+              smooth
+              offset={0}
+              duration={500}
+            >
+              What I learn
+            </StyledButtonFull>
+            <StyledButtonGhost
+              activeClass="active"
+              to="section_works"
+              smooth
+              offset={-70}
+              duration={500}
+            >
+              My works
+            </StyledButtonGhost>
+            <StyledButtonGhost
+              activeClass="active"
+              to="section_contact"
+              smooth
+              offset={-70}
+              duration={500}
+            >
+              Contact me
+            </StyledButtonGhost>
+          </StyledInfoButtons>
+        </StyledInfo>
+      </StyledWrapper>
+    </Container>
+  )
+};
 
 export default resumeAbout;

@@ -1,11 +1,10 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import SearchBar from './components/SearchBar';
-import SearchResult from './components/SearchResult';
-import * as actionCreators from '../../../redux/modules/worksYt/worksYtActions';
-import { RootState } from '@src/redux/root';
+import { useAppSelector, useAppDispatch } from '@src/redux/hooks';
+import SearchBar from '@src/features/Works/WorksYt/components/SearchBar';
+import SearchResult from '@src/features/Works/WorksYt/components/SearchResult';
+import { clearPlaylist, fetchMostPopularVideo, fetchVideo } from '@src/redux/modules/worksYt/worksYtSlice';
 
 const StyledContainer = styled.div`
   margin: 40px auto;
@@ -15,13 +14,13 @@ const StyledContainer = styled.div`
 const Yt = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
-  const { videos, loading, nextPageToken } = useSelector((state: RootState) => ({
+  const { videos, loading, nextPageToken } = useAppSelector(state => ({
     videos: state.yt.videos,
     loading: state.yt.loading,
     nextPageToken: state.yt.nextPageToken,
   }));
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const infiniteScroll = useCallback(() => {
     const hasScrolledToBottom = (window.innerHeight + document.documentElement.scrollTop >=
@@ -29,21 +28,24 @@ const Yt = () => {
 
     if (videos.length && !!nextPageToken && !loading && hasScrolledToBottom) {
       if (searchTerm) {
-        dispatch(actionCreators.fetchVideo({ searchTerm, nextPageToken }));
+        dispatch(fetchVideo({ searchTerm, nextPageToken }));
       } else {
-        dispatch(actionCreators.fetchMostPopularVideo({ nextPageToken }));
+        dispatch(fetchMostPopularVideo({ nextPageToken }));
       }
     }
   }, [videos, loading, nextPageToken, searchTerm, dispatch]);
 
   useEffect(() => {
+    dispatch(fetchMostPopularVideo({}));
+  }, []);
+
+  useEffect(() => {
     window.addEventListener('scroll', infiniteScroll);
-    dispatch(actionCreators.fetchMostPopularVideo({}));
 
     return () => {
       window.removeEventListener('scroll', infiniteScroll);
     };
-  }, []);
+  }, [infiniteScroll]);
 
   const updateSearchTerm = (value: string) => {
     setSearchTerm(value);
@@ -54,8 +56,8 @@ const Yt = () => {
       <SearchBar
         searchTerm={searchTerm}
         updateSearchTerm={updateSearchTerm}
-        fetchPlaylist={result => dispatch(actionCreators.fetchVideo(result))}
-        resetPlaylist={() => dispatch(actionCreators.resetPlaylist())}
+        fetchPlaylist={result => dispatch(fetchVideo(result))}
+        resetPlaylist={() => dispatch(clearPlaylist())}
       />
       <SearchResult
         data={videos}

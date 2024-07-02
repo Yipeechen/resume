@@ -1,21 +1,23 @@
-import { useMemo } from 'react';
-import { PropTypes } from 'prop-types';
+import { useEffect, useMemo } from 'react';
 import styled from 'styled-components';
-
 import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Navigation, Pagination } from 'swiper/core';
-import 'swiper/swiper-bundle.css';
+import { Navigation, Pagination, Autoplay, Parallax } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/parallax';
+import 'swiper/css/autoplay';
 
+import { useAppSelector, useAppDispatch } from '@src/redux/hooks';
 import { HeadingSecondary } from '@src/components/TypoGraphy';
-
-SwiperCore.use([Navigation, Pagination]);
+import { getWorks } from '@src/redux/modules/resume/works/slice';
 
 const MEDIA_QUERIES = {
   isPc: '(min-width: 1024px)',
   isPad: '(min-width:701px) and (max-width: 1023px)',
   isMobile: '(max-width: 700px)',
 };
-const Container = styled.section`
+const Container = styled.section<{id: string}>`
   background-color: ${({ theme }) => theme.color.bgPrimary};
   padding: 5rem 0 10rem 0;
   ${({ theme }) => theme.tablet_mobile`
@@ -45,14 +47,14 @@ const StyledWorkWrapper = styled.li`
     margin-bottom: 1.8rem;
   `}
 `;
-const StyledWorkLink = styled.a.attrs(({ link }) => ({
+const StyledWorkLink = styled.a.attrs<{ link: string }>(({ link }) => ({
   href: link,
   target: '_blank',
-}))``;
-const StyledWorkImg = styled.img.attrs(({ img }) => ({
+}))<{ link: string }>``;
+const StyledWorkImg = styled.img.attrs<{ img: { pc: string; mobile: string; } }>(({ img }) => ({
   src: window.matchMedia(MEDIA_QUERIES.isMobile).matches
-    ? img.mobile : img.pc,
-}))`
+    ? img?.mobile : img?.pc,
+}))<{ img: { pc: string; mobile: string; } }>`
   opacity: 0.15;
   width: 100%;
   height: auto;
@@ -122,7 +124,7 @@ const StyledWorkImgWrapper = styled.figure`
       ${StyledWorkImg} {
         opacity: 1;
         transform: translateY(1.8rem) scale(1.17) skewY(-4deg);
-        ${({ theme }) => theme.mobile`
+        ${theme.mobile`
           transform: translateY(1.8rem) scale(1.17) skewY(0deg);
         `}
       }
@@ -134,8 +136,16 @@ const StyledWorkImgWrapper = styled.figure`
     }
   `}
 `;
-
-const Work = ({ link, title, tool, img }) => (
+interface WorkProps {
+  link: string;
+  title: string;
+  tool: string;
+  img: {
+    pc: string;
+    mobile: string;
+  };
+}
+const Work = ({ link, title, tool, img }: WorkProps) => (
   <StyledWorkWrapper>
     <StyledWorkLink link={link}>
       <StyledWorkImgWrapper>
@@ -148,94 +158,37 @@ const Work = ({ link, title, tool, img }) => (
     </StyledWorkLink>
   </StyledWorkWrapper>
 );
-Work.propTypes = {
-  img: PropTypes.object,
-  link: PropTypes.string,
-  title: PropTypes.string,
-  tool: PropTypes.string,
-};
-Work.defaultProps = {
-  img: {},
-  link: '',
-  title: '',
-  tool: '',
-};
-const works = [
-  {
-    title: '人性化線下 CRM 平台',
-    tool: 'Ruby on Rails | JS | Chart.js | Bootstrap3 | Github | AJAX | jQuery',
-    link: 'https://github.com/Yipeechen/whale',
-    img: {
-      pc: 'https://yipeechen.github.io/resume/images/work-1.jpg',
-      mobile: 'https://yipeechen.github.io/resume/images/mobile/work-1.jpg',
-    },
-  },
-  {
-    title: 'About Yiping',
-    tool: ' JS | React | Github | CSS in JS | Webpack | Eslint',
-    link: 'https://github.com/Yipeechen/resume',
-    img: {
-      pc: 'https://yipeechen.github.io/resume/images/work-5.jpg',
-      mobile: 'https://yipeechen.github.io/resume/images/mobile/work-5.jpg',
-    },
-  },
-  {
-    title: 'Fake Youtube',
-    tool: 'Skeleton loading | Infinite scrolling | Youtube Data API | Redux',
-    link: 'https://yipeechen.github.io/resume/#/works/yt',
-    img: {
-      pc: 'https://yipeechen.github.io/resume/images/work-6.jpg',
-      mobile: 'https://yipeechen.github.io/resume/images/mobile/work-6.jpg',
-    },
-  },
-  {
-    title: 'Stack Overflow',
-    tool: 'Ruby on Rails | JS | Bootstrap4 | Github | AJAX | jQuery',
-    link: 'https://github.com/Yipeechen/stackoverflow',
-    img: {
-      pc: 'https://yipeechen.github.io/resume/images/work-2.jpg',
-      mobile: 'https://yipeechen.github.io/resume/images/mobile/work-2.jpg',
-    },
-  },
-  {
-    title: 'Restaurant forum',
-    tool: 'Ruby on Rails | Bootstrap3 | Database Design | Github | Heroku',
-    link: 'https://restaurant-forum-by-yipee.herokuapp.com',
-    img: {
-      pc: 'https://yipeechen.github.io/resume/images/work-3.jpg',
-      mobile: 'https://yipeechen.github.io/resume/images/mobile/work-3.jpg',
-    },
-  },
-  {
-    title: 'Dojo forum',
-    tool: 'Ruby on Rails | JS | Bootstrap3 | Github | AJAX | Heroku',
-    link: 'https://dojooforum.herokuapp.com',
-    img: {
-      pc: 'https://yipeechen.github.io/resume/images/work-4.jpg',
-      mobile: 'https://yipeechen.github.io/resume/images/mobile/work-4.jpg',
-    },
-  },
-];
 
 const resumeWorks = () => {
-  const slides = useMemo(() => {
-    const slidesArray = [];
-    works.map((work, i) => {
-      slidesArray.push(
-        <SwiperSlide key={`slide-${i}`} style={{ listStyle: 'none' }}>
-          <div className="slide">
-            <Work
-              title={work.title}
-              link={work.link}
-              tool={work.tool}
-              img={work.img}
-            />
-          </div>
-        </SwiperSlide>,
-      );
-    });
-    return slidesArray;
-  }, [works]);
+  const works = useAppSelector(state => state.resume.works.works);
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    dispatch(getWorks())
+  }, [])
+  
+  const slides = useMemo(() => (
+    works.map(work => (
+      <SwiperSlide
+        key={work.title}
+        style={{ listStyle: 'none' }}
+      >
+        <div className="slide">
+          <Work
+            title={work.title}
+            link={work.link}
+            tool={work.tool}
+            img={work.img}
+          />
+        </div>
+      </SwiperSlide>
+    ))
+  ), [works]);
+  const slidesPerViewCondition = useMemo(() => (
+    window.matchMedia(MEDIA_QUERIES.isMobile).matches
+      ? 1 : window.matchMedia(MEDIA_QUERIES.isPad).matches
+        ? 3 : 4
+  ), [])
 
   return (
     <Container id="section_works">
@@ -243,13 +196,14 @@ const resumeWorks = () => {
       <StyledWrapper>
         <Swiper
           id="swiper"
-          slidesPerView={window.matchMedia(MEDIA_QUERIES.isMobile).matches
-            ? 1 : window.matchMedia(MEDIA_QUERIES.isPad).matches
-              ? 3 : 4}
+          slidesPerView={slidesPerViewCondition}
           spaceBetween={16}
+          modules={[Navigation, Pagination, Autoplay, Parallax]}
           navigation
-          pagination
+          pagination={{ clickable: true }}
+          parallax={{ enabled: true }}
           loop
+          autoplay={{ pauseOnMouseEnter: true }}
           // loopFillGroupWithBlank
         >
           {slides}

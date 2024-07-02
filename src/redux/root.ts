@@ -1,6 +1,6 @@
 import { combineReducers } from '@reduxjs/toolkit'
 
-import ytVideosReducer from '@src/redux/modules/worksYt/worksYtReducers';
+import ytVideosReducer from '@src/redux/modules/worksYt/worksYtSlice';
 import resumeReducer from '@src/redux/modules/resume';
 
 

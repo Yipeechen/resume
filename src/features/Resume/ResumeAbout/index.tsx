@@ -85,24 +85,24 @@ const StyledAvatar = styled.div`
   ${({ theme }) => theme.hoverable`
     &:hover {
       ${StyledAvatarImg} {
-        outline: 1.5rem solid ${({ theme }) => theme.color.secondaryOpLevel5};
+        outline: 1.5rem solid ${theme.color.secondaryOpLevel5};
         transform: scale(1.05) translate(15%, 15%);
         filter: grayscale(0);
-        box-shadow: 0 2.5rem 4rem ${({ theme }) => theme.color.blackOpLevel5};
+        box-shadow: 0 2.5rem 4rem ${theme.color.blackOpLevel5};
         z-index: 20;
-        ${({ theme }) => theme.tablet`
+        ${theme.tablet`
           transform: translate(0%, 10vw);
         `}
-        ${({ theme }) => theme.mobile`
+        ${theme.mobile`
           transform: translate(0%, 0%);
-          outline: 0rem solid ${({ theme }) => theme.color.secondaryOpLevel5};
+          outline: 0rem solid ${theme.color.secondaryOpLevel5};
         `}
       }
 
       ${StyledAvatarBordered} {
         &::after {
           transform: translate(-23%, 24%);
-          ${({ theme }) => theme.tablet`
+          ${theme.tablet`
             border-color: transparent;
           `}
         }

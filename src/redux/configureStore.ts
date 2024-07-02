@@ -1,12 +1,18 @@
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware, compose, Store, Middleware } from 'redux';
 import thunk from 'redux-thunk';
 
-import rootReducer from './root';
+import rootReducer, { RootState } from './root';
+
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+  }
+}
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-export default function configureStore () {
-  const logger = store => {
+export default function configureStore (): Store<RootState> {
+  const logger: Middleware<{}, RootState> = (store) => {
     return next => {
       return action => {
         console.info('[Middleware] Dispatching', action);

@@ -1,8 +1,9 @@
-import PropTypes from 'prop-types';
 import styled, { keyframes } from 'styled-components';
 import { useSelector } from 'react-redux';
 
 import timeUtils from '@src/utils/time';
+import { RootState } from '@src/redux/root';
+import { VideoItem } from '@src/redux/modules/worksYt/worksYtReducers';
 
 const StyledContainer = styled.div`
   display: grid;
@@ -21,10 +22,10 @@ const loading = keyframes`
     transform: translateX(100%); 
   } 
 `;
-const StyledCard = styled.a.attrs(props => ({
+const StyledCard = styled.a.attrs<{ videoId?: string }>(props => ({
   href: `https://www.youtube.com/watch?v=${props.videoId}`,
   target: '_blank',
-}))`
+}))<{ videoId?: string }>`
   overflow: hidden;
   width: 100%;
   text-align: center;
@@ -51,9 +52,9 @@ const StyledCard = styled.a.attrs(props => ({
     }
   }
 `;
-const StyledCardImg = styled.img.attrs(props => ({
+const StyledCardImg = styled.img.attrs<{ img: string }>(props => ({
   src: props.img,
-}))`
+}))<{ img: string }>`
   width: 100%;
   background: ${({ theme }) => theme.color.grey};
 `;
@@ -107,45 +108,45 @@ const StyledCardInfoChannel = styled.p`
   display: -webkit-box;
 `;
 
-const ResultCard = ({ cardDetail }) => {
-  return (
-    <>
-      {cardDetail
-        ? <StyledCard videoId={cardDetail.videoId}>
-          <StyledCardImg img={cardDetail.img} />
-          <StyledCardDetail>
-            <StyledCardAvatarWrapper>
-              <StyledAvatar />
-            </StyledCardAvatarWrapper>
-            <StyledCardTitle>
-              {cardDetail.title}
-            </StyledCardTitle>
-            <StyledCardInfo>
-              <StyledCardInfoChannel>
-                {cardDetail.channelTitle}
-              </StyledCardInfoChannel>
-              {cardDetail.publishTime}
-            </StyledCardInfo>
-          </StyledCardDetail>
-        </StyledCard>
-        : <StyledCard />
-      }
-    </>
-  );
-};
-ResultCard.propTypes = {
-  cardDetail: PropTypes.object,
-};
-ResultCard.defaultProps = {
-  cardDetail: {},
-};
+interface CardDetailProps {
+  videoId: string;
+  img: string;
+  title: string;
+  channelTitle: string;
+  publishTime: string;
+}
 
-const SearchResult = ({ data }) => {
-  const isLoading = useSelector(state => state.yt.loading);
+const ResultCard = ({ cardDetail }: { cardDetail: CardDetailProps | null }) => (
+  <>
+    {cardDetail
+      ? <StyledCard videoId={cardDetail.videoId}>
+        <StyledCardImg img={cardDetail.img} />
+        <StyledCardDetail>
+          <StyledCardAvatarWrapper>
+            <StyledAvatar />
+          </StyledCardAvatarWrapper>
+          <StyledCardTitle>
+            {cardDetail.title}
+          </StyledCardTitle>
+          <StyledCardInfo>
+            <StyledCardInfoChannel>
+              {cardDetail.channelTitle}
+            </StyledCardInfoChannel>
+            {cardDetail.publishTime}
+          </StyledCardInfo>
+        </StyledCardDetail>
+      </StyledCard>
+      : <StyledCard />
+    }
+  </>
+);
+
+const SearchResult = ({ data }: { data: VideoItem[]}) => {
+  const isLoading: boolean = useSelector((state: RootState) => state.yt.loading);
 
   return (
     <StyledContainer>
-      {data.map((item, i) => {
+      {data.map((item, i = 0) => {
         return (
           <ResultCard
             key={i}
@@ -170,13 +171,6 @@ const SearchResult = ({ data }) => {
       }
     </StyledContainer>
   );
-};
-
-SearchResult.propTypes = {
-  data: PropTypes.array,
-};
-SearchResult.defaultProps = {
-  data: [],
 };
 
 export default SearchResult;

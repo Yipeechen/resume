@@ -12,14 +12,14 @@ export const Button = styled(Link)`
   ${({ theme }) => theme.hoverable`
     &:hover,
     &:active {
-      background-color: ${({ theme }) => theme.color.primaryDark};
-      box-shadow: 0 1rem 2rem ${({ theme }) => theme.color.blackOpLevel2};
+      background-color: ${theme.color.primaryDark};
+      box-shadow: 0 1rem 2rem ${theme.color.blackOpLevel2};
       transform: translateY(-2px);
     }
   `}
 `;
 
-export const ButtonFull = styled(Button)`
+export const ButtonFull = styled(Button)<{ theme: object }>`
   background-color: ${({ theme }) => theme.color.primary};
   border: 1px solid ${({ theme }) => theme.color.primary};
   color: ${({ theme }) => theme.color.white};
@@ -27,7 +27,7 @@ export const ButtonFull = styled(Button)`
   ${({ theme }) => theme.hoverable`
     &:hover,
     &:active {
-      border: 1px solid ${({ theme }) => theme.color.primaryDark};
+      border: 1px solid ${theme.color.primaryDark};
     }
   `}
 `;
@@ -39,8 +39,8 @@ export const ButtonGhost = styled(Button)`
   ${({ theme }) => theme.hoverable`
     &:hover,
     &:active {
-      border: 1px solid ${({ theme }) => theme.color.primary};
-      color: ${({ theme }) => theme.color.white};
+      border: 1px solid ${theme.color.primary};
+      color: ${theme.color.white};
     }
   `}
 `;

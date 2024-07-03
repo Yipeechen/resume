@@ -1,3 +1,4 @@
+import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
 const moveInLeft = keyframes`
@@ -105,18 +106,20 @@ const StyledHeadingMain = styled.span`
 `;
 
 const resumeHeader = () => (
-  <StyledHeader>
-    <StyledHeaderTextBox>
-      <StyledHeadingPrimary>
-        <StyledHeadingSub>
-          Hello, I&apos;m
-        </StyledHeadingSub>
-        <StyledHeadingMain>
-          Yi Ping
-        </StyledHeadingMain>
-      </StyledHeadingPrimary>
-    </StyledHeaderTextBox>
-  </StyledHeader>
+  <React.Fragment>
+    <StyledHeader>
+      <StyledHeaderTextBox>
+        <StyledHeadingPrimary>
+          <StyledHeadingSub>
+            Hello, I&apos;m
+          </StyledHeadingSub>
+          <StyledHeadingMain>
+            Yi Ping
+          </StyledHeadingMain>
+        </StyledHeadingPrimary>
+      </StyledHeaderTextBox>
+    </StyledHeader>
+  </React.Fragment>
 );
 
 export default resumeHeader;

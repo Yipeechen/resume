@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { useAppSelector, useAppDispatch } from '@src/redux/hooks';
@@ -214,81 +214,85 @@ const Event = ({ period, title, subTitle, content = [], isMainEvent = false }: E
   };
 
   return (
-    <StyledEventWrapper isMainEvent={isMainEvent}>
-      <StyledEventIcon />
-      <StyledEventBox>
-        <StyledEventPeriod>{period}</StyledEventPeriod>
-        <HeadingTertiary>
-          {title}
-          <StyledEventSubTitle>
-            {subTitle}
-          </StyledEventSubTitle>
-        </HeadingTertiary>
-        <StyledEventContent>
-          {content.map(({ heading, body, skills, isHighlight = false }, i) => (
-            <StyledEventContentPart
-              key={i}
-              isLastOne={content.length === i + 1}
-            >
-              {heading &&
-              <StyledEventContentHeading isHighlight={isHighlight}>
-                {heading}
-                {isHighlight &&
-                <StyledEventContentHeadingHighlight />}
-              </StyledEventContentHeading>}
-              <StyledEventContentParagraph
-                expanded={selected.some(idx => idx === i)}
-                onClick={() => handleReadBtnOnPress(i)}
+    <React.Fragment>
+      <StyledEventWrapper isMainEvent={isMainEvent}>
+        <StyledEventIcon />
+        <StyledEventBox>
+          <StyledEventPeriod>{period}</StyledEventPeriod>
+          <HeadingTertiary>
+            {title}
+            <StyledEventSubTitle>
+              {subTitle}
+            </StyledEventSubTitle>
+          </HeadingTertiary>
+          <StyledEventContent>
+            {content.map(({ heading, body, skills, isHighlight = false }, i) => (
+              <StyledEventContentPart
+                key={i}
+                isLastOne={content.length === i + 1}
               >
-                {body}
-                <StyledEventContentParagraphRead
+                {heading &&
+                <StyledEventContentHeading isHighlight={isHighlight}>
+                  {heading}
+                  {isHighlight &&
+                  <StyledEventContentHeadingHighlight />}
+                </StyledEventContentHeading>}
+                <StyledEventContentParagraph
                   expanded={selected.some(idx => idx === i)}
                   onClick={() => handleReadBtnOnPress(i)}
-                />
-              </StyledEventContentParagraph>
-              <StyledEventContentSkills
-                expanded={selected.some(idx => idx === i)}
-              >
-                {skills?.map((skill, i) => (
-                  <StyledEventContentSkill key={i}>
-                    {skill}
-                  </StyledEventContentSkill>
-                ))}
-              </StyledEventContentSkills>
-            </StyledEventContentPart>
-          ))}</StyledEventContent>
-      </StyledEventBox>
-    </StyledEventWrapper>
+                >
+                  {body}
+                  <StyledEventContentParagraphRead
+                    expanded={selected.some(idx => idx === i)}
+                    onClick={() => handleReadBtnOnPress(i)}
+                  />
+                </StyledEventContentParagraph>
+                <StyledEventContentSkills
+                  expanded={selected.some(idx => idx === i)}
+                >
+                  {skills?.map((skill, i) => (
+                    <StyledEventContentSkill key={i}>
+                      {skill}
+                    </StyledEventContentSkill>
+                  ))}
+                </StyledEventContentSkills>
+              </StyledEventContentPart>
+            ))}</StyledEventContent>
+        </StyledEventBox>
+      </StyledEventWrapper>
+    </React.Fragment>
   );
 };
 
-const resumeExperience = () => {
+const ResumeExperience = () => {
   const events: EventProps[] = useAppSelector(state => state.resume.events.events);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(getEvents());
-  }, []);
+  }, [dispatch]);
 
   return (
-    <Container>
-      <HeadingSecondary>Experience</HeadingSecondary>
-      <StyledWrapper>
-        {[...events]
-          .reverse()
-          .map((event, i) => (
-            <Event
-              key={i}
-              title={event.title}
-              subTitle={event.subTitle}
-              period={event.period}
-              content={event.content}
-              isMainEvent={event.isMainEvent}
-            />
-          ))}
-      </StyledWrapper>
-    </Container>
+    <React.Fragment>
+      <Container>
+        <HeadingSecondary>Experience</HeadingSecondary>
+        <StyledWrapper>
+          {[...events]
+            .reverse()
+            .map((event, i) => (
+              <Event
+                key={i}
+                title={event.title}
+                subTitle={event.subTitle}
+                period={event.period}
+                content={event.content}
+                isMainEvent={event.isMainEvent}
+              />
+            ))}
+        </StyledWrapper>
+      </Container>
+    </React.Fragment>
   );
 };
 
-export default resumeExperience;
+export default ResumeExperience;

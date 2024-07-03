@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 
 interface SearchBarProps {
@@ -69,18 +70,20 @@ const SearchBar = ({
   };
 
   return (
-    <StyledContainer>
-      <StyledInput
-        onChange={handleChange}
-        onKeyUp={handleKeyUp}
-        value={searchTerm}
-      />
-      <StyledSearchButton
-        onClick={handleClick}
-      >
-        Search
-      </StyledSearchButton>
-    </StyledContainer>
+    <React.Fragment>
+      <StyledContainer>
+        <StyledInput
+          onChange={handleChange}
+          onKeyUp={handleKeyUp}
+          value={searchTerm}
+        />
+        <StyledSearchButton
+          onClick={handleClick}
+        >
+          Search
+        </StyledSearchButton>
+      </StyledContainer>
+    </React.Fragment>
   );
 };
 

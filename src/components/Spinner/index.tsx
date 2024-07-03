@@ -1,3 +1,4 @@
+import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
 interface PageSpinnerProps {
@@ -46,8 +47,10 @@ const StyledPageSpinner = styled.div<PageSpinnerProps>`
 `;
 
 export const PageSpinner = (props: PageSpinnerProps) => (
-  <StyledPageSpinner {...props}>
-    <StyledPageSpinnerChild />
-    <StyledPageSpinnerChild />
-  </StyledPageSpinner>
+  <React.Fragment>
+    <StyledPageSpinner {...props}>
+      <StyledPageSpinnerChild />
+      <StyledPageSpinnerChild />
+    </StyledPageSpinner>
+  </React.Fragment>
 );

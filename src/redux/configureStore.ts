@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { Middleware } from 'redux';
 
-import rootReducer, { RootState } from '@src/redux/root';
+import rootReducer from '@src/redux/root';
 
-const logger: Middleware<{}, RootState> = (store) => {
+const logger: Middleware = store => {
   return next => {
     return action => {
       console.info('[Middleware] Dispatching', action);

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { HeadingTertiary } from '@src/components/TypoGraphy';
 import { getAbilities } from '@src/redux/modules/resume/abilities/slice';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@src/redux/hooks';
 
 interface CardProps {
@@ -125,39 +125,43 @@ const StyledCardList = styled.ul<{ isTwoColumn: boolean }>`
 `;
 
 const Card = ({ title, className, content }: CardProps) => (
-  <StyledCard>
-    <StyledCardIcon className={className} />
-    <HeadingTertiary>{title}</HeadingTertiary>
-    <StyledCardList isTwoColumn={content.length > 8}>
-      {content.map((item, i) => (
-        <StyledCardListLi key={i}>{item}</StyledCardListLi>
-      ))}
-    </StyledCardList>
-  </StyledCard>
+  <React.Fragment>
+    <StyledCard>
+      <StyledCardIcon className={className} />
+      <HeadingTertiary>{title}</HeadingTertiary>
+      <StyledCardList isTwoColumn={content.length > 8}>
+        {content.map((item, i) => (
+          <StyledCardListLi key={i}>{item}</StyledCardListLi>
+        ))}
+      </StyledCardList>
+    </StyledCard>
+  </React.Fragment>
 );
 
-const resumeSkills = () => {
+const ResumeSkills = () => {
   const dispatch = useAppDispatch();
   const abilities = useAppSelector(state => state.resume.abilities.abilities)
 
   useEffect(() => {
     dispatch(getAbilities())
-  }, []);
+  }, [dispatch]);
 
   return (
-    <Container id="section_skills">
-      <StyledWrapper>
-        {abilities.map((ability, i) => (
-          <Card
-            key={ability.title}
-            className={ability.icon}
-            title={ability.title}
-            content={ability.list}
-          />
-        ))}
-      </StyledWrapper>
-    </Container>
+    <React.Fragment>
+      <Container id="section_skills">
+        <StyledWrapper>
+          {abilities.map(ability => (
+            <Card
+              key={ability.title}
+              className={ability.icon}
+              title={ability.title}
+              content={ability.list}
+            />
+          ))}
+        </StyledWrapper>
+      </Container>
+    </React.Fragment>
   )
 };
 
-export default resumeSkills;
+export default ResumeSkills;

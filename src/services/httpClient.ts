@@ -33,7 +33,7 @@ interface CustomAxiosRequestConfig extends AxiosRequestConfig {
 export const createInstance = (config: CustomAxiosRequestConfig): CustomAxiosInstance => {
   function handleRequest (req: InternalAxiosRequestConfig): InternalAxiosRequestConfig | Promise<InternalAxiosRequestConfig> {
     // transform logged data
-    let loggedData = { ...req.data };
+    const loggedData = { ...req.data };
 
     // log request info
     const logged = {

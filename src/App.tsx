@@ -1,6 +1,6 @@
-import { lazy, Suspense } from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Provider } from 'react-redux';
-import { BrowserRouter, Navigate, Routes, useRoutes } from 'react-router-dom';
+import { BrowserRouter, Navigate, useRoutes } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { Helmet } from 'react-helmet';
 
@@ -43,12 +43,12 @@ const AppRoutes = () => {
     ...routes.map(route => ({
       path: route.path,
       element: (
-        <>
+        <React.Fragment>
           <Helmet>
             <title>{route.pageMeta.title}</title>
           </Helmet>
           <route.component />
-        </>
+        </React.Fragment>
       )
     })),
     {

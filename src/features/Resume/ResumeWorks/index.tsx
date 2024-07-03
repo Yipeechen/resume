@@ -204,7 +204,6 @@ const resumeWorks = () => {
           parallax={{ enabled: true }}
           loop
           autoplay={{ pauseOnMouseEnter: true }}
-          // loopFillGroupWithBlank
         >
           {slides}
         </Swiper>

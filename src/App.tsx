@@ -1,9 +1,8 @@
-import { lazy, Suspense, FC } from 'react';
+import { lazy, Suspense } from 'react';
 import { Provider } from 'react-redux';
-import { HashRouter, Route, Redirect, Switch } from 'react-router-dom';
+import { BrowserRouter, Navigate, Routes, useRoutes } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { Helmet } from 'react-helmet';
-import { RouteComponentProps } from 'react-router-dom';
 
 import { store } from '@src/redux/configureStore';
 import theme from '@src/styles/theme';
@@ -11,21 +10,27 @@ import mediaQueries from '@src/styles/mediaQueries';
 import { ResetStyle, GlobalStyle } from '@src/styles/reset';
 import { PageSpinner } from '@src/components/Spinner';
 
-const Resume: FC<RouteComponentProps> = lazy(() => import(/* webpackChunkName: "Resume" */'@src/features/Resume'));
-const Yt: FC<RouteComponentProps> = lazy(() => import(/* webpackChunkName: "Yt" */'@src/features/Works/WorksYt'));
+const Resume = lazy(() => import(/* webpackChunkName: "Resume" */'@src/features/Resume'));
+const Yt = lazy(() => import(/* webpackChunkName: "Yt" */'@src/features/Works/WorksYt'));
 
 const routes = [
   {
     path: '/',
-    exact: true,
+    index: true,
     component: Resume,
     pageMeta: {
       title: 'About Yipee | Resume',
     },
   },
   {
+    path: '/dd',
+    component: Yt,
+    pageMeta: {
+      title: 'About Yipee | dd',
+    },
+  },
+  {
     path: '/works/yt',
-    exact: true,
     component: Yt,
     pageMeta: {
       title: 'About Yipee | Work',
@@ -33,35 +38,38 @@ const routes = [
   },
 ];
 
+const AppRoutes = () => {
+  const elements = useRoutes([
+    ...routes.map(route => ({
+      path: route.path,
+      element: (
+        <>
+          <Helmet>
+            <title>{route.pageMeta.title}</title>
+          </Helmet>
+          <route.component />
+        </>
+      )
+    })),
+    {
+      path: '*',
+      element: <Navigate to='/' replace />,
+    }
+  ]);
+
+  return elements;
+};
+
 const App = () => (
   <Provider store={store} >
     <ThemeProvider theme={{ ...theme, ...mediaQueries }}>
-      <HashRouter basename="/">
+      <BrowserRouter basename='/'>
         <ResetStyle />
         <GlobalStyle />
         <Suspense fallback={<PageSpinner size="50vh" style={{ margin: '25vh auto' }} />}>
-          <Switch>
-            {routes.map((route, i) => (
-              <Route
-                key={i}
-                path={route.path}
-                exact={route.exact}
-                render={routeProps => (
-                  <>
-                    <Helmet>
-                      <title>{route.pageMeta.title}</title>
-                    </Helmet>
-                    <route.component {...routeProps} />
-                  </>
-                )} />
-            ))}
-            <Route
-              exact
-              path="*"
-              render={() => <Redirect to="/" />} />
-          </Switch>
+          <AppRoutes />
         </Suspense>
-      </HashRouter>
+      </BrowserRouter>
     </ThemeProvider>
   </Provider>
 );

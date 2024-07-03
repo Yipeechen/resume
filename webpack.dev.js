@@ -10,7 +10,7 @@ module.exports = merge(common, {
   devtool: 'inline-source-map',
   output: {
     path: path.resolve(__dirname, OUTPUT),
-    filename: 'scripts/[hash:8].js',
+    filename: 'scripts/[fullhash:8].js',
     publicPath: '/',
   },
   devServer: {
@@ -20,7 +20,7 @@ module.exports = merge(common, {
     },
     port: 8080,
     host: 'dev.pee.com',
-    https: true,
+    server: 'https',
     hot: true,
     open: true,
   },

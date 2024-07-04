@@ -4,21 +4,32 @@ on:
     branches:
       - main
       - master
-defaults:
-  run:
-    working-directory: src
 jobs:
   check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
       - name: Cache Dependencies
         uses: actions/cache@v4
         with:
           path: '**/node_modules'
           key: ${{ runner.os }}-node-${{ hashFiles('**/package.json') }}
+
+      - name: Install Dependencies
+        run: npm ci
+        working-directory: .
+
       - name: Check lint
         run: npx eslint .
+        working-directory: src
+
       - name: Check type
         run: npx tsc -p tsconfig.json
+        working-directory: .

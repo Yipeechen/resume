@@ -173,6 +173,7 @@ const ResumeWorks = () => {
     works.map(work => (
       <React.Fragment key={work.title}>
         <SwiperSlide
+          key={work.title}
           style={{ listStyle: 'none' }}
         >
           <div className="slide">

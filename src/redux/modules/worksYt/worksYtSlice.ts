@@ -18,7 +18,6 @@ export interface VideoItem {
       }
     }
   }
-  [key: string]: any;
 }
 
 const initialState: {

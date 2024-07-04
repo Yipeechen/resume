@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faGithubAlt, faMediumM } from '@fortawesome/free-brands-svg-icons';
 import { HeadingSecondary } from '@src/components/TypoGraphy';
-import { ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 
 const StyledContainer = styled.section`
   background-color: ${({ theme }) => theme.color.bgPrimary};
@@ -161,17 +161,19 @@ const StyledCardIcon = styled.div`
 `;
 
 const Card = ({ link, icon, title, content }: { link: string, icon: ReactElement, title: string, content: string }) => (
-  <StyledCardWrapper href={link}>
-    <StyledCardLink>
-      <StyledCardIcon>
-        {icon}
-      </StyledCardIcon>
-      <StyledCardInfo>
-        {title}
-        <StyledCardInfoContent>{content}</StyledCardInfoContent>
-      </StyledCardInfo>
-    </StyledCardLink>
-  </StyledCardWrapper>
+  <React.Fragment>
+    <StyledCardWrapper href={link}>
+      <StyledCardLink>
+        <StyledCardIcon>
+          {icon}
+        </StyledCardIcon>
+        <StyledCardInfo>
+          {title}
+          <StyledCardInfoContent>{content}</StyledCardInfoContent>
+        </StyledCardInfo>
+      </StyledCardLink>
+    </StyledCardWrapper>
+  </React.Fragment>
 );
 
 const cards = [

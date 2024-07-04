@@ -9,7 +9,7 @@ module.exports = merge(common, {
   mode: 'production',
   output: {
     path: path.resolve(__dirname, OUTPUT),
-    filename: 'scripts/[hash:8].js',
+    filename: 'scripts/[fullhash:8].js',
     publicPath: './',
   },
   plugins: [

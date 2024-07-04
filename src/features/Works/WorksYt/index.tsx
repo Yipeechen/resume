@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 
 import { useAppSelector, useAppDispatch } from '@src/redux/hooks';
@@ -37,7 +37,7 @@ const Yt = () => {
 
   useEffect(() => {
     dispatch(fetchMostPopularVideo({}));
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     window.addEventListener('scroll', infiniteScroll);
@@ -52,17 +52,19 @@ const Yt = () => {
   };
 
   return (
-    <StyledContainer>
-      <SearchBar
-        searchTerm={searchTerm}
-        updateSearchTerm={updateSearchTerm}
-        fetchPlaylist={result => dispatch(fetchVideo(result))}
-        resetPlaylist={() => dispatch(clearPlaylist())}
-      />
-      <SearchResult
-        data={videos}
-      />
-    </StyledContainer>
+    <React.Fragment>
+      <StyledContainer>
+        <SearchBar
+          searchTerm={searchTerm}
+          updateSearchTerm={updateSearchTerm}
+          fetchPlaylist={result => dispatch(fetchVideo(result))}
+          resetPlaylist={() => dispatch(clearPlaylist())}
+        />
+        <SearchResult
+          data={videos}
+        />
+      </StyledContainer>
+    </React.Fragment>
   );
 };
 

@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay, Parallax } from 'swiper/modules';
@@ -146,42 +146,46 @@ interface WorkProps {
   };
 }
 const Work = ({ link, title, tool, img }: WorkProps) => (
-  <StyledWorkWrapper>
-    <StyledWorkLink link={link}>
-      <StyledWorkImgWrapper>
-        <StyledWorkImg img={img} />
-        <StyledWorkInfo>
-          <StyledInfoTitle>{title}</StyledInfoTitle>
-          <StyledInfoContent>{tool}</StyledInfoContent>
-        </StyledWorkInfo>
-      </StyledWorkImgWrapper>
-    </StyledWorkLink>
-  </StyledWorkWrapper>
+  <React.Fragment>
+    <StyledWorkWrapper>
+      <StyledWorkLink link={link}>
+        <StyledWorkImgWrapper>
+          <StyledWorkImg img={img} />
+          <StyledWorkInfo>
+            <StyledInfoTitle>{title}</StyledInfoTitle>
+            <StyledInfoContent>{tool}</StyledInfoContent>
+          </StyledWorkInfo>
+        </StyledWorkImgWrapper>
+      </StyledWorkLink>
+    </StyledWorkWrapper>
+  </React.Fragment>
 );
 
-const resumeWorks = () => {
+const ResumeWorks = () => {
   const works = useAppSelector(state => state.resume.works.works);
   const dispatch = useAppDispatch()
 
   useEffect(() => {
     dispatch(getWorks())
-  }, [])
+  }, [dispatch])
   
   const slides = useMemo(() => (
     works.map(work => (
-      <SwiperSlide
-        key={work.title}
-        style={{ listStyle: 'none' }}
-      >
-        <div className="slide">
-          <Work
-            title={work.title}
-            link={work.link}
-            tool={work.tool}
-            img={work.img}
-          />
-        </div>
-      </SwiperSlide>
+      <React.Fragment key={work.title}>
+        <SwiperSlide
+          key={work.title}
+          style={{ listStyle: 'none' }}
+        >
+          <div className="slide">
+            <Work
+              title={work.title}
+              link={work.link}
+              tool={work.tool}
+              img={work.img}
+            />
+          </div>
+        </SwiperSlide>
+      </React.Fragment>
     ))
   ), [works]);
   const slidesPerViewCondition = useMemo(() => (
@@ -204,7 +208,6 @@ const resumeWorks = () => {
           parallax={{ enabled: true }}
           loop
           autoplay={{ pauseOnMouseEnter: true }}
-          // loopFillGroupWithBlank
         >
           {slides}
         </Swiper>
@@ -214,4 +217,4 @@ const resumeWorks = () => {
 }
 ;
 
-export default resumeWorks;
+export default ResumeWorks;

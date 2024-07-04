@@ -3,6 +3,7 @@ import { useAppSelector } from '@src/redux/hooks';
 
 import timeUtils from '@src/utils/time';
 import { VideoItem } from '@src/redux/modules/worksYt/worksYtSlice';
+import React from 'react';
 
 const StyledContainer = styled.div`
   display: grid;
@@ -116,7 +117,7 @@ interface CardDetailProps {
 }
 
 const ResultCard = ({ cardDetail }: { cardDetail: CardDetailProps | null }) => (
-  <>
+  <React.Fragment>
     {cardDetail
       ? <StyledCard videoId={cardDetail.videoId}>
         <StyledCardImg img={cardDetail.img} />
@@ -137,7 +138,7 @@ const ResultCard = ({ cardDetail }: { cardDetail: CardDetailProps | null }) => (
       </StyledCard>
       : <StyledCard />
     }
-  </>
+  </React.Fragment>
 );
 
 const SearchResult = ({ data }: { data: VideoItem[]}) => {

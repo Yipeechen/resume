@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import React from 'react';
 
 import Header from '@src/features/Resume/ResumeHeader';
 import About from '@src/features/Resume/ResumeAbout';
@@ -8,14 +8,14 @@ import Works from '@src/features/Resume/ResumeWorks';
 import Contact from '@src/features/Resume/ResumeContact';
 
 const resume = () => (
-  <Fragment>
+  <React.Fragment>
     <Header />
     <About />
     <Skills />
     <Experience />
     <Works />
     <Contact />
-  </Fragment>
+  </React.Fragment>
 );
 
 export default resume;

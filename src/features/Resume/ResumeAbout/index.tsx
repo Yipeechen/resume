@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import { useAppSelector, useAppDispatch } from '@src/redux/hooks';
 import { HeadingSecondary, HeadingTertiary } from '@src/components/TypoGraphy';
@@ -170,75 +170,77 @@ const StyledButtonGhost = styled(ButtonGhost)`
   `}
 `;
 
-const resumeAbout = () => {
+const ResumeAbout = () => {
   const overview: OverViewProps = useAppSelector(state => state.resume.overview.overview)
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(getOverview())
-  }, [])
+  }, [dispatch])
 
 
   return (
-    <Container>
-      <HeadingSecondary>
-        About Me
-      </HeadingSecondary>
-      <StyledWrapper>
-        <StyledAvatar>
-          <StyledAvatarBordered />
-          <StyledAvatarImg />
-        </StyledAvatar>
-        <StyledInfo>
-          <StyledInfoContent>
-            <StyledHeadingTertiary>
-              {overview.title}
-              <StyledHeadingTertiarySub>
-                {overview.subtitle}
-              </StyledHeadingTertiarySub>
-            </StyledHeadingTertiary>
-            {overview.body.map(eachContent => (
-              <StyledText key={eachContent}>{eachContent}</StyledText>
-            ))}
-          </StyledInfoContent>
-          <StyledInfoSkill>
-            {overview.skills.map((each, index) => (
-              `${index !== 0 ? ' | ' : ''}${each}`
-            ))}
-          </StyledInfoSkill>
-          <StyledInfoButtons>
-            <StyledButtonFull
-              activeClass="active"
-              to="section_skills"
-              smooth
-              offset={0}
-              duration={500}
-            >
-              What I learn
-            </StyledButtonFull>
-            <StyledButtonGhost
-              activeClass="active"
-              to="section_works"
-              smooth
-              offset={-70}
-              duration={500}
-            >
-              My works
-            </StyledButtonGhost>
-            <StyledButtonGhost
-              activeClass="active"
-              to="section_contact"
-              smooth
-              offset={-70}
-              duration={500}
-            >
-              Contact me
-            </StyledButtonGhost>
-          </StyledInfoButtons>
-        </StyledInfo>
-      </StyledWrapper>
-    </Container>
+    <React.Fragment>
+      <Container>
+        <HeadingSecondary>
+          About Me
+        </HeadingSecondary>
+        <StyledWrapper>
+          <StyledAvatar>
+            <StyledAvatarBordered />
+            <StyledAvatarImg />
+          </StyledAvatar>
+          <StyledInfo>
+            <StyledInfoContent>
+              <StyledHeadingTertiary>
+                {overview.title}
+                <StyledHeadingTertiarySub>
+                  {overview.subtitle}
+                </StyledHeadingTertiarySub>
+              </StyledHeadingTertiary>
+              {overview.body.map(eachContent => (
+                <StyledText key={eachContent}>{eachContent}</StyledText>
+              ))}
+            </StyledInfoContent>
+            <StyledInfoSkill>
+              {overview.skills.map((each, index) => (
+                `${index !== 0 ? ' | ' : ''}${each}`
+              ))}
+            </StyledInfoSkill>
+            <StyledInfoButtons>
+              <StyledButtonFull
+                activeClass="active"
+                to="section_skills"
+                smooth
+                offset={0}
+                duration={500}
+              >
+                What I learn
+              </StyledButtonFull>
+              <StyledButtonGhost
+                activeClass="active"
+                to="section_works"
+                smooth
+                offset={-70}
+                duration={500}
+              >
+                My works
+              </StyledButtonGhost>
+              <StyledButtonGhost
+                activeClass="active"
+                to="section_contact"
+                smooth
+                offset={-70}
+                duration={500}
+              >
+                Contact me
+              </StyledButtonGhost>
+            </StyledInfoButtons>
+          </StyledInfo>
+        </StyledWrapper>
+      </Container>
+    </React.Fragment>
   )
 };
 
-export default resumeAbout;
+export default ResumeAbout;

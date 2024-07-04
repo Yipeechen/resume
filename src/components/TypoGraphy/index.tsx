@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 interface HeadingSecondaryProps {
   children: ReactNode;
@@ -38,15 +38,19 @@ const StyledHeadingTertiary = styled.h3.attrs(({ className }) => ({
 `;
 
 export const HeadingSecondary = ({ children }: HeadingSecondaryProps) => (
-  <StyledHeadingSecondaryWrapper>
-    <StyledHeadingSecondary>
-      {children}
-    </StyledHeadingSecondary>
-  </StyledHeadingSecondaryWrapper>
+  <React.Fragment>
+    <StyledHeadingSecondaryWrapper>
+      <StyledHeadingSecondary>
+        {children}
+      </StyledHeadingSecondary>
+    </StyledHeadingSecondaryWrapper>
+  </React.Fragment>
 );
 
 export const HeadingTertiary = ({ className, children }: HeadingTertiaryProps) => (
-  <StyledHeadingTertiary className={className}>
-    {children}
-  </StyledHeadingTertiary>
+  <React.Fragment>
+    <StyledHeadingTertiary className={className}>
+      {children}
+    </StyledHeadingTertiary>
+  </React.Fragment>
 );

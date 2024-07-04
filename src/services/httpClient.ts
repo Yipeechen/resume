@@ -1,39 +1,26 @@
-import axios, { AxiosRequestConfig, InternalAxiosRequestConfig, AxiosInstance, AxiosResponse, AxiosError } from 'axios';
+import axios, { AxiosInterceptorManager, AxiosRequestConfig, InternalAxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 
 const LOGGER_MAX_LENGTH = 300;
 
-type CustomAxiosResponse<T = any> = T;
-
-interface CustomAxiosInstance {
-  <T = any>(config: AxiosRequestConfig): Promise<CustomAxiosResponse<T>>;
-  <T = any>(url: string, config?: AxiosRequestConfig): Promise<CustomAxiosResponse<T>>;
-
-  get<T = any>(url: string, config?: AxiosRequestConfig): Promise<CustomAxiosResponse<T>>;
-  delete<T = any>(url: string, config?: AxiosRequestConfig): Promise<CustomAxiosResponse<T>>;
-  head<T = any>(url: string, config?: AxiosRequestConfig): Promise<CustomAxiosResponse<T>>;
-  options<T = any>(url: string, config?: AxiosRequestConfig): Promise<CustomAxiosResponse<T>>;
-  post<T = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<CustomAxiosResponse<T>>;
-  put<T = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<CustomAxiosResponse<T>>;
-  patch<T = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<CustomAxiosResponse<T>>;
-}
-
-interface CustomInterceptors<T = any> {
-  request?: (
-    config: InternalAxiosRequestConfig
-  ) => InternalAxiosRequestConfig | Promise<InternalAxiosRequestConfig>;
-  response?: (
-    response: AxiosResponse<T>
-  ) => T | AxiosResponse<T> | Promise<T>;
-}
+type CustomAxiosInstance = {
+  <T = any>(config: AxiosRequestConfig): Promise<T>;
+  interceptors: {
+    request: AxiosInterceptorManager<InternalAxiosRequestConfig>;
+    response: AxiosInterceptorManager<AxiosResponse>;
+  };
+};
 
 interface CustomAxiosRequestConfig extends AxiosRequestConfig {
-  interceptors?: CustomInterceptors;
+  interceptors?: {
+    request?: (config: InternalAxiosRequestConfig) => InternalAxiosRequestConfig | Promise<InternalAxiosRequestConfig>;
+    response?: (res: AxiosResponse) => any;
+  };
 }
 
 export const createInstance = (config: CustomAxiosRequestConfig): CustomAxiosInstance => {
   function handleRequest (req: InternalAxiosRequestConfig): InternalAxiosRequestConfig | Promise<InternalAxiosRequestConfig> {
     // transform logged data
-    let loggedData = { ...req.data };
+    const loggedData = { ...req.data };
 
     // log request info
     const logged = {
@@ -65,13 +52,12 @@ export const createInstance = (config: CustomAxiosRequestConfig): CustomAxiosIns
     console.info('RESPONSE_SUCCESS', loggedString);
     // if server return 204, the response data will be '',
     // so we need to transform the data be undefined for use.
-    res.data = res.data || undefined;
+    const responseData = res.data || undefined;
 
-    // handle custom response interceptor
     if (config.interceptors?.response) {
       return config.interceptors.response(res);
     }
-    return res.data;
+    return responseData;
   }
 
   function handleResponseFailure (error: AxiosError): Promise<never> {
